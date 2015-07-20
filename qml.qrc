@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>MainForm.ui.qml</file>
+        <file>CoverView/CoverView.qml</file>
+        <file>SpectrumView/SpectrumView.qml</file>
+        <file>CoverView/Subelements/Cover.qml</file>
+        <file>CoverView/Subelements/TagBar.qml</file>
+        <file>SpectrumView/Subelements/Spectrum.qml</file>
+        <file>SideMenus/StationMenu/StationList.qml</file>
+        <file>SideMenus/CommonMenu/MenuList.qml</file>
+        <file>SideMenus/CommonMenu/CaptureMenu/CaptureList.qml</file>
+        <file>SideMenus/CommonMenu/OptionsMenu/OptionsList.qml</file>
+        <file>SideMenus/CommonMenu/AboutMenu/About.qml</file>
+    </qresource>
+</RCC>
