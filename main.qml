@@ -29,36 +29,32 @@ Window {
 
         states: [
             State {
-                name: "showCoverView"
-                PropertyChanges {
-                    target: coverView
-                    anchors.fill: parent
-                }
-
                 PropertyChanges {
                     target: spectrumView
                     width: 50; height: 50
-                    x: 20; y: 20
+                    x: 20; y: 20; z: 1
+                }
+
+                name: "showCoverView"
+                PropertyChanges {
+                    target: coverView
+                    width: parent.width; height: parent.height
                 }
             },
 
             State {
                 name: "showSpectrumView"
                 PropertyChanges {
-                    target: spectrumView
-                    anchors.fill: parent
+                    target: coverView
+                    width: 50; height: 50
+                    x: 20; y: 20; z: 1
                 }
 
                 PropertyChanges {
-                    target: coverView
-                    width: 50; height: 50
-                    x: 20; y: 20
-                }
-
+                    target: spectrumView
+                    width: parent.width; height: parent.height
+                }      
             }
-
         ]
-
     }
-
 }

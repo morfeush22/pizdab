@@ -5,6 +5,8 @@ Rectangle {
 
     color: "black"
 
+    state: "active"
+
     states: [
         State {
             name: "active"; when: mainView.state == "showCoverView"
