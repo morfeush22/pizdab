@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import "./Subelements"
 
 Rectangle {
     id: cView
@@ -20,6 +21,11 @@ Rectangle {
                 target: mouseArea
                 enabled: true
             }
+
+            PropertyChanges {
+                target: cover
+                width: Math.max(parent.width, parent.height); height: width
+            }
         },
 
         State {
@@ -27,6 +33,11 @@ Rectangle {
             PropertyChanges {
                 target: mouseArea
                 enabled: false
+            }
+
+            PropertyChanges {
+                target: cover
+                width: 0.7*Math.max(parent.width, parent.height); height: width
             }
         }
     ]
@@ -37,6 +48,14 @@ Rectangle {
 
         onClicked: {
             mainView.state = "showCoverView"
+        }
+    }
+
+    Cover {
+        id: cover
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            verticalCenter: parent.verticalCenter
         }
     }
 }
