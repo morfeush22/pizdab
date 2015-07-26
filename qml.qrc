@@ -11,5 +11,6 @@
         <file>SideMenus/CommonMenu/CaptureMenu/CaptureList.qml</file>
         <file>SideMenus/CommonMenu/OptionsMenu/OptionsList.qml</file>
         <file>SideMenus/CommonMenu/AboutMenu/About.qml</file>
+        <file>CommonElements/ToolTip.qml</file>
     </qresource>
 </RCC>

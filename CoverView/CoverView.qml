@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.5
 import "./Subelements"
 
 Rectangle {
@@ -62,6 +62,7 @@ Rectangle {
     TagBar {
         id: tagBar
         width: cover.width
+        height: (mainView.height - cover.height)/2
 
         anchors.horizontalCenter: cover.horizontalCenter
         anchors.top: cover.bottom
