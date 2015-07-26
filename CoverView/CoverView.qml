@@ -24,7 +24,7 @@ Rectangle {
 
             PropertyChanges {
                 target: cover
-                width: Math.max(parent.width, parent.height); height: width
+                width: Math.min(parent.width, parent.height); height: width
             }
         },
 
@@ -37,7 +37,7 @@ Rectangle {
 
             PropertyChanges {
                 target: cover
-                width: 0.7*Math.max(parent.width, parent.height); height: width
+                width: 0.7*Math.min(parent.width, parent.height); height: width
             }
         }
     ]
@@ -57,6 +57,15 @@ Rectangle {
             horizontalCenter: parent.horizontalCenter
             verticalCenter: parent.verticalCenter
         }
+    }
+
+    TagBar {
+        id: tagBar
+        width: cover.width
+
+        anchors.horizontalCenter: cover.horizontalCenter
+        anchors.top: cover.bottom
+        anchors.topMargin: 5
     }
 }
 
