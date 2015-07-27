@@ -20,7 +20,7 @@ import "../../CommonElements"
             text: textArea.text
             width: 250
             target: textArea
-            tipEnabled: truncated
+            tipEnabled: cView.state == "inactive" ? true : false
         }
     }
 

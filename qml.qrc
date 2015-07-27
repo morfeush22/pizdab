@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
+        <file>pizdab.qml</file>
         <file>CoverView/CoverView.qml</file>
         <file>SpectrumView/SpectrumView.qml</file>
         <file>CoverView/Subelements/Cover.qml</file>
@@ -12,5 +12,7 @@
         <file>SideMenus/CommonMenu/OptionsMenu/OptionsList.qml</file>
         <file>SideMenus/CommonMenu/AboutMenu/About.qml</file>
         <file>CommonElements/ToolTip.qml</file>
+        <file>SideMenus/images/arrow.png</file>
+        <file>main.qml</file>
     </qresource>
 </RCC>
