@@ -24,7 +24,6 @@ public:
     std::list<std::string> GetDevices();
 
 signals:
-    void SchedulerError(scheduler_error_t);
     void SNRData(float);
     void FicExtraData(UserFICData_t);
     void RDSData(std::string);

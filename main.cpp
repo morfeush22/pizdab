@@ -1,6 +1,5 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include "ui_scheduler.h"
 #include "thread_controller.h"
 
 int main(int argc, char *argv[]) {
@@ -12,8 +11,6 @@ int main(int argc, char *argv[]) {
     //now pop up with devices list
     //next pop up with freq?
     //pass ui_scheduler to ThreadController and start
-
-
 
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
