@@ -3,8 +3,8 @@ TEMPLATE = app
 QT += qml quick widgets
 
 SOURCES += main.cpp \
-    ui_sheduler.cpp \
-    thread_controller.cpp
+    thread_controller.cpp \
+    ui_scheduler.cpp
 
 RESOURCES += qml.qrc
 
@@ -28,5 +28,5 @@ CONFIG += link_pkgconfig
 PKGCONFIG += gstreamer-1.0
 
 HEADERS += \
-    ui_sheduler.h \
-    thread_controller.h
+    thread_controller.h \
+    ui_scheduler.h

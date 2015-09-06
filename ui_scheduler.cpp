@@ -1,4 +1,4 @@
-#include "ui_sheduler.h"
+#include "ui_scheduler.h"
 
 void UIScheduler::ParametersFromSDR(Scheduler::scheduler_error_t error_code) {
     emit SchedulerError(error_code);
