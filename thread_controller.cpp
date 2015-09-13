@@ -13,6 +13,15 @@ ThreadController::ThreadController(UIScheduler *ui_scheduler, QObject *parent):
     connect(ui_scheduler_, &UIScheduler::RDSData, this, &ThreadController::HandleRDSData);
     connect(ui_scheduler_, &UIScheduler::StationInfoData, this, &ThreadController::HandleStationInfoData);
     scheduler_thread_.start();
+
+    //only test
+    Scheduler::SchedulerConfig_t config;
+    config.sampling_rate = 2048000;
+    config.carrier_frequency = 209936;
+    config.input_filename = "/home/morfeush22/project/sdr/Record3_katowice_iq.raw";
+    config.data_source = Scheduler::DATA_FROM_FILE;
+    config.use_speakers = true;
+    emit SchedulerProcess(config);
 }
 
 ThreadController::~ThreadController() {

@@ -3,6 +3,11 @@
 #include "thread_controller.h"
 
 int main(int argc, char *argv[]) {
+    //register types for connect
+    qRegisterMetaType<Scheduler::SchedulerConfig_t>("Scheduler::SchedulerConfig_t");
+    qRegisterMetaType<UserFICData_t>("UserFICData_t");
+    qRegisterMetaType<std::list<stationInfo> >("std::list<stationInfo>");
+
     UIScheduler ui_scheduler;
     ThreadController thread_controller(&ui_scheduler);
 
