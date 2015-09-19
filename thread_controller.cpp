@@ -12,6 +12,8 @@ ThreadController::ThreadController(UIScheduler *ui_scheduler, QObject *parent):
     connect(ui_scheduler_, &UIScheduler::FicExtraData, this, &ThreadController::HandleFicExtraData);
     connect(ui_scheduler_, &UIScheduler::RDSData, this, &ThreadController::HandleRDSData);
     connect(ui_scheduler_, &UIScheduler::StationInfoData, this, &ThreadController::HandleStationInfoData);
+    connect(ui_scheduler_, &UIScheduler::SchedulerStarted, this, &ThreadController::HandleSchedulerStarted);
+    connect(ui_scheduler_, &UIScheduler::SchedulerStopped, this, &ThreadController::HandleSchedulerStopped);
     scheduler_thread_.start();
 
     //only test
@@ -28,6 +30,9 @@ ThreadController::~ThreadController() {
     emit SchedulerSuspend();
     scheduler_thread_.quit();
     scheduler_thread_.wait();
+
+    for(QList<QStationInfo*>::iterator it = q_station_list_.begin(); it != q_station_list_.end(); it++)
+        delete (*it);
 }
 
 std::list<std::string> ThreadController::GetDevices() {
@@ -35,17 +40,68 @@ std::list<std::string> ThreadController::GetDevices() {
 }
 
 void ThreadController::HandleSNRData(float snr) {
+    qDebug("Handling SNR");
 
+    snr_ = snr;
+
+    emit SNRChanged();
 }
 
 void ThreadController::HandleFicExtraData(UserFICData_t user_fic_extra_data) {
+    qDebug("Handling FIC");
 
+    q_user_fic_extra_data_.setBitrate(user_fic_extra_data.bitrate_);
+    q_user_fic_extra_data_.setDABPlus(user_fic_extra_data.DAB_plus_);
+
+    emit UserFICExtraDataChanged();
 }
 
 void ThreadController::HandleRDSData(std::string text) {
+    qDebug("Handling RDS");
 
+    text_ = text;
+
+    emit TextChanged();
 }
 
 void ThreadController::HandleStationInfoData(std::list<stationInfo> station_list) {
+    qDebug("Handling station info");
 
+    for(QList<QStationInfo*>::iterator it = q_station_list_.begin(); it != q_station_list_.end(); it++)
+        delete (*it);
+    q_station_list_.clear();
+
+    std::list<stationInfo>::iterator it;
+    for(it = station_list.begin(); it != station_list.end(); it++) {
+        QStationInfo* item = new QStationInfo;
+        item->setAudioKbps(it->audio_kbps);
+        item->setStationName(it->station_name);
+        q_station_list_.push_back(item);
+    }
+
+    /*
+    QList<QStationInfo*>::iterator it2;
+    for(it2 = q_station_list_.begin(); it2 != q_station_list_.end(); it2++) {
+        std::cout << (*it2)->audio_kbps() << std::endl;
+        std::cout << (*it2)->station_name() << std::endl;
+    }
+    */
+
+    emit StationListChanged();
+}
+
+void ThreadController::HandleSchedulerStarted() {
+    qDebug("Scheduler started");
+
+    scheduler_running_ = true;
+
+    emit SchedulerRunningChanged();
+}
+
+void ThreadController::HandleSchedulerStopped() {
+    qDebug("Scheduler stopped");
+
+    scheduler_running_ = false;
+
+    emit SchedulerRunningChanged();
 }

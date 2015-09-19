@@ -18,7 +18,7 @@ class UIScheduler: public QObject, public Scheduler {
     scheduler_error_t errno_;
 
 public:
-    UIScheduler(QObject *parent = 0);
+    explicit UIScheduler(QObject *parent = 0);
     virtual ~UIScheduler();
 
     std::list<std::string> GetDevices();
@@ -28,6 +28,8 @@ signals:
     void FicExtraData(UserFICData_t);
     void RDSData(std::string);
     void StationInfoData(std::list<stationInfo>);
+    void SchedulerStarted();
+    void SchedulerStopped();
 
 public slots:
     void StartWork(SchedulerConfig_t config);

@@ -62,7 +62,9 @@ std::list<std::string> UIScheduler::GetDevices() {
 }
 
 void UIScheduler::StartWork(SchedulerConfig_t config) {
+    emit SchedulerStarted();
     Start(config);
+    emit SchedulerStopped();
 }
 
 void UIScheduler::StopWork() {

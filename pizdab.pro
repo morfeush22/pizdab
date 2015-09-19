@@ -4,7 +4,10 @@ QT += qml quick widgets
 
 SOURCES += main.cpp \
     thread_controller.cpp \
-    ui_scheduler.cpp
+    ui_scheduler.cpp \
+    q_station_info.cpp \
+    q_user_fic_data.cpp \
+    q_scheduler_config.cpp
 
 RESOURCES += qml.qrc
 
@@ -29,4 +32,7 @@ PKGCONFIG += gstreamer-1.0
 
 HEADERS += \
     thread_controller.h \
-    ui_scheduler.h
+    ui_scheduler.h \
+    q_station_info.h \
+    q_user_fic_data.h \
+    q_scheduler_config.h
