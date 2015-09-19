@@ -17,13 +17,8 @@ ThreadController::ThreadController(UIScheduler *ui_scheduler, QObject *parent):
     scheduler_thread_.start();
 
     //only test
-    Scheduler::SchedulerConfig_t config;
-    config.sampling_rate = 2048000;
-    config.carrier_frequency = 209936;
-    config.input_filename = "/home/morfeush22/project/sdr/Record3_katowice_iq.raw";
-    config.data_source = Scheduler::DATA_FROM_FILE;
-    config.use_speakers = true;
-    emit SchedulerProcess(config);
+    QSchedulerConfig config;
+    //StartScheduler(&config);
 }
 
 ThreadController::~ThreadController() {
@@ -37,6 +32,20 @@ ThreadController::~ThreadController() {
 
 std::list<std::string> ThreadController::GetDevices() {
     return ui_scheduler_->GetDevices();
+}
+
+void ThreadController::StartScheduler(QSchedulerConfig *config) {
+    Scheduler::SchedulerConfig_t new_config;
+    new_config.sampling_rate = config->samplingRate();
+    new_config.carrier_frequency = config->carrierFrequency();
+    new_config.input_filename = config->inputFilename();
+    new_config.data_source = config->dataSource();
+    new_config.use_speakers = config->useSpeakers();
+    emit SchedulerProcess(new_config);
+}
+
+void ThreadController::StopScheduler() {
+    emit SchedulerSuspend();
 }
 
 void ThreadController::HandleSNRData(float snr) {

@@ -1,10 +1,17 @@
 #include "q_scheduler_config.h"
 
-QSchedulerConfig::QSchedulerConfig(QObject* parent) : QObject(parent) {
+QSchedulerConfig::QSchedulerConfig(QObject* parent):
+    QObject(parent),
+    sampling_rate_(2048000),
+    carrier_frequency_(209936),
+    dongle_nr_(0),
+    input_filename_("/home/morfeush22/project/sdr/Record3_katowice_iq.raw"),
+    data_source_(Scheduler::DATA_FROM_FILE),
+    use_speakers_(true) {
 
 }
 
-u_int32_t QSchedulerConfig::samplingRate() const {
+unsigned int QSchedulerConfig::samplingRate() const {
     return sampling_rate_;
 }
 
@@ -13,7 +20,7 @@ void QSchedulerConfig::setSamplingRate(const u_int32_t sampling_rate) {
     emit samplingRateChanged();
 }
 
-u_int32_t QSchedulerConfig::carrierFrequency() const {
+unsigned int QSchedulerConfig::carrierFrequency() const {
     return carrier_frequency_;
 }
 
@@ -22,7 +29,7 @@ void QSchedulerConfig::setCarrierFrequency(const u_int32_t carrier_frequency) {
     emit carrierFrequencyChanged();
 }
 
-size_t QSchedulerConfig::dongleNr() const {
+unsigned int QSchedulerConfig::dongleNr() const {
     return dongle_nr_;
 }
 

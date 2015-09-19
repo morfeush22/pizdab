@@ -4,6 +4,7 @@
 #include "ui_scheduler.h"
 #include "q_station_info.h"
 #include "q_user_fic_data.h"
+#include "q_scheduler_config.h"
 #include <QObject>
 #include <QThread>
 
@@ -29,6 +30,8 @@ public:
     virtual ~ThreadController();
 
     std::list<std::string> GetDevices();
+    Q_INVOKABLE void StartScheduler(QSchedulerConfig *config);
+    Q_INVOKABLE void StopScheduler();
 
 signals:
     void SchedulerProcess(Scheduler::SchedulerConfig_t config);

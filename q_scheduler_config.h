@@ -6,6 +6,12 @@
 
 class QSchedulerConfig : public QObject {
     Q_OBJECT
+    Q_PROPERTY(unsigned int samplingRate READ samplingRate NOTIFY samplingRateChanged)
+    Q_PROPERTY(unsigned int carrierFrequency READ carrierFrequency NOTIFY carrierFrequencyChanged)
+    Q_PROPERTY(unsigned int dongleNr READ dongleNr NOTIFY dongleNrChanged)
+    Q_PROPERTY(const char * inputFilename READ inputFilename NOTIFY inputFilenameChanged)
+    Q_PROPERTY(Scheduler::data_source_t dataSource READ dataSource NOTIFY dataSourceChanged)
+    Q_PROPERTY(bool useSpeakers READ useSpeakers NOTIFY useSpeakersChanged)
 
     u_int32_t sampling_rate_;
     u_int32_t carrier_frequency_;
@@ -17,11 +23,11 @@ class QSchedulerConfig : public QObject {
 public:
     explicit QSchedulerConfig(QObject* parent = 0);
 
-    u_int32_t samplingRate() const;
+    unsigned int samplingRate() const;
     void setSamplingRate(const u_int32_t sampling_rate);
-    u_int32_t carrierFrequency() const;
+    unsigned int carrierFrequency() const;
     void setCarrierFrequency(const u_int32_t carrier_frequency);
-    size_t dongleNr() const;
+    unsigned int dongleNr() const;
     void setDongleNr(const size_t dongle_nr);
     const char *inputFilename() const;
     void setInputFilename(const char *input_filename);
