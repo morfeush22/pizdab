@@ -71,6 +71,6 @@ void UIScheduler::StopWork() {
     Stop();
 }
 
-void UIScheduler::ChangeStation(int new_station) {
+void UIScheduler::ChangeStation(quint16 new_station) {
     ParametersToSDR(new_station);
 }

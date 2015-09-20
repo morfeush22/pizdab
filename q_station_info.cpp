@@ -4,7 +4,7 @@ QStationInfo::QStationInfo(QObject* parent): QObject(parent) {
 
 }
 
-unsigned int QStationInfo::audioKbps() const {
+size_t QStationInfo::audioKbps() const {
     return audio_kbps_;
 }
 

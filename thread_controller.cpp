@@ -9,7 +9,7 @@ ThreadController::ThreadController(UIScheduler *ui_scheduler, QObject *parent):
     connect(&scheduler_thread_, &QThread::finished, ui_scheduler, &QObject::deleteLater);
     connect(this, &ThreadController::schedulerProcess, ui_scheduler_, &UIScheduler::StartWork);
     connect(this, &ThreadController::schedulerSuspend, ui_scheduler_, &UIScheduler::StopWork);
-    connect(this, &ThreadController::changeStation, ui_scheduler_, &UIScheduler::ChangeStation);
+    connect(this, &ThreadController::stationChange, ui_scheduler_, &UIScheduler::ChangeStation);
     connect(ui_scheduler_, &UIScheduler::SNRData, this, &ThreadController::HandleSNRData);
     connect(ui_scheduler_, &UIScheduler::FicExtraData, this, &ThreadController::HandleFicExtraData);
     connect(ui_scheduler_, &UIScheduler::RDSData, this, &ThreadController::HandleRDSData);
@@ -17,10 +17,6 @@ ThreadController::ThreadController(UIScheduler *ui_scheduler, QObject *parent):
     connect(ui_scheduler_, &UIScheduler::SchedulerStarted, this, &ThreadController::HandleSchedulerStarted);
     connect(ui_scheduler_, &UIScheduler::SchedulerStopped, this, &ThreadController::HandleSchedulerStopped);
     scheduler_thread_.start();
-
-    //only test
-    //QSchedulerConfig config;
-    //StartScheduler(&config);
 }
 
 ThreadController::~ThreadController() {
@@ -34,8 +30,12 @@ ThreadController::~ThreadController() {
     delete q_user_fic_extra_data_;
 }
 
-std::list<std::string> ThreadController::GetDevices() {
-    return ui_scheduler_->GetDevices();
+QList<QString> ThreadController::GetDevices() {
+    QList<QString> q_devices;
+    std::list<std::string> devices = ui_scheduler_->GetDevices();
+    for(std::list<std::string>::iterator it = devices.begin(); it != devices.end(); it++)
+        q_devices.push_back(QString(it->c_str()));
+    return q_devices;
 }
 
 void ThreadController::startScheduler(QSchedulerConfig *config) {
@@ -52,6 +52,10 @@ void ThreadController::stopScheduler() {
     emit schedulerSuspend();
 }
 
+void ThreadController::changeStation(quint16 new_station) {
+    emit stationChange(new_station);
+}
+
 float ThreadController::snr() const {
     return snr_;
 }
@@ -60,8 +64,8 @@ QUserFICData *ThreadController::userFICExtraData() const {
     return q_user_fic_extra_data_;
 }
 
-std::string ThreadController::text() const {
-    return text_;
+QString ThreadController::text() const {
+    return QString(text_.c_str());
 }
 
 QList<QObject *> ThreadController::stationList() const {
@@ -73,16 +77,12 @@ bool ThreadController::schedulerRunning() const {
 }
 
 void ThreadController::HandleSNRData(float snr) {
-    qDebug("Handling SNR");
-
     snr_ = snr;
 
     emit snrChanged();
 }
 
 void ThreadController::HandleFicExtraData(UserFICData_t user_fic_extra_data) {
-    qDebug("Handling FIC");
-
     q_user_fic_extra_data_->setBitrate(user_fic_extra_data.bitrate_);
     q_user_fic_extra_data_->setDabPlus(user_fic_extra_data.DAB_plus_);
 
@@ -90,22 +90,17 @@ void ThreadController::HandleFicExtraData(UserFICData_t user_fic_extra_data) {
 }
 
 void ThreadController::HandleRDSData(std::string text) {
-    qDebug("Handling RDS");
-
     text_ = text;
 
     emit textChanged();
 }
 
 void ThreadController::HandleStationInfoData(std::list<stationInfo> station_list) {
-    qDebug("Handling station info");
-
     for(QList<QObject *>::iterator it = q_station_list_.begin(); it != q_station_list_.end(); it++)
         delete (*it);
     q_station_list_.clear();
 
-    std::list<stationInfo>::iterator it;
-    for(it = station_list.begin(); it != station_list.end(); it++) {
+    for(std::list<stationInfo>::iterator it = station_list.begin(); it != station_list.end(); it++) {
         QStationInfo *item = new QStationInfo;
         item->setAudioKbps(it->audio_kbps);
         item->setStationName(it->station_name);
@@ -119,21 +114,16 @@ void ThreadController::HandleStationInfoData(std::list<stationInfo> station_list
         std::cout << (*it2)->station_name() << std::endl;
     }
     */
-
     emit stationListChanged();
 }
 
 void ThreadController::HandleSchedulerStarted() {
-    qDebug("Scheduler started");
-
     scheduler_running_ = true;
 
     emit schedulerRunningChanged();
 }
 
 void ThreadController::HandleSchedulerStopped() {
-    qDebug("Scheduler stopped");
-
     scheduler_running_ = false;
 
     emit schedulerRunningChanged();

@@ -1,21 +1,21 @@
 #ifndef QSCHEDULERCONFIG_H
 #define QSCHEDULERCONFIG_H
 
-#include <scheduler.h>
 #include <QObject>
+#include <scheduler.h>
 
 class QSchedulerConfig : public QObject {
     Q_OBJECT
-    Q_PROPERTY(unsigned int samplingRate READ samplingRate WRITE setSamplingRate NOTIFY samplingRateChanged)
-    Q_PROPERTY(unsigned int carrierFrequency READ carrierFrequency WRITE setCarrierFrequency NOTIFY carrierFrequencyChanged)
-    Q_PROPERTY(unsigned int dongleNr READ dongleNr WRITE setDongleNr NOTIFY dongleNrChanged)
+    Q_PROPERTY(quint32 samplingRate READ samplingRate WRITE setSamplingRate NOTIFY samplingRateChanged)
+    Q_PROPERTY(quint32 carrierFrequency READ carrierFrequency WRITE setCarrierFrequency NOTIFY carrierFrequencyChanged)
+    Q_PROPERTY(int dongleNr READ dongleNr WRITE setDongleNr NOTIFY dongleNrChanged)
     Q_PROPERTY(const char * inputFilename READ inputFilename WRITE setInputFilename NOTIFY inputFilenameChanged)
     Q_PROPERTY(Scheduler::data_source_t dataSource READ dataSource WRITE setDataSource NOTIFY dataSourceChanged)
     Q_PROPERTY(bool useSpeakers READ useSpeakers WRITE setUseSpeakers NOTIFY useSpeakersChanged)
 
     u_int32_t sampling_rate_;
     u_int32_t carrier_frequency_;
-    size_t dongle_nr_;
+    int dongle_nr_;
     const char *input_filename_;
     Scheduler::data_source_t data_source_;
     bool use_speakers_;
@@ -23,11 +23,11 @@ class QSchedulerConfig : public QObject {
 public:
     explicit QSchedulerConfig(QObject *parent = 0);
 
-    unsigned int samplingRate() const;
+    quint32 samplingRate() const;
     void setSamplingRate(const unsigned int sampling_rate);
-    unsigned int carrierFrequency() const;
+    quint32 carrierFrequency() const;
     void setCarrierFrequency(const unsigned int carrier_frequency);
-    unsigned int dongleNr() const;
+    int dongleNr() const;
     void setDongleNr(const unsigned int dongle_nr);
     const char *inputFilename() const;
     void setInputFilename(const char *input_filename);

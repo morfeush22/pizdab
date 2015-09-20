@@ -12,7 +12,7 @@ Loader {//Just loader, since there's only one.
         repeat: true
         onTriggered: {
             console.log("triggered");
-            console.log(threadController.stationList.length);
+            console.log(threadController.stationList.length ? threadController.stationList[0].stationName : "no name");
         }
     }
     onLoaded: load()

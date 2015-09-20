@@ -12,7 +12,7 @@ void QUserFICData::setDabPlus(bool dab_plus) {
     dab_plus_ = dab_plus;
 }
 
-unsigned int QUserFICData::bitrate() const {
+size_t QUserFICData::bitrate() const {
     return bitrate_;
 }
 

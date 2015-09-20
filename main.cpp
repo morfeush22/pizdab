@@ -11,9 +11,7 @@ int main(int argc, char *argv[]) {
     qRegisterMetaType<UserFICData_t>("UserFICData_t");
     qRegisterMetaType<std::list<stationInfo> >("std::list<stationInfo>");
     qRegisterMetaType<QUserFICData *>("QUserFICData *");
-    qRegisterMetaType<QStationInfo *>("QStationInfo *");
     qmlRegisterType<QSchedulerConfig>("SDRDAB", 1, 0, "QSchedulerConfig");
-    //qmlRegisterType<QStationInfo>("SDRDAB", 1, 0, "QStationInfo");
 
     UIScheduler ui_scheduler;
     ThreadController thread_controller(&ui_scheduler);

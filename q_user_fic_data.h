@@ -6,7 +6,7 @@
 class QUserFICData: public QObject {
     Q_OBJECT
     Q_PROPERTY(bool dabPlus READ dabPlus NOTIFY dabPlusChanged)
-    Q_PROPERTY(unsigned int bitrate READ bitrate NOTIFY bitrateChanged)
+    Q_PROPERTY(size_t bitrate READ bitrate NOTIFY bitrateChanged)
 
     bool dab_plus_;
     size_t bitrate_;
@@ -16,7 +16,7 @@ public:
 
     bool dabPlus() const;
     void setDabPlus(bool dab_plus);
-    unsigned int bitrate() const;
+    size_t bitrate() const;
     void setBitrate(size_t bitrate);
 
 signals:
