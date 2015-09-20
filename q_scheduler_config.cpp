@@ -1,6 +1,6 @@
 #include "q_scheduler_config.h"
 
-QSchedulerConfig::QSchedulerConfig(QObject* parent):
+QSchedulerConfig::QSchedulerConfig(QObject *parent):
     QObject(parent),
     sampling_rate_(2048000),
     carrier_frequency_(209936),
@@ -15,7 +15,7 @@ unsigned int QSchedulerConfig::samplingRate() const {
     return sampling_rate_;
 }
 
-void QSchedulerConfig::setSamplingRate(const u_int32_t sampling_rate) {
+void QSchedulerConfig::setSamplingRate(const unsigned int sampling_rate) {
     sampling_rate_ = sampling_rate;
     emit samplingRateChanged();
 }
@@ -24,7 +24,7 @@ unsigned int QSchedulerConfig::carrierFrequency() const {
     return carrier_frequency_;
 }
 
-void QSchedulerConfig::setCarrierFrequency(const u_int32_t carrier_frequency) {
+void QSchedulerConfig::setCarrierFrequency(const unsigned int carrier_frequency) {
     carrier_frequency_ = carrier_frequency;
     emit carrierFrequencyChanged();
 }
@@ -33,7 +33,7 @@ unsigned int QSchedulerConfig::dongleNr() const {
     return dongle_nr_;
 }
 
-void QSchedulerConfig::setDongleNr(const size_t dongle_nr) {
+void QSchedulerConfig::setDongleNr(const unsigned int dongle_nr) {
     dongle_nr_ = dongle_nr;
     emit dongleNrChanged();
 }

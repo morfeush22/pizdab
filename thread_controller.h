@@ -7,9 +7,15 @@
 #include "q_scheduler_config.h"
 #include <QObject>
 #include <QThread>
+#include <QQmlListProperty>
 
 class ThreadController: public QObject {
     Q_OBJECT
+    Q_PROPERTY(float snr READ snr NOTIFY snrChanged)
+    Q_PROPERTY(QUserFICData * userFICExtraData READ userFICExtraData NOTIFY userFICExtraDataChanged)
+    Q_PROPERTY(std::string text READ text NOTIFY textChanged)
+    Q_PROPERTY(QList<QObject *> stationList READ stationList NOTIFY stationListChanged)
+    Q_PROPERTY(bool schedulerRunning READ schedulerRunning NOTIFY schedulerRunningChanged)
 
     UIScheduler *ui_scheduler_;
     QThread scheduler_thread_;
@@ -22,26 +28,32 @@ class ThreadController: public QObject {
     bool scheduler_running_;
 
     //variables QML formatted
-    QList<QStationInfo*> q_station_list_;
-    QUserFICData q_user_fic_extra_data_;
+    QList<QObject *> q_station_list_;
+    QUserFICData *q_user_fic_extra_data_;
 
 public:
     explicit ThreadController(UIScheduler *ui_scheduler, QObject *parent = 0);
     virtual ~ThreadController();
 
     std::list<std::string> GetDevices();
-    Q_INVOKABLE void StartScheduler(QSchedulerConfig *config);
-    Q_INVOKABLE void StopScheduler();
+    Q_INVOKABLE void startScheduler(QSchedulerConfig *config);
+    Q_INVOKABLE void stopScheduler();
+
+    float snr() const;
+    QUserFICData *userFICExtraData() const;
+    std::string text() const;
+    QList<QObject *> stationList() const;
+    bool schedulerRunning() const;
 
 signals:
-    void SchedulerProcess(Scheduler::SchedulerConfig_t config);
-    void SchedulerSuspend();
-    void ChangeStation(uint8_t);
-    void SNRChanged();
-    void UserFICExtraDataChanged();
-    void TextChanged();
-    void StationListChanged();
-    void SchedulerRunningChanged();
+    void schedulerProcess(Scheduler::SchedulerConfig_t config);
+    void schedulerSuspend();
+    void changeStation(int);
+    void snrChanged();
+    void userFICExtraDataChanged();
+    void textChanged();
+    void stationListChanged();
+    void schedulerRunningChanged();
 
 public slots:
     //hande result functions

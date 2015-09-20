@@ -34,7 +34,7 @@ signals:
 public slots:
     void StartWork(SchedulerConfig_t config);
     void StopWork();
-    void ChangeStation(uint8_t new_station);
+    void ChangeStation(int new_station);
 
 };
 

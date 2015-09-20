@@ -6,12 +6,12 @@
 
 class QSchedulerConfig : public QObject {
     Q_OBJECT
-    Q_PROPERTY(unsigned int samplingRate READ samplingRate NOTIFY samplingRateChanged)
-    Q_PROPERTY(unsigned int carrierFrequency READ carrierFrequency NOTIFY carrierFrequencyChanged)
-    Q_PROPERTY(unsigned int dongleNr READ dongleNr NOTIFY dongleNrChanged)
-    Q_PROPERTY(const char * inputFilename READ inputFilename NOTIFY inputFilenameChanged)
-    Q_PROPERTY(Scheduler::data_source_t dataSource READ dataSource NOTIFY dataSourceChanged)
-    Q_PROPERTY(bool useSpeakers READ useSpeakers NOTIFY useSpeakersChanged)
+    Q_PROPERTY(unsigned int samplingRate READ samplingRate WRITE setSamplingRate NOTIFY samplingRateChanged)
+    Q_PROPERTY(unsigned int carrierFrequency READ carrierFrequency WRITE setCarrierFrequency NOTIFY carrierFrequencyChanged)
+    Q_PROPERTY(unsigned int dongleNr READ dongleNr WRITE setDongleNr NOTIFY dongleNrChanged)
+    Q_PROPERTY(const char * inputFilename READ inputFilename WRITE setInputFilename NOTIFY inputFilenameChanged)
+    Q_PROPERTY(Scheduler::data_source_t dataSource READ dataSource WRITE setDataSource NOTIFY dataSourceChanged)
+    Q_PROPERTY(bool useSpeakers READ useSpeakers WRITE setUseSpeakers NOTIFY useSpeakersChanged)
 
     u_int32_t sampling_rate_;
     u_int32_t carrier_frequency_;
@@ -21,14 +21,14 @@ class QSchedulerConfig : public QObject {
     bool use_speakers_;
 
 public:
-    explicit QSchedulerConfig(QObject* parent = 0);
+    explicit QSchedulerConfig(QObject *parent = 0);
 
     unsigned int samplingRate() const;
-    void setSamplingRate(const u_int32_t sampling_rate);
+    void setSamplingRate(const unsigned int sampling_rate);
     unsigned int carrierFrequency() const;
-    void setCarrierFrequency(const u_int32_t carrier_frequency);
+    void setCarrierFrequency(const unsigned int carrier_frequency);
     unsigned int dongleNr() const;
-    void setDongleNr(const size_t dongle_nr);
+    void setDongleNr(const unsigned int dongle_nr);
     const char *inputFilename() const;
     void setInputFilename(const char *input_filename);
     Scheduler::data_source_t dataSource() const;

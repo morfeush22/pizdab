@@ -5,22 +5,22 @@
 
 class QUserFICData: public QObject {
     Q_OBJECT
-    Q_PROPERTY(bool DABPlus READ DABPlus NOTIFY DABPlusChanged)
-    Q_PROPERTY(size_t bitrate READ bitrate NOTIFY bitrateChanged)
+    Q_PROPERTY(bool dabPlus READ dabPlus NOTIFY dabPlusChanged)
+    Q_PROPERTY(unsigned int bitrate READ bitrate NOTIFY bitrateChanged)
 
-    bool DAB_plus_;
+    bool dab_plus_;
     size_t bitrate_;
 
 public:
     explicit QUserFICData(QObject* parent = 0);
 
-    bool DABPlus() const;
-    void setDABPlus(bool DAB_Plus);
-    size_t bitrate() const;
+    bool dabPlus() const;
+    void setDabPlus(bool dab_plus);
+    unsigned int bitrate() const;
     void setBitrate(size_t bitrate);
 
 signals:
-    void DABPlusChanged();
+    void dabPlusChanged();
     void bitrateChanged();
 
 };

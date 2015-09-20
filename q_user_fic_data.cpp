@@ -1,18 +1,18 @@
 #include "q_user_fic_data.h"
 
-QUserFICData::QUserFICData(QObject* parent): QObject(parent) {
+QUserFICData::QUserFICData(QObject *parent): QObject(parent) {
 
 }
 
-bool QUserFICData::DABPlus() const {
-    return DAB_plus_;
+bool QUserFICData::dabPlus() const {
+    return dab_plus_;
 }
 
-void QUserFICData::setDABPlus(bool DAB_Plus) {
-    DAB_plus_ = DAB_Plus;
+void QUserFICData::setDabPlus(bool dab_plus) {
+    dab_plus_ = dab_plus;
 }
 
-size_t QUserFICData::bitrate() const {
+unsigned int QUserFICData::bitrate() const {
     return bitrate_;
 }
 

@@ -6,12 +6,20 @@ Loader {//Just loader, since there's only one.
     focus: true
     // Exception to the standard sizing, because this is primarily a desktop
     // example and it benefits from being able to see everything at once.
+    Timer {
+        interval: 500
+        running: true
+        repeat: true
+        onTriggered: {
+            console.log("triggered");
+            console.log(threadController.stationList.length);
+        }
+    }
     onLoaded: load()
     QSchedulerConfig {
         id: mainConfig
     }
     function load() {
-        threadController.StartScheduler(mainConfig);
-        console.log(schedulerConfig.samplingRate);
+        threadController.startScheduler(mainConfig);
     }
 }
