@@ -2,14 +2,16 @@ import QtQuick 2.5
 
 Rectangle {
     id: sView
-
     color: "black"
+    state: "inactive"
 
-    state: "active"
+    Behavior on scale { NumberAnimation{} }
 
     states: [
         State {
-            name: "active"; when: mainView.state == "showCoverView"
+            name: "inactive";
+            when: mainView.state == "showCoverView"
+
             PropertyChanges {
                 target: sView
                 color: "red"
@@ -23,7 +25,9 @@ Rectangle {
         },
 
         State {
-            name: "inactive"; when: mainView.state == "showSpectrumView"
+            name: "active";
+            when: mainView.state == "showSpectrumView"
+
             PropertyChanges {
                 target: mouseArea
                 enabled: false

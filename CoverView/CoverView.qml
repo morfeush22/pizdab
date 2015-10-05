@@ -3,14 +3,16 @@ import "./Subelements"
 
 Rectangle {
     id: cView
-
     color: "white"
+    state: "active"
 
-    state: "inactive"
+    Behavior on scale { NumberAnimation{} }
 
     states: [
         State {
-            name: "active"; when: mainView.state == "showSpectrumView"
+            name: "inactive";
+            when: mainView.state == "showSpectrumView"
+
             PropertyChanges {
                 target: cView
                 color: "blue"
@@ -24,12 +26,20 @@ Rectangle {
 
             PropertyChanges {
                 target: cover
-                width: Math.min(parent.width, parent.height); height: width
+                width: Math.min(parent.width, parent.height);
+                height: width
+            }
+
+            PropertyChanges {
+                target: tagBar
+                visible: false
             }
         },
 
         State {
-            name: "inactive"; when: mainView.state == "showCoverView"
+            name: "active";
+            when: mainView.state == "showCoverView"
+
             PropertyChanges {
                 target: mouseArea
                 enabled: false
@@ -37,7 +47,13 @@ Rectangle {
 
             PropertyChanges {
                 target: cover
-                width: 0.7*Math.min(parent.width, parent.height); height: width
+                width: 0.7*Math.min(parent.width, parent.height);
+                height: width
+            }
+
+            PropertyChanges {
+                target: tagBar
+                visible: true
             }
         }
     ]
@@ -53,6 +69,7 @@ Rectangle {
 
     Cover {
         id: cover
+
         anchors {
             horizontalCenter: parent.horizontalCenter
             verticalCenter: parent.verticalCenter
@@ -63,7 +80,6 @@ Rectangle {
         id: tagBar
         width: cover.width
         height: (mainView.height - cover.height)/2
-
         anchors.horizontalCenter: cover.horizontalCenter
         anchors.top: cover.bottom
         anchors.topMargin: 5

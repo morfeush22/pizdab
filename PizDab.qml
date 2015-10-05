@@ -125,8 +125,11 @@ Rectangle {
 
             MouseArea {
                 anchors.fill: parent
-                onClicked: mainWindow.Stack.view.push(
-                               {item: Qt.resolvedUrl(url), properties: {title: title}})
+                onClicked: {
+                    mainWindow.Stack.view.push(
+                               {item: Qt.resolvedUrl(url), properties: {title: title}});
+                    mainWindow.state = "sideMenusClosed"
+                }
             }
         }
     }

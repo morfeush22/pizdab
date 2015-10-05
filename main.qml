@@ -16,13 +16,13 @@ ApplicationWindow {
 
         Rectangle {
             id: backButton
+            width: 80
+            height: 80
             anchors.left: parent.left
             anchors.leftMargin: 20
             anchors.verticalCenter: parent.verticalCenter
             radius: 4
             color: backmouse.pressed ? "#222" : "transparent"
-
-            Behavior on opacity { NumberAnimation{} }
 
             Image {
                 anchors.verticalCenter: parent.verticalCenter
@@ -32,7 +32,6 @@ ApplicationWindow {
             MouseArea {
                 id: backmouse
                 anchors.fill: parent
-                anchors.margins: -20
                 onClicked: stackView.pop()
             }
 
@@ -51,6 +50,28 @@ ApplicationWindow {
         anchors.fill: parent
         focus: true
         initialItem: PizDab {}
+        delegate: StackViewDelegate {
+            function transitionFinished(properties) {
+                properties.exitItem.opacity = 1
+            }
+
+            pushTransition: StackViewTransition {
+
+                PropertyAnimation {
+                    target: enterItem
+                    property: "opacity"
+                    from: 0
+                    to: 1
+                }
+
+                PropertyAnimation {
+                    target: exitItem
+                    property: "opacity"
+                    from: 1
+                    to: 0
+                }
+            }
+        }
     }
 }
 
