@@ -5,6 +5,7 @@
 
 class QUserFICData: public QObject {
     Q_OBJECT
+
     Q_PROPERTY(bool dabPlus READ dabPlus NOTIFY dabPlusChanged)
     Q_PROPERTY(size_t bitrate READ bitrate NOTIFY bitrateChanged)
 

@@ -11,6 +11,7 @@
 
 class ThreadController: public QObject {
     Q_OBJECT
+
     Q_PROPERTY(float snr READ snr NOTIFY snrChanged)
     Q_PROPERTY(QUserFICData * userFICExtraData READ userFICExtraData NOTIFY userFICExtraDataChanged)
     Q_PROPERTY(QString text READ text NOTIFY textChanged)
@@ -49,7 +50,7 @@ public:
 signals:
     void schedulerProcess(Scheduler::SchedulerConfig_t config);
     void schedulerSuspend();
-    void stationChange(uint16_t);
+    void stationChange(quint16);
     void snrChanged();
     void userFICExtraDataChanged();
     void textChanged();

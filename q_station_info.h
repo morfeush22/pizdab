@@ -6,6 +6,7 @@
 
 class QStationInfo: public QObject {
     Q_OBJECT
+
     Q_PROPERTY(size_t audioKbps READ audioKbps NOTIFY audioKbpsChanged)
     Q_PROPERTY(QString stationName READ stationName NOTIFY stationNameChanged)
 

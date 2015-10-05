@@ -1,18 +1,18 @@
 <RCC>
     <qresource prefix="/">
-        <file>pizdab.qml</file>
+        <file>PizDab.qml</file>
         <file>CoverView/CoverView.qml</file>
         <file>SpectrumView/SpectrumView.qml</file>
         <file>CoverView/Subelements/Cover.qml</file>
         <file>CoverView/Subelements/TagBar.qml</file>
         <file>SpectrumView/Subelements/Spectrum.qml</file>
         <file>SideMenus/StationMenu/StationList.qml</file>
-        <file>SideMenus/CommonMenu/MenuList.qml</file>
-        <file>SideMenus/CommonMenu/CaptureMenu/CaptureList.qml</file>
-        <file>SideMenus/CommonMenu/OptionsMenu/OptionsList.qml</file>
-        <file>SideMenus/CommonMenu/AboutMenu/About.qml</file>
+        <file>SideMenus/CommonMenu/CaptureList.qml</file>
+        <file>SideMenus/CommonMenu/OptionsList.qml</file>
+        <file>SideMenus/CommonMenu/About.qml</file>
         <file>CommonElements/ToolTip.qml</file>
-        <file>SideMenus/images/arrow.png</file>
         <file>main.qml</file>
+        <file>images/arrow.png</file>
+        <file>images/navigation_previous_item.png</file>
     </qresource>
 </RCC>

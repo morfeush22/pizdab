@@ -6,6 +6,7 @@
 
 class QSchedulerConfig : public QObject {
     Q_OBJECT
+
     Q_PROPERTY(quint32 samplingRate READ samplingRate WRITE setSamplingRate NOTIFY samplingRateChanged)
     Q_PROPERTY(quint32 carrierFrequency READ carrierFrequency WRITE setCarrierFrequency NOTIFY carrierFrequencyChanged)
     Q_PROPERTY(int dongleNr READ dongleNr WRITE setDongleNr NOTIFY dongleNrChanged)
@@ -13,8 +14,8 @@ class QSchedulerConfig : public QObject {
     Q_PROPERTY(Scheduler::data_source_t dataSource READ dataSource WRITE setDataSource NOTIFY dataSourceChanged)
     Q_PROPERTY(bool useSpeakers READ useSpeakers WRITE setUseSpeakers NOTIFY useSpeakersChanged)
 
-    u_int32_t sampling_rate_;
-    u_int32_t carrier_frequency_;
+    quint32 sampling_rate_;
+    quint32 carrier_frequency_;
     int dongle_nr_;
     const char *input_filename_;
     Scheduler::data_source_t data_source_;
