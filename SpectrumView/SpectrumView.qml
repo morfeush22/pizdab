@@ -5,7 +5,7 @@ Rectangle {
     color: "black"
     state: "inactive"
 
-    Behavior on scale { NumberAnimation{} }
+    //Behavior on scale { NumberAnimation{} }
 
     states: [
         State {

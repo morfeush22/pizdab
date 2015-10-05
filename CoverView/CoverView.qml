@@ -3,10 +3,10 @@ import "./Subelements"
 
 Rectangle {
     id: cView
-    color: "white"
+    color: "yellow"
     state: "active"
 
-    Behavior on scale { NumberAnimation{} }
+    //Behavior on scale { NumberAnimation{} }
 
     states: [
         State {

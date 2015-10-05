@@ -1,5 +1,6 @@
 import QtQuick 2.5
 import QtQuick.Controls 1.2
+import SDRDAB 1.0
 import "CoverView"
 import "SpectrumView"
 import "SideMenus/CommonMenu"
@@ -7,6 +8,16 @@ import "SideMenus/StationMenu"
 
 Rectangle {
     id: mainWindow
+
+    // ========temporary========
+    QSchedulerConfig {
+        id: mainConfig
+    }
+
+    Component.onCompleted: {
+        threadController.startScheduler(mainConfig);
+    }
+    // =========================
 
     ListModel {
         id: commonMenuModel
@@ -22,6 +33,11 @@ Rectangle {
             title: "Options"
             url: "qrc:/SideMenus/CommonMenu/OptionsList.qml"
         }
+    }
+
+    ListModel {
+        id: stationListModel
+        dynamicRoles: true
     }
 
     FocusScope {
@@ -53,6 +69,7 @@ Rectangle {
                 PropertyChanges {
                     target: coverView
                     width: parent.width; height: parent.height
+                    z: 0
                 }
 
                 PropertyChanges {
@@ -74,6 +91,7 @@ Rectangle {
                 PropertyChanges {
                     target: spectrumView
                     width: parent.width; height: parent.height
+                    z: 0
                 }
             }
         ]
@@ -89,7 +107,7 @@ Rectangle {
 
         MouseArea {
             anchors.fill: parent
-            onClicked: mainWindow.state = (mainWindow.state == "contextMenuOpen" ? "sideMenusClosed" : "contextMenuOpen")
+            onClicked: mainWindow.state = (mainWindow.state == "contextMenuOpened" ? "sideMenusClosed" : "contextMenuOpened")
         }
     }
 
@@ -97,15 +115,12 @@ Rectangle {
         id: rightArrow
         source: "images/arrow.png"
         rotation: 270
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.right: parent.right
+        anchors.verticalCenter: stationList.verticalCenter
+        anchors.right: stationList.left
 
         MouseArea {
             anchors.fill: parent
-            onClicked: {
-                console.log("clicked right");
-                console.log(mainWindow.Stack.index);
-            }
+            onClicked: mainWindow.state = (mainWindow.state == "stationListOpened" ? "sideMenusClosed" : "stationListOpened")
         }
     }
 
@@ -116,7 +131,7 @@ Rectangle {
         height: parent.height
         model: commonMenuModel
         delegate: Item {
-            height: 50
+            height: 10
             width: parent.width
 
             Rectangle {
@@ -134,23 +149,70 @@ Rectangle {
         }
     }
 
+    ListView {
+        id: stationList
+        x: parent.width
+        width: 125
+        height: parent.height
+        model: stationListModel
+        delegate: Item {
+            height: 10
+            width: parent.width
+
+            Rectangle {
+                Text { text: title + ": " + kbps }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    mainWindow.Stack.view.push(
+                               {item: Qt.resolvedUrl(url), properties: {title: title}});
+                    mainWindow.state = "sideMenusClosed"
+                }
+            }
+        }
+
+        Connections {
+            target: threadController
+            onStationListChanged: {
+                stationListModel.clear();
+                for (var i = 0; i < threadController.stationList.length; i++) {
+                    stationListModel.append(
+                                {"title": threadController.stationList[i].stationName,
+                                "kbps": threadController.stationList[i].audioKbps})
+                }
+            }
+        }
+    }
+
     states: [
         State {
             name: "sideMenusClosed"
             PropertyChanges { target: contextMenu; x: -130 }
+            PropertyChanges { target: stationList; x: parent.width }
             PropertyChanges { target: mainView; x: 0 }
             PropertyChanges { target: shade; opacity: 0 }
         },
 
         State {
-            name: "contextMenuOpen"
+            name: "contextMenuOpened"
             PropertyChanges { target: contextMenu; x: 0 }
+            PropertyChanges { target: stationList; x: parent.width + 125 }
             PropertyChanges { target: mainView; x: 125 }
+            PropertyChanges { target: shade; opacity: 0.25 }
+        },
+
+        State {
+            name: "stationListOpened"
+            PropertyChanges { target: contextMenu; x: -255 }
+            PropertyChanges { target: stationList; x: parent.width - 130 }
+            PropertyChanges { target: mainView; x: -125 }
             PropertyChanges { target: shade; opacity: 0.25 }
         }
     ]
 
     transitions: Transition {
-        NumberAnimation { properties: "x,opacity"; duration: 100; easing.type: Easing.OutQuint }
+        NumberAnimation { properties: "x,opacity"; duration: 200; easing.type: Easing.OutQuint }
     }
 }

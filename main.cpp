@@ -7,6 +7,7 @@
 
 int main(int argc, char *argv[]) {
     //register types
+    qRegisterMetaType<size_t>("size_t");
     qRegisterMetaType<Scheduler::SchedulerConfig_t>("Scheduler::SchedulerConfig_t");
     qRegisterMetaType<UserFICData_t>("UserFICData_t");
     qRegisterMetaType<std::list<stationInfo> >("std::list<stationInfo>");
