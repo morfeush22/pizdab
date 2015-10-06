@@ -6,10 +6,8 @@ ThreadController::ThreadController(UIScheduler *ui_scheduler, QObject *parent):
     q_user_fic_extra_data_ = new QUserFICData;
 
     ui_scheduler->moveToThread(&scheduler_thread_);
-    connect(&scheduler_thread_, &QThread::finished, ui_scheduler, &QObject::deleteLater);
+    connect(&scheduler_thread_, &QThread::finished, ui_scheduler_, &QObject::deleteLater);
     connect(this, &ThreadController::schedulerProcess, ui_scheduler_, &UIScheduler::StartWork);
-    connect(this, &ThreadController::schedulerSuspend, ui_scheduler_, &UIScheduler::StopWork);
-    connect(this, &ThreadController::stationChange, ui_scheduler_, &UIScheduler::ChangeStation);
     connect(ui_scheduler_, &UIScheduler::SNRData, this, &ThreadController::HandleSNRData);
     connect(ui_scheduler_, &UIScheduler::FicExtraData, this, &ThreadController::HandleFicExtraData);
     connect(ui_scheduler_, &UIScheduler::RDSData, this, &ThreadController::HandleRDSData);
@@ -20,7 +18,7 @@ ThreadController::ThreadController(UIScheduler *ui_scheduler, QObject *parent):
 }
 
 ThreadController::~ThreadController() {
-    emit schedulerSuspend();
+    ui_scheduler_->StopWork();
     scheduler_thread_.quit();
     scheduler_thread_.wait();
 
@@ -49,11 +47,11 @@ void ThreadController::startScheduler(QSchedulerConfig *config) {
 }
 
 void ThreadController::stopScheduler() {
-    emit schedulerSuspend();
+    ui_scheduler_->StopWork();
 }
 
 void ThreadController::changeStation(quint16 new_station) {
-    emit stationChange(new_station);
+    ui_scheduler_->ChangeStation(new_station);
 }
 
 float ThreadController::snr() const {
@@ -83,9 +81,10 @@ void ThreadController::HandleSNRData(float snr) {
 }
 
 void ThreadController::HandleFicExtraData(UserFICData_t user_fic_extra_data) {
+    if ((user_fic_extra_data.validity_ & UserFICData_t::LABEL_VALID) && q_user_fic_extra_data_->currentStationId() != user_fic_extra_data.service_id_)
+        q_user_fic_extra_data_->setCurrentStationId(user_fic_extra_data.service_id_);
     q_user_fic_extra_data_->setBitrate(user_fic_extra_data.bitrate_);
     q_user_fic_extra_data_->setDabPlus(user_fic_extra_data.DAB_plus_);
-    q_user_fic_extra_data_->setCurrentStationId(user_fic_extra_data.service_id_);
 
     emit userFICExtraDataChanged();
 }

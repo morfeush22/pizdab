@@ -24,6 +24,6 @@ quint16 QStationInfo::stationId() const {
 	return station_id_;
 }
 
-void setStationId(quint16 station_id) {
-	station_id_ = station_id;
+void QStationInfo::setStationId(quint16 station_id) {
+    station_id_ = station_id;
 }

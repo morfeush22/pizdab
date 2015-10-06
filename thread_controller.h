@@ -48,9 +48,7 @@ public:
     bool schedulerRunning() const;
 
 signals:
-    void schedulerProcess(Scheduler::SchedulerConfig_t config);
-    void schedulerSuspend();
-    void stationChange(quint16);
+    void schedulerProcess(Scheduler::SchedulerConfig_t);
     void snrChanged();
     void userFICExtraDataChanged();
     void textChanged();

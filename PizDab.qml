@@ -131,7 +131,7 @@ Rectangle {
         height: parent.height
         model: commonMenuModel
         delegate: Item {
-            height: 10
+            height: 20
             width: parent.width
 
             Rectangle {
@@ -156,32 +156,39 @@ Rectangle {
         height: parent.height
         model: stationListModel
         delegate: Item {
-            height: 10
+            height: 20
             width: parent.width
 
             Rectangle {
-                Text { text: title + ": " + kbps }
+                Text { text:
+                        if (station_id == threadController.userFICExtraData.currentStationId)
+                            station_title ? station_title + " (current)" : ""
+                        else
+                            station_title ? station_title : ""
+                }
             }
 
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    mainWindow.Stack.view.push(
-                               {item: Qt.resolvedUrl(url), properties: {title: title}});
                     mainWindow.state = "sideMenusClosed"
+                    threadController.changeStation(station_id);
                 }
             }
         }
 
         Connections {
-            target: threadController
+            target: mainWindow.state == "stationListOpened" ? null : threadController
             onStationListChanged: {
-                stationListModel.clear();
+                var newModel = [];
                 for (var i = 0; i < threadController.stationList.length; i++) {
-                    stationListModel.append(
-                                {"title": threadController.stationList[i].stationName,
-                                "kbps": threadController.stationList[i].audioKbps})
+                    newModel.push(
+                                {"station_title": threadController.stationList[i].stationName,
+                                "kbps": threadController.stationList[i].audioKbps,
+                                "station_id": threadController.stationList[i].stationId})
                 }
+                stationListModel.clear()
+                stationListModel.append(newModel);
             }
         }
     }

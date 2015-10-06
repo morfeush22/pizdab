@@ -15,7 +15,7 @@ class QUserFICData: public QObject {
     quint16 current_station_id_;
 
 public:
-    explicit QUserFICData(QObject* parent = 0);
+    explicit QUserFICData(QObject *parent = 0);
 
     bool dabPlus() const;
     void setDabPlus(bool dab_plus);

@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
     qRegisterMetaType<Scheduler::SchedulerConfig_t>("Scheduler::SchedulerConfig_t");
     qRegisterMetaType<UserFICData_t>("UserFICData_t");
     qRegisterMetaType<std::list<stationInfo> >("std::list<stationInfo>");
-    qRegisterMetaType<QUserFICData *>("QUserFICData *");
+    qRegisterMetaType<QUserFICData *>("QUserFICData *"); 
     qmlRegisterType<QSchedulerConfig>("SDRDAB", 1, 0, "QSchedulerConfig");
 
     UIScheduler ui_scheduler;
