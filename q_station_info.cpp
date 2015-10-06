@@ -19,3 +19,11 @@ QString QStationInfo::stationName() const {
 void QStationInfo::setStationName(std::string station_name) {
     station_name_ = station_name;
 }
+
+quint16 QStationInfo::stationId() const {
+	return station_id_;
+}
+
+void setStationId(quint16 station_id) {
+	station_id_ = station_id;
+}

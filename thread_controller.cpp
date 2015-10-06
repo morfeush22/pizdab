@@ -85,6 +85,7 @@ void ThreadController::HandleSNRData(float snr) {
 void ThreadController::HandleFicExtraData(UserFICData_t user_fic_extra_data) {
     q_user_fic_extra_data_->setBitrate(user_fic_extra_data.bitrate_);
     q_user_fic_extra_data_->setDabPlus(user_fic_extra_data.DAB_plus_);
+    q_user_fic_extra_data_->setCurrentStationId(user_fic_extra_data.service_id_);
 
     emit userFICExtraDataChanged();
 }
@@ -104,16 +105,10 @@ void ThreadController::HandleStationInfoData(std::list<stationInfo> station_list
         QStationInfo *item = new QStationInfo;
         item->setAudioKbps(it->audio_kbps);
         item->setStationName(it->station_name);
+        item->setStationId(it->ServiceId);
         q_station_list_.push_back(item);
     }
 
-    /*
-    QList<QStationInfo*>::iterator it2;
-    for(it2 = q_station_list_.begin(); it2 != q_station_list_.end(); it2++) {
-        std::cout << (*it2)->audio_kbps() << std::endl;
-        std::cout << (*it2)->station_name() << std::endl;
-    }
-    */
     emit stationListChanged();
 }
 

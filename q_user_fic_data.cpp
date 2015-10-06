@@ -19,3 +19,11 @@ size_t QUserFICData::bitrate() const {
 void QUserFICData::setBitrate(size_t bitrate) {
     bitrate_ = bitrate;
 }
+
+quint16 currentStationId() const {
+	return current_station_id_
+}
+
+void setCurrentStationId(quint16 current_station_id) {
+	current_station_id_ = current_station_id
+}
