@@ -172,7 +172,7 @@ Rectangle {
                 anchors.fill: parent
                 onClicked: {
                     mainWindow.state = "sideMenusClosed"
-                    threadController.changeStation(station_id);
+                    threadController.changeStation(sub_channel_id);
                 }
             }
         }
@@ -185,7 +185,8 @@ Rectangle {
                     newModel.push(
                                 {"station_title": threadController.stationList[i].stationName,
                                 "kbps": threadController.stationList[i].audioKbps,
-                                "station_id": threadController.stationList[i].stationId})
+                                "station_id": threadController.stationList[i].stationId,
+                                "sub_channel_id": threadController.stationList[i].subChannelId})
                 }
                 stationListModel.clear()
                 stationListModel.append(newModel);

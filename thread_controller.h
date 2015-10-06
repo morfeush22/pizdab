@@ -23,9 +23,7 @@ class ThreadController: public QObject {
 
     //variables to keep obtained data
     float snr_;
-    UserFICData_t user_fic_extra_data_;
     std::string text_;
-    std::list<stationInfo> station_list_;
     bool scheduler_running_;
 
     //variables QML formatted
@@ -39,7 +37,7 @@ public:
     Q_INVOKABLE QList<QString> GetDevices();
     Q_INVOKABLE void startScheduler(QSchedulerConfig *config);
     Q_INVOKABLE void stopScheduler();
-    Q_INVOKABLE void changeStation(quint16 new_station);
+    Q_INVOKABLE void changeStation(quint8 new_station);
 
     float snr() const;
     QUserFICData *userFICExtraData() const;

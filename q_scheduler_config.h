@@ -20,6 +20,7 @@ class QSchedulerConfig : public QObject {
     const char *input_filename_;
     Scheduler::data_source_t data_source_;
     bool use_speakers_;
+    quint8 initial_channel_;
 
 public:
     explicit QSchedulerConfig(QObject *parent = 0);
@@ -36,6 +37,7 @@ public:
     void setDataSource(const Scheduler::data_source_t data_source);
     bool useSpeakers() const;
     void setUseSpeakers(const bool use_speakers);
+    quint8 initialChannel() const;
 
 signals:
     void samplingRateChanged();

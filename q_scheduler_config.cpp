@@ -7,7 +7,8 @@ QSchedulerConfig::QSchedulerConfig(QObject *parent):
     dongle_nr_(0),
     input_filename_("/home/morfeush22/project/sdr/Record3_katowice_iq.raw"),
     data_source_(Scheduler::DATA_FROM_FILE),
-    use_speakers_(true) {
+    use_speakers_(true),
+    initial_channel_(0x3) {
 
 }
 
@@ -63,4 +64,8 @@ bool QSchedulerConfig::useSpeakers() const {
 void QSchedulerConfig::setUseSpeakers(const bool use_speakers) {
     use_speakers_ = use_speakers;
     emit useSpeakersChanged();
+}
+
+quint8 QSchedulerConfig::initialChannel() const {
+    return initial_channel_;
 }

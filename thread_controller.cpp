@@ -43,6 +43,7 @@ void ThreadController::startScheduler(QSchedulerConfig *config) {
     new_config.input_filename = config->inputFilename();
     new_config.data_source = config->dataSource();
     new_config.use_speakers = config->useSpeakers();
+    new_config.start_station_nr = config->initialChannel();
     emit schedulerProcess(new_config);
 }
 
@@ -50,7 +51,7 @@ void ThreadController::stopScheduler() {
     ui_scheduler_->StopWork();
 }
 
-void ThreadController::changeStation(quint16 new_station) {
+void ThreadController::changeStation(quint8 new_station) {
     ui_scheduler_->ChangeStation(new_station);
 }
 
@@ -105,6 +106,7 @@ void ThreadController::HandleStationInfoData(std::list<stationInfo> station_list
         item->setAudioKbps(it->audio_kbps);
         item->setStationName(it->station_name);
         item->setStationId(it->ServiceId);
+        item->setSubChannelId(it->SubChannelId);
         q_station_list_.push_back(item);
     }
 
