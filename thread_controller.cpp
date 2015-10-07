@@ -51,7 +51,7 @@ void ThreadController::stopScheduler() {
     ui_scheduler_->StopWork();
 }
 
-void ThreadController::changeStation(quint8 new_station) {
+void ThreadController::changeStation(int new_station) {
     ui_scheduler_->ChangeStation(new_station);
 }
 

@@ -37,7 +37,7 @@ public:
     Q_INVOKABLE QList<QString> GetDevices();
     Q_INVOKABLE void startScheduler(QSchedulerConfig *config);
     Q_INVOKABLE void stopScheduler();
-    Q_INVOKABLE void changeStation(quint8 new_station);
+    Q_INVOKABLE void changeStation(int new_station);
 
     float snr() const;
     QUserFICData *userFICExtraData() const;

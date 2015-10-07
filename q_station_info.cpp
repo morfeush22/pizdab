@@ -28,10 +28,10 @@ void QStationInfo::setStationId(quint16 station_id) {
     station_id_ = station_id;
 }
 
-quint8 QStationInfo::subChannelId() const {
+quint16 QStationInfo::subChannelId() const {
     return sub_channel_id_;
 }
 
-void QStationInfo::setSubChannelId(quint8 sub_channel_id) {
+void QStationInfo::setSubChannelId(quint16 sub_channel_id) {
     sub_channel_id_ = sub_channel_id;
 }

@@ -64,7 +64,6 @@ std::list<std::string> UIScheduler::GetDevices() {
 void UIScheduler::StartWork(SchedulerConfig_t config) {
     emit SchedulerStarted();
     Start(config);
-    std::cout << "stopped" << std::endl;
     emit SchedulerStopped();
 }
 
@@ -72,7 +71,6 @@ void UIScheduler::StopWork() {
     Stop();
 }
 
-void UIScheduler::ChangeStation(quint8 new_station) {
-    ParametersToSDR(0x6);
-    std::cout << "changed" << std::endl;
+void UIScheduler::ChangeStation(quint16 new_station) {
+    ParametersToSDR(new_station);
 }

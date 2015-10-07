@@ -161,7 +161,7 @@ Rectangle {
 
             Rectangle {
                 Text { text:
-                        if (station_id == threadController.userFICExtraData.currentStationId)
+                        if (station_id === threadController.userFICExtraData.currentStationId)
                             station_title ? station_title + " (current)" : ""
                         else
                             station_title ? station_title : ""
