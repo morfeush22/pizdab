@@ -1,6 +1,5 @@
 import QtQuick 2.2
 import QtQuick.Controls 1.2
-import SDRDAB 1.0
 
 ApplicationWindow {
     id: root
@@ -12,10 +11,10 @@ ApplicationWindow {
         color: "#212126"
         width: parent.width
         height: 100
-        visible: stackView.depth > 1 ? 1 : 0
+        visible: stackView.depth > 1 && stackView.currentItem.backButtonBarVisible
 
         Rectangle {
-            id: backButton
+            id: backButtonBar
             width: 80
             height: 80
             anchors.left: parent.left
@@ -37,10 +36,15 @@ ApplicationWindow {
 
             Text {
                 font.pixelSize: 42
-                x: backButton.x + backButton.width + 20
+                x: backButtonBar.x + backButtonBar.width + 20
                 anchors.verticalCenter: parent.verticalCenter
                 color: "white"
-                text: stackView.currentItem.title ? stackView.currentItem.title : ""
+                text: {
+                    if (stackView.currentItem && stackView.currentItem.title)
+                        stackView.currentItem.title
+                    else
+                        ""
+                }
             }
         }
     }

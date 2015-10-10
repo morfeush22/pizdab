@@ -19,7 +19,7 @@ class ThreadController: public QObject {
     Q_PROPERTY(bool schedulerRunning READ schedulerRunning NOTIFY schedulerRunningChanged)
 
     UIScheduler *ui_scheduler_;
-    QThread scheduler_thread_;
+    QThread *scheduler_thread_;
 
     //variables to keep obtained data
     float snr_;
@@ -27,14 +27,17 @@ class ThreadController: public QObject {
     bool scheduler_running_;
 
     //variables QML formatted
-    QList<QObject *> q_station_list_;
+    QList<QObject *> *q_station_list_;
     QUserFICData *q_user_fic_extra_data_;
 
+    void ConnectSignals();
+    Scheduler::SchedulerConfig_t parseConfig(QSchedulerConfig *config);
+
 public:
-    explicit ThreadController(UIScheduler *ui_scheduler, QObject *parent = 0);
+    explicit ThreadController(QObject *parent = 0);
     virtual ~ThreadController();
 
-    Q_INVOKABLE QList<QString> GetDevices();
+    Q_INVOKABLE QList<QString> getDevices();
     Q_INVOKABLE void startScheduler(QSchedulerConfig *config);
     Q_INVOKABLE void stopScheduler();
     Q_INVOKABLE void changeStation(int new_station);

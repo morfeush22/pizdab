@@ -2,6 +2,8 @@
 
 void UIScheduler::ParametersFromSDR(Scheduler::scheduler_error_t error_code) {
     errno_ = error_code;
+    if (errno_ != OK)
+        Stop();
 }
 
 void UIScheduler::ParametersFromSDR(float snr) {
@@ -44,6 +46,12 @@ void UIScheduler::ParametersFromSDR(std::string *text) {
     delete text;
 }
 
+void UIScheduler::Run(UIScheduler *ui_scheduler, SchedulerConfig_t config) {
+    emit ui_scheduler->SchedulerStarted();
+    ui_scheduler->Start(config);
+    emit ui_scheduler->SchedulerStopped();
+}
+
 UIScheduler::UIScheduler(QObject *parent):
     QObject(parent),
     Scheduler(),
@@ -62,6 +70,7 @@ std::list<std::string> UIScheduler::GetDevices() {
 }
 
 void UIScheduler::StartWork(SchedulerConfig_t config) {
+    //scheduler_future_ = QtConcurrent::run(Run, this, config);
     emit SchedulerStarted();
     Start(config);
     emit SchedulerStopped();

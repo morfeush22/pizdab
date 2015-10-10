@@ -14,5 +14,6 @@
         <file>main.qml</file>
         <file>images/arrow.png</file>
         <file>images/navigation_previous_item.png</file>
+        <file>SideMenus/CommonMenu/PleaseWait.qml</file>
     </qresource>
 </RCC>

@@ -1,12 +1,6 @@
 #include "thread_controller.h"
 
-ThreadController::ThreadController(UIScheduler *ui_scheduler, QObject *parent):
-    QObject(parent),
-    ui_scheduler_(ui_scheduler) {
-    q_user_fic_extra_data_ = new QUserFICData;
-
-    ui_scheduler->moveToThread(&scheduler_thread_);
-    connect(&scheduler_thread_, &QThread::finished, ui_scheduler_, &QObject::deleteLater);
+void ThreadController::ConnectSignals() {
     connect(this, &ThreadController::schedulerProcess, ui_scheduler_, &UIScheduler::StartWork);
     connect(ui_scheduler_, &UIScheduler::SNRData, this, &ThreadController::HandleSNRData);
     connect(ui_scheduler_, &UIScheduler::FicExtraData, this, &ThreadController::HandleFicExtraData);
@@ -14,21 +8,43 @@ ThreadController::ThreadController(UIScheduler *ui_scheduler, QObject *parent):
     connect(ui_scheduler_, &UIScheduler::StationInfoData, this, &ThreadController::HandleStationInfoData);
     connect(ui_scheduler_, &UIScheduler::SchedulerStarted, this, &ThreadController::HandleSchedulerStarted);
     connect(ui_scheduler_, &UIScheduler::SchedulerStopped, this, &ThreadController::HandleSchedulerStopped);
-    scheduler_thread_.start();
+}
+
+Scheduler::SchedulerConfig_t ThreadController::parseConfig(QSchedulerConfig *config) {
+    Scheduler::SchedulerConfig_t new_config;
+    new_config.sampling_rate = config->samplingRate();
+    new_config.carrier_frequency = config->carrierFrequency();
+    new_config.input_filename = config->inputFilename();
+    new_config.data_source = config->dataSource();
+    new_config.use_speakers = config->useSpeakers();
+    new_config.start_station_nr = config->initialChannel();
+    return new_config;
+}
+
+ThreadController::ThreadController(QObject *parent):
+    QObject(parent),
+    scheduler_running_(false) {
+    q_station_list_ = new QList<QObject *>;
+    q_user_fic_extra_data_ = new QUserFICData;
 }
 
 ThreadController::~ThreadController() {
-    ui_scheduler_->StopWork();
-    scheduler_thread_.quit();
-    scheduler_thread_.wait();
+    if (scheduler_running_) {
+        ui_scheduler_->StopWork();
+        scheduler_thread_->quit();
+        scheduler_thread_->wait();
+        delete ui_scheduler_;
+        delete scheduler_thread_;
+    }
 
-    for(QList<QObject *>::iterator it = q_station_list_.begin(); it != q_station_list_.end(); it++)
+    for(QList<QObject *>::iterator it = q_station_list_->begin(); it != q_station_list_->end(); it++)
         delete (*it);
 
+    delete q_station_list_;
     delete q_user_fic_extra_data_;
 }
 
-QList<QString> ThreadController::GetDevices() {
+QList<QString> ThreadController::getDevices() {
     QList<QString> q_devices;
     std::list<std::string> devices = ui_scheduler_->GetDevices();
     for(std::list<std::string>::iterator it = devices.begin(); it != devices.end(); it++)
@@ -37,17 +53,22 @@ QList<QString> ThreadController::GetDevices() {
 }
 
 void ThreadController::startScheduler(QSchedulerConfig *config) {
-    Scheduler::SchedulerConfig_t new_config;
-    new_config.sampling_rate = config->samplingRate();
-    new_config.carrier_frequency = config->carrierFrequency();
-    new_config.input_filename = config->inputFilename();
-    new_config.data_source = config->dataSource();
-    new_config.use_speakers = config->useSpeakers();
-    new_config.start_station_nr = config->initialChannel();
-    emit schedulerProcess(new_config);
+    if (scheduler_running_)
+        return;
+
+    ui_scheduler_ = new UIScheduler;
+    scheduler_thread_ = new QThread;
+    ConnectSignals();
+    scheduler_thread_->start();
+    ui_scheduler_->moveToThread(scheduler_thread_);
+
+    emit schedulerProcess(parseConfig(config));
 }
 
 void ThreadController::stopScheduler() {
+    if(!scheduler_running_)
+        return;
+
     ui_scheduler_->StopWork();
 }
 
@@ -68,7 +89,7 @@ QString ThreadController::text() const {
 }
 
 QList<QObject *> ThreadController::stationList() const {
-    return q_station_list_;
+    return *q_station_list_;
 }
 
 bool ThreadController::schedulerRunning() const {
@@ -97,9 +118,9 @@ void ThreadController::HandleRDSData(std::string text) {
 }
 
 void ThreadController::HandleStationInfoData(std::list<stationInfo> station_list) {
-    for(QList<QObject *>::iterator it = q_station_list_.begin(); it != q_station_list_.end(); it++)
+    for(QList<QObject *>::iterator it = q_station_list_->begin(); it != q_station_list_->end(); it++)
         delete (*it);
-    q_station_list_.clear();
+    q_station_list_->clear();
 
     for(std::list<stationInfo>::iterator it = station_list.begin(); it != station_list.end(); it++) {
         QStationInfo *item = new QStationInfo;
@@ -107,7 +128,7 @@ void ThreadController::HandleStationInfoData(std::list<stationInfo> station_list
         item->setStationName(it->station_name);
         item->setStationId(it->ServiceId);
         item->setSubChannelId(it->SubChannelId);
-        q_station_list_.push_back(item);
+        q_station_list_->push_back(item);
     }
 
     emit stationListChanged();
@@ -121,6 +142,11 @@ void ThreadController::HandleSchedulerStarted() {
 
 void ThreadController::HandleSchedulerStopped() {
     scheduler_running_ = false;
+
+    scheduler_thread_->quit();
+    scheduler_thread_->wait();
+    delete ui_scheduler_;
+    delete scheduler_thread_;
 
     emit schedulerRunningChanged();
 }

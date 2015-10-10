@@ -1,6 +1,5 @@
 import QtQuick 2.5
 import QtQuick.Controls 1.2
-import SDRDAB 1.0
 import "CoverView"
 import "SpectrumView"
 import "SideMenus/CommonMenu"
@@ -8,16 +7,12 @@ import "SideMenus/StationMenu"
 
 Rectangle {
     id: mainWindow
-
-    // ========temporary========
-    QSchedulerConfig {
-        id: mainConfig
-    }
+    property bool backButtonBarVisible: false
 
     Component.onCompleted: {
-        threadController.startScheduler(mainConfig);
+        //threadController.startScheduler(schedulerConfig);
+        //console.log(threadController.getDevices());
     }
-    // =========================
 
     ListModel {
         id: commonMenuModel
@@ -32,6 +27,9 @@ Rectangle {
         ListElement {
             title: "Options"
             url: "qrc:/SideMenus/CommonMenu/OptionsList.qml"
+        }
+        ListElement {
+            title: "Exit"
         }
     }
 
@@ -141,9 +139,13 @@ Rectangle {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    mainWindow.Stack.view.push(
-                               {item: Qt.resolvedUrl(url), properties: {title: title}});
-                    mainWindow.state = "sideMenusClosed"
+                    if (title == "Exit")
+                        Qt.quit();
+                    else {
+                        mainWindow.Stack.view.push(
+                                   {item: Qt.resolvedUrl(url), properties: {title: title}});
+                        mainWindow.state = "sideMenusClosed"
+                    }
                 }
             }
         }
@@ -221,6 +223,6 @@ Rectangle {
     ]
 
     transitions: Transition {
-        NumberAnimation { properties: "x,opacity"; duration: 200; easing.type: Easing.OutQuint }
+        NumberAnimation { properties: "x, opacity"; duration: 200; easing.type: Easing.OutQuint }
     }
 }
