@@ -3,7 +3,6 @@
 
 #include <QMutex>
 #include <QObject>
-#include <QtConcurrent/QtConcurrent>
 #include <scheduler.h>
 #include <string.h>
 
@@ -17,8 +16,6 @@ class UIScheduler: public QObject, public Scheduler {
     virtual void ParametersFromSDR(std::string *text);
 
     scheduler_error_t errno_;
-    QFuture<void> scheduler_future_;
-    static void Run(UIScheduler *ui_scheduler, SchedulerConfig_t config);
 
 public:
     explicit UIScheduler(QObject *parent = 0);

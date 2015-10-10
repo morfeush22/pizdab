@@ -1,7 +1,6 @@
 #include "q_station_info.h"
 
 QStationInfo::QStationInfo(QObject* parent): QObject(parent) {
-
 }
 
 size_t QStationInfo::audioKbps() const {

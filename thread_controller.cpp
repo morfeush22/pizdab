@@ -72,7 +72,7 @@ void ThreadController::stopScheduler() {
     ui_scheduler_->StopWork();
 }
 
-void ThreadController::changeStation(int new_station) {
+void ThreadController::changeStation(quint16 new_station) {
     ui_scheduler_->ChangeStation(new_station);
 }
 

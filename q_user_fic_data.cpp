@@ -1,7 +1,6 @@
 #include "q_user_fic_data.h"
 
 QUserFICData::QUserFICData(QObject *parent): QObject(parent) {
-
 }
 
 bool QUserFICData::dabPlus() const {

@@ -1,13 +1,13 @@
 #ifndef THREADCONTROLLER_H
 #define THREADCONTROLLER_H
 
-#include <QQmlListProperty>
 #include <QObject>
+#include <QQmlListProperty>
 #include <QThread>
-#include "ui_scheduler.h"
 #include "q_scheduler_config.h"
 #include "q_station_info.h"
 #include "q_user_fic_data.h"
+#include "ui_scheduler.h"
 
 class ThreadController: public QObject {
     Q_OBJECT
@@ -20,15 +20,12 @@ class ThreadController: public QObject {
 
     UIScheduler *ui_scheduler_;
     QThread *scheduler_thread_;
-
-    //variables to keep obtained data
-    float snr_;
-    std::string text_;
     bool scheduler_running_;
-
+    float snr_;
+    std::string text_;  
     //variables QML formatted
-    QList<QObject *> *q_station_list_;
     QUserFICData *q_user_fic_extra_data_;
+    QList<QObject *> *q_station_list_;
 
     void ConnectSignals();
     Scheduler::SchedulerConfig_t parseConfig(QSchedulerConfig *config);
@@ -40,7 +37,7 @@ public:
     Q_INVOKABLE QList<QString> getDevices();
     Q_INVOKABLE void startScheduler(QSchedulerConfig *config);
     Q_INVOKABLE void stopScheduler();
-    Q_INVOKABLE void changeStation(int new_station);
+    Q_INVOKABLE void changeStation(quint16 new_station);
 
     float snr() const;
     QUserFICData *userFICExtraData() const;
@@ -50,11 +47,11 @@ public:
 
 signals:
     void schedulerProcess(Scheduler::SchedulerConfig_t);
+    void schedulerRunningChanged();
     void snrChanged();
     void userFICExtraDataChanged();
     void textChanged();
     void stationListChanged();
-    void schedulerRunningChanged();
 
 public slots:
     //hande result functions
