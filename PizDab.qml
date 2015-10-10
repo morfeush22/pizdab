@@ -3,14 +3,14 @@ import QtQuick.Controls 1.2
 import "CoverView"
 import "SpectrumView"
 import "SideMenus/CommonMenu"
-import "SideMenus/StationMenu"
 
 Rectangle {
     id: mainWindow
     property bool backButtonBarVisible: false
 
     Component.onCompleted: {
-        //threadController.startScheduler(schedulerConfig);
+        threadController.startScheduler(schedulerConfig);
+        //todo move to CaptureList
         //console.log(threadController.getDevices());
     }
 
@@ -40,8 +40,8 @@ Rectangle {
 
     FocusScope {
         id: mainView
-        width: root.width
-        height: root.height
+        width: mainWindow.width
+        height: mainWindow.height
         focus: true
         state: "showCoverView"
 

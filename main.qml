@@ -21,7 +21,7 @@ ApplicationWindow {
             anchors.leftMargin: 20
             anchors.verticalCenter: parent.verticalCenter
             radius: 4
-            color: backmouse.pressed ? "#222" : "transparent"
+            color: backMouse.pressed ? "#222" : "transparent"
 
             Image {
                 anchors.verticalCenter: parent.verticalCenter
@@ -29,12 +29,13 @@ ApplicationWindow {
             }
 
             MouseArea {
-                id: backmouse
+                id: backMouse
                 anchors.fill: parent
                 onClicked: stackView.pop()
             }
 
             Text {
+                id: titleText
                 font.pixelSize: 42
                 x: backButtonBar.x + backButtonBar.width + 20
                 anchors.verticalCenter: parent.verticalCenter
@@ -60,7 +61,6 @@ ApplicationWindow {
             }
 
             pushTransition: StackViewTransition {
-
                 PropertyAnimation {
                     target: enterItem
                     property: "opacity"

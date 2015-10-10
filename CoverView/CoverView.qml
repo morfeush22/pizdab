@@ -6,8 +6,6 @@ Rectangle {
     color: "yellow"
     state: "active"
 
-    //Behavior on scale { NumberAnimation{} }
-
     states: [
         State {
             name: "inactive";
@@ -85,4 +83,3 @@ Rectangle {
         anchors.topMargin: 5
     }
 }
-

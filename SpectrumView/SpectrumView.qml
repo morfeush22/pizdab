@@ -5,8 +5,6 @@ Rectangle {
     color: "black"
     state: "inactive"
 
-    //Behavior on scale { NumberAnimation{} }
-
     states: [
         State {
             name: "inactive";
@@ -44,4 +42,3 @@ Rectangle {
         }
     }
 }
-

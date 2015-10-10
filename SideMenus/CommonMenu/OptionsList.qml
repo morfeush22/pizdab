@@ -4,7 +4,4 @@ Rectangle {
     id: options
     property string title
     property bool backButtonBarVisible: true
-    width: 100
-    height: 62
 }
-

@@ -23,4 +23,3 @@ import "../../CommonElements"
             tipEnabled: cView.state == "inactive" ? true : false
         }
     }
-

@@ -6,7 +6,6 @@
         <file>CoverView/Subelements/Cover.qml</file>
         <file>CoverView/Subelements/TagBar.qml</file>
         <file>SpectrumView/Subelements/Spectrum.qml</file>
-        <file>SideMenus/StationMenu/StationList.qml</file>
         <file>SideMenus/CommonMenu/CaptureList.qml</file>
         <file>SideMenus/CommonMenu/OptionsList.qml</file>
         <file>SideMenus/CommonMenu/About.qml</file>
