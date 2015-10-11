@@ -10,7 +10,7 @@ Rectangle {
     property bool backButtonBarVisible: false
 
     Component.onCompleted: {
-        threadController.startScheduler(schedulerConfig);
+        //threadController.startScheduler(schedulerConfig);
         //todo move to CaptureList
         //console.log(threadController.getDevices());
     }
