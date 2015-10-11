@@ -12,11 +12,13 @@ void ThreadController::ConnectSignals() {
 
 Scheduler::SchedulerConfig_t ThreadController::parseConfig(QSchedulerConfig *config) {
     Scheduler::SchedulerConfig_t new_config;
+    new_config.data_source = config->dataSource();
+    if (new_config.data_source == Scheduler::DATA_FROM_DONGLE)
+        new_config.dongle_nr = config->dongleNr();
+    else
+        new_config.input_filename = config->inputFilename();
     new_config.sampling_rate = config->samplingRate();
     new_config.carrier_frequency = config->carrierFrequency();
-    new_config.input_filename = config->inputFilename();
-    new_config.data_source = config->dataSource();
-    new_config.use_speakers = config->useSpeakers();
     new_config.start_station_nr = config->initialChannel();
     return new_config;
 }

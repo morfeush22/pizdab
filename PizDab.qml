@@ -10,6 +10,7 @@ Rectangle {
 
     Component.onCompleted: {
         threadController.startScheduler(schedulerConfig);
+        //console.log(typeof(schedulerConfig.inputFilename));
         //todo move to CaptureList
         //console.log(threadController.getDevices());
     }

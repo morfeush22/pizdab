@@ -2,6 +2,7 @@
 #define QSCHEDULERCONFIG_H
 
 #include <QObject>
+#include <QUrl>
 #include <scheduler.h>
 
 class QSchedulerConfig : public QObject {
@@ -10,16 +11,14 @@ class QSchedulerConfig : public QObject {
     Q_PROPERTY(quint32 samplingRate READ samplingRate WRITE setSamplingRate NOTIFY samplingRateChanged)
     Q_PROPERTY(quint32 carrierFrequency READ carrierFrequency WRITE setCarrierFrequency NOTIFY carrierFrequencyChanged)
     Q_PROPERTY(int dongleNr READ dongleNr WRITE setDongleNr NOTIFY dongleNrChanged)
-    Q_PROPERTY(const char * inputFilename READ inputFilename WRITE setInputFilename NOTIFY inputFilenameChanged)
+    Q_PROPERTY(QUrl inputFilename READ inputFilename WRITE setInputFilename NOTIFY inputFilenameChanged)
     Q_PROPERTY(Scheduler::data_source_t dataSource READ dataSource WRITE setDataSource NOTIFY dataSourceChanged)
-    Q_PROPERTY(bool useSpeakers READ useSpeakers WRITE setUseSpeakers NOTIFY useSpeakersChanged)
 
     quint32 sampling_rate_;
     quint32 carrier_frequency_;
     int dongle_nr_;
-    const char *input_filename_;
+    QByteArray input_filename_;
     Scheduler::data_source_t data_source_;
-    bool use_speakers_;
     quint8 initial_channel_;
 
 public:
@@ -32,11 +31,9 @@ public:
     int dongleNr() const;
     void setDongleNr(const unsigned int dongle_nr);
     const char *inputFilename() const;
-    void setInputFilename(const char *input_filename);
+    void setInputFilename(QUrl input_filename);
     Scheduler::data_source_t dataSource() const;
     void setDataSource(const Scheduler::data_source_t data_source);
-    bool useSpeakers() const;
-    void setUseSpeakers(const bool use_speakers);
     quint8 initialChannel() const;
 
 signals:

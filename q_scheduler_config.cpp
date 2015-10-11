@@ -5,10 +5,9 @@ QSchedulerConfig::QSchedulerConfig(QObject *parent):
     sampling_rate_(2048000),
     carrier_frequency_(209936),
     dongle_nr_(0),
-    input_filename_("/home/morfeush22/project/sdr/Record3_katowice_iq.raw"),
+    input_filename_("//home/morfeush22/project/sdr/Record3_katowice_iq.raw"),
     data_source_(Scheduler::DATA_FROM_FILE),
-    use_speakers_(true),
-    initial_channel_(0x3) {
+    initial_channel_(0x0) {
 }
 
 quint32 QSchedulerConfig::samplingRate() const {
@@ -42,11 +41,11 @@ void QSchedulerConfig::setDongleNr(const unsigned int dongle_nr) {
 }
 
 const char *QSchedulerConfig::inputFilename() const {
-    return input_filename_;
+    return input_filename_.data();
 }
 
-void QSchedulerConfig::setInputFilename(const char *input_filename) {
-    input_filename_ = input_filename;
+void QSchedulerConfig::setInputFilename(QUrl input_filename) {
+    input_filename_ = input_filename.toLocalFile().toUtf8();
 
     emit inputFilenameChanged();
 }
@@ -59,16 +58,6 @@ void QSchedulerConfig::setDataSource(const Scheduler::data_source_t data_source)
     data_source_ = data_source;
 
     emit dataSourceChanged();
-}
-
-bool QSchedulerConfig::useSpeakers() const {
-    return use_speakers_;
-}
-
-void QSchedulerConfig::setUseSpeakers(const bool use_speakers) {
-    use_speakers_ = use_speakers;
-
-    emit useSpeakersChanged();
 }
 
 quint8 QSchedulerConfig::initialChannel() const {

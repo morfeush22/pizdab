@@ -8,6 +8,7 @@
 int main(int argc, char *argv[]) {
     //register types
     qRegisterMetaType<size_t>("size_t");
+    qRegisterMetaType<Scheduler::data_source_t>("Scheduler::data_source_t");
     qRegisterMetaType<Scheduler::SchedulerConfig_t>("Scheduler::SchedulerConfig_t");
     qRegisterMetaType<UserFICData_t>("UserFICData_t");
     qRegisterMetaType<std::list<stationInfo> >("std::list<stationInfo>");
@@ -20,7 +21,7 @@ int main(int argc, char *argv[]) {
     //register singletons
     engine.rootContext()->setContextProperty("schedulerConfig", &scheduler_config);
     engine.rootContext()->setContextProperty("threadController", &thread_controller); 
-    //load main view
+    //load main view into engine
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     //register quit signal
     QObject::connect(&engine, SIGNAL(quit()), &app, SLOT(quit()));
