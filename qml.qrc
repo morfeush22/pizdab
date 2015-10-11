@@ -6,13 +6,17 @@
         <file>CoverView/Subelements/Cover.qml</file>
         <file>CoverView/Subelements/TagBar.qml</file>
         <file>SpectrumView/Subelements/Spectrum.qml</file>
-        <file>SideMenus/CommonMenu/CaptureList.qml</file>
-        <file>SideMenus/CommonMenu/OptionsList.qml</file>
-        <file>SideMenus/CommonMenu/About.qml</file>
         <file>CommonElements/ToolTip.qml</file>
         <file>main.qml</file>
         <file>images/arrow.png</file>
         <file>images/navigation_previous_item.png</file>
-        <file>SideMenus/CommonMenu/PleaseWait.qml</file>
+        <file>SideMenus/ContextMenu/Subelements/About.qml</file>
+        <file>SideMenus/ContextMenu/Subelements/CaptureList.qml</file>
+        <file>SideMenus/ContextMenu/Subelements/ContextMenuNavListDelegate.qml</file>
+        <file>SideMenus/ContextMenu/Subelements/OptionsList.qml</file>
+        <file>SideMenus/ContextMenu/ContextMenu.qml</file>
+        <file>SideMenus/StationMenu/Subelements/StationListNavListDelegate.qml</file>
+        <file>SideMenus/StationMenu/StationList.qml</file>
+        <file>CommonElements/PleaseWait.qml</file>
     </qresource>
 </RCC>

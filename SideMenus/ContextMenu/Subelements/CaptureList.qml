@@ -13,16 +13,12 @@ Rectangle {
         folder: shortcuts.home
         onAccepted: {
             schedulerConfig.inputFilename = fileDialog.fileUrl;
-            //console.log("You chose: " + schedulerConfig.inputFilename);
             captureList.Stack.view.push(
-                        {item: Qt.resolvedUrl("qrc:/SideMenus/CommonMenu/PleaseWait.qml"), replace: true});
+                        {item: Qt.resolvedUrl("qrc:/CommonElements/PleaseWait.qml"), replace: true});
             if (threadController.schedulerRunning)
                 threadController.stopScheduler();
             else
                 threadController.startScheduler(schedulerConfig);
-        }
-        onRejected: {
-            console.log("Canceled")
         }
     }
 
@@ -30,15 +26,6 @@ Rectangle {
         text: threadController.schedulerRunning
         onClicked: {
             fileDialog.visible = true;
-            /*
-            captureList.Stack.view.push(
-                        {item: Qt.resolvedUrl("qrc:/SideMenus/CommonMenu/PleaseWait.qml"), replace: true});
-            if (threadController.schedulerRunning)
-                threadController.stopScheduler();
-            else
-                threadController.startScheduler(schedulerConfig);
-            */
         }
     }
 }
-

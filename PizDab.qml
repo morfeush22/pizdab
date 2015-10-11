@@ -2,7 +2,8 @@ import QtQuick 2.5
 import QtQuick.Controls 1.2
 import "CoverView"
 import "SpectrumView"
-import "SideMenus/CommonMenu"
+import "SideMenus/ContextMenu"
+import "SideMenus/StationMenu"
 
 Rectangle {
     id: mainWindow
@@ -10,33 +11,8 @@ Rectangle {
 
     Component.onCompleted: {
         threadController.startScheduler(schedulerConfig);
-        //console.log(typeof(schedulerConfig.inputFilename));
         //todo move to CaptureList
         //console.log(threadController.getDevices());
-    }
-
-    ListModel {
-        id: commonMenuModel
-        ListElement {
-            title: "About"
-            url: "qrc:/SideMenus/CommonMenu/About.qml"
-        }
-        ListElement {
-            title: "Capture List"
-            url: "qrc:/SideMenus/CommonMenu/CaptureList.qml"
-        }
-        ListElement {
-            title: "Options"
-            url: "qrc:/SideMenus/CommonMenu/OptionsList.qml"
-        }
-        ListElement {
-            title: "Exit"
-        }
-    }
-
-    ListModel {
-        id: stationListModel
-        dynamicRoles: true
     }
 
     FocusScope {
@@ -123,78 +99,12 @@ Rectangle {
         }
     }
 
-    ListView {
+    ContextMenu {
         id: contextMenu;
-        x: -130;
-        width: 125;
-        height: parent.height
-        model: commonMenuModel
-        delegate: Item {
-            height: 20
-            width: parent.width
-
-            Rectangle {
-                Text { text: title }
-            }
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    if (title == "Exit")
-                        Qt.quit();
-                    else {
-                        mainWindow.Stack.view.push(
-                                   {item: Qt.resolvedUrl(url), properties: {title: title}});
-                        mainWindow.state = "sideMenusClosed"
-                    }
-                }
-            }
-        }
     }
 
-    ListView {
+    StationList {
         id: stationList
-        x: parent.width
-        width: 125
-        height: parent.height
-        model: stationListModel
-        delegate: Item {
-            height: 20
-            width: parent.width
-
-            Rectangle {
-                Text { text:
-                        if (station_id === threadController.userFICExtraData.currentStationId)
-                            station_title ? station_title + " (current)" : ""
-                        else
-                            station_title ? station_title : ""
-                }
-            }
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    mainWindow.state = "sideMenusClosed"
-                    threadController.changeStation(sub_channel_id);
-                }
-            }
-        }
-
-        Connections {
-            target: mainWindow.state == "stationListOpened" ? null : threadController
-            onStationListChanged: {
-                var newModel = [];
-                for (var i = 0; i < threadController.stationList.length; i++) {
-                    newModel.push(
-                                {"station_title": threadController.stationList[i].stationName,
-                                "kbps": threadController.stationList[i].audioKbps,
-                                "station_id": threadController.stationList[i].stationId,
-                                "sub_channel_id": threadController.stationList[i].subChannelId})
-                }
-                stationListModel.clear()
-                stationListModel.append(newModel);
-            }
-        }
     }
 
     states: [
