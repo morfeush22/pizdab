@@ -1,6 +1,5 @@
 import QtQuick 2.5
 import QtQuick.Controls 1.2
-import QtGraphicalEffects 1.0
 import "CoverView"
 import "SpectrumView"
 import "SideMenus/ContextMenu"
@@ -11,7 +10,7 @@ Rectangle {
     property bool backButtonBarVisible: false
 
     Component.onCompleted: {
-        //threadController.startScheduler(schedulerConfig);
+        threadController.startScheduler(schedulerConfig);
         //todo move to CaptureList
         //console.log(threadController.getDevices());
     }
@@ -38,32 +37,6 @@ Rectangle {
             opacity: 0
         }
 
-        DropShadow {
-            id: coverViewShadow
-            anchors.fill: coverView
-            horizontalOffset: 20
-            verticalOffset: 20
-            radius: 8
-            samples: 16
-            color: "#80000000"
-            source: coverView
-            //z: 10
-            visible: false
-        }
-
-        DropShadow {
-            id: spectrumViewShadow
-            anchors.fill: spectrumView
-            horizontalOffset: 20
-            verticalOffset: 20
-            radius: 8
-            samples: 16
-            color: "#80000000"
-            source: spectrumView
-            //z: 10
-            visible: false
-        }
-
         states: [
             State {
                 name: "showCoverView"
@@ -78,7 +51,6 @@ Rectangle {
                     target: spectrumView
                     width: 60; height: 60
                     x: 30; y: 30; z: 1
-                    //visible: false
                 }
             },
 
@@ -158,8 +130,6 @@ Rectangle {
             PropertyChanges { target: shade; opacity: 0.35 }
             PropertyChanges { target: leftArrow; rotation: 0 }
             PropertyChanges { target: shade; z: 2 }
-            //PropertyChanges { target: coverViewShadow; visible: true }
-            //PropertyChanges { target: spectrumViewShadow; visible: true }
         },
 
         State {

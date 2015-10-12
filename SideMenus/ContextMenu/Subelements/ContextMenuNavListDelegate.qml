@@ -19,7 +19,7 @@ Component {
                 anchors.verticalCenter: parent.verticalCenter
                 font.pointSize: 12
                 color: mouseArea.containsMouse ? "#FF6426" : "#D9D9D9"
-                text: "<b>" + title + "</b>"
+                text: title
             }
 
             MouseArea {

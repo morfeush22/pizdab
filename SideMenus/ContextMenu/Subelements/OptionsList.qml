@@ -5,7 +5,7 @@ Rectangle {
     id: optionsList
     property string title
     property bool backButtonBarVisible: true
-    color: "#6D7173"
+    color: "#D9D9D9"
 
     Column {
         Row {
