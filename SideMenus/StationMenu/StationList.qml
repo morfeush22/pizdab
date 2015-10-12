@@ -3,9 +3,6 @@ import "Subelements"
 
 Rectangle {
     id: stationList
-    x: parent.width
-    width: 125
-    height: parent.height
 
     ListModel {
         id: stationListNavListModel

@@ -3,50 +3,56 @@ import QtQuick.Controls 1.2
 
 ApplicationWindow {
     id: root
-    visible: true
     width: 800
     height: 480
+    visible: true
 
-    toolBar: Rectangle {
-        color: "#212126"
-        width: parent.width
-        height: 100
+    toolBar: Column {
         visible: stackView.depth > 1 && stackView.currentItem.backButtonBarVisible
 
         Rectangle {
-            id: backButtonBar
-            width: 80
-            height: 80
-            anchors.left: parent.left
-            anchors.leftMargin: 20
-            anchors.verticalCenter: parent.verticalCenter
-            radius: 4
-            color: backMouse.pressed ? "#222" : "transparent"
+            width: root.width
+            height: 100
+            color: "#0A073E"
 
-            Image {
+            Rectangle {
+                id: backButton
+                width: 80
+                height: 80
+                anchors.left: parent.left
+                anchors.leftMargin: 20
                 anchors.verticalCenter: parent.verticalCenter
-                source: "images/navigation_previous_item.png"
-            }
+                color: "transparent"
 
-            MouseArea {
-                id: backMouse
-                anchors.fill: parent
-                onClicked: stackView.pop()
-            }
+                Image {
+                    anchors.verticalCenter: parent.verticalCenter
+                    source: "qrc:/images/navigation_previous_item.png"
+                }
 
-            Text {
-                id: titleText
-                font.pixelSize: 42
-                x: backButtonBar.x + backButtonBar.width + 20
-                anchors.verticalCenter: parent.verticalCenter
-                color: "white"
-                text: {
-                    if (stackView.currentItem && stackView.currentItem.title)
-                        stackView.currentItem.title
-                    else
-                        ""
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: stackView.pop()
+                }
+
+                Text {
+                    font.pixelSize: 42
+                    x: backButton.x + backButton.width + 20
+                    anchors.verticalCenter: parent.verticalCenter
+                    color: "#FFFFFF"
+                    text: {
+                        if (stackView.currentItem && stackView.currentItem.title)
+                            stackView.currentItem.title
+                        else
+                            ""
+                    }
                 }
             }
+        }
+
+        Rectangle {
+            width: root.width
+            height: 5
+            color: "#403F69"
         }
     }
 

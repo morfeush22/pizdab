@@ -18,5 +18,9 @@
         <file>SideMenus/StationMenu/Subelements/StationListNavListDelegate.qml</file>
         <file>SideMenus/StationMenu/StationList.qml</file>
         <file>CommonElements/PleaseWait.qml</file>
+        <file>images/logo.png</file>
+        <file>images/iet_logo.png</file>
+        <file>images/kt_logo.png</file>
+        <file>images/agh_logo.png</file>
     </qresource>
 </RCC>

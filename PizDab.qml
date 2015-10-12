@@ -74,8 +74,8 @@ Rectangle {
 
     Image {
         id: leftArrow
-        source: "images/arrow.png"
-        rotation: 90
+        source: "qrc:/images/navigation_previous_item.png"
+        rotation: 0
         anchors.verticalCenter: contextMenu.verticalCenter
         anchors.left: contextMenu.right
         anchors.leftMargin: 10
@@ -88,8 +88,8 @@ Rectangle {
 
     Image {
         id: rightArrow
-        source: "images/arrow.png"
-        rotation: 270
+        source: "qrc:/images/navigation_previous_item.png"
+        rotation: 180
         anchors.verticalCenter: stationList.verticalCenter
         anchors.right: stationList.left
 
@@ -101,16 +101,22 @@ Rectangle {
 
     ContextMenu {
         id: contextMenu;
+        x: -250;
+        width: 250;
+        height: parent.height
     }
 
     StationList {
         id: stationList
+        x: parent.width
+        width: 250
+        height: parent.height
     }
 
     states: [
         State {
             name: "sideMenusClosed"
-            PropertyChanges { target: contextMenu; x: -130 }
+            PropertyChanges { target: contextMenu; x: -250 }
             PropertyChanges { target: stationList; x: parent.width }
             PropertyChanges { target: mainView; x: 0 }
             PropertyChanges { target: shade; opacity: 0 }
@@ -119,16 +125,16 @@ Rectangle {
         State {
             name: "contextMenuOpened"
             PropertyChanges { target: contextMenu; x: 0 }
-            PropertyChanges { target: stationList; x: parent.width + 125 }
-            PropertyChanges { target: mainView; x: 125 }
+            PropertyChanges { target: stationList; x: parent.width + 250 }
+            PropertyChanges { target: mainView; x: 250 }
             PropertyChanges { target: shade; opacity: 0.25 }
         },
 
         State {
             name: "stationListOpened"
-            PropertyChanges { target: contextMenu; x: -255 }
-            PropertyChanges { target: stationList; x: parent.width - 130 }
-            PropertyChanges { target: mainView; x: -125 }
+            PropertyChanges { target: contextMenu; x: -500 }
+            PropertyChanges { target: stationList; x: parent.width - 250 }
+            PropertyChanges { target: mainView; x: -250 }
             PropertyChanges { target: shade; opacity: 0.25 }
         }
     ]

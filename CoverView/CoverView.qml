@@ -3,7 +3,7 @@ import "./Subelements"
 
 Rectangle {
     id: cView
-    color: "yellow"
+    color: "#D9D9D9"
     state: "active"
 
     states: [

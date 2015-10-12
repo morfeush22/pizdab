@@ -6,6 +6,7 @@ Rectangle {
     id: captureList
     property string title
     property bool backButtonBarVisible: true
+    color: "#6D7173"
 
     FileDialog {
         id: fileDialog
