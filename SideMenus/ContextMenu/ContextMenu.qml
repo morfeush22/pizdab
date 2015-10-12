@@ -8,6 +8,7 @@ Row {
         id: context
         width: contextMenu.width
         height: contextMenu.height
+        color: "#D9D9D9"
 
         ListModel {
             id: contextMenuNavListModel
@@ -32,24 +33,39 @@ Row {
         ListView {
             id: contextMenuNavList
             width: parent.width
-            height: parent.height - contextMenuExitApp.height
+            height: parent.height
             model: contextMenuNavListModel
             delegate: contextMenuNavListDelegate
         }
 
-        Item {
+        Rectangle {
             id: contextMenuExitApp
-            width: contextMenu.width
-            height: 20
-            anchors.top: contextMenuNavList.bottom
+            width: parent.width
+            height: 60
+            y: contextMenuNavList.contentHeight
+            color: "#4D4A48"
 
             Text {
-                text: "Exit"
+                anchors.left: parent.left
+                anchors.leftMargin: 10
+                anchors.verticalCenter: parent.verticalCenter
+                font.pointSize: 12
+                color: mouseArea.containsMouse ? "#FF6426" : "#D9D9D9"
+                text: "<b>Exit</b>"
             }
 
             MouseArea {
+                id: mouseArea
                 anchors.fill: parent
+                hoverEnabled: true
                 onClicked: Qt.quit()
+            }
+
+            Rectangle {
+                width: parent.width
+                anchors.top: contextMenuExitApp.bottom
+                height: 2
+                color: mouseArea.containsMouse ? "#FF6426" : "#403E3C"
             }
         }
     }
@@ -57,6 +73,6 @@ Row {
     Rectangle {
         width: 2
         height: contextMenu.height
-        color: "#403F69"
+        color: "#403E3C"
     }
 }

@@ -4,7 +4,7 @@ import "../../CommonElements"
     Text {
         id: textArea
 
-        text: "Hello World! Hello World! Hello World! Hello World! Hello World!\n DDDddd AAAaaa CCCccc EEEeee "
+        text: "No RDS data"
 
         wrapMode: Text.WordWrap
         horizontalAlignment: Text.AlignHCenter
@@ -12,7 +12,7 @@ import "../../CommonElements"
         fontSizeMode: Text.HorizontalFit
         minimumPixelSize: 29
 
-        font.pixelSize: 72
+        font.pixelSize: 46
         elide: Text.ElideRight 
 
         ToolTip {

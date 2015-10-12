@@ -13,7 +13,7 @@ ApplicationWindow {
         Rectangle {
             width: root.width
             height: 100
-            color: "#0A073E"
+            color: "#21201F"
 
             Rectangle {
                 id: backButton
@@ -38,7 +38,7 @@ ApplicationWindow {
                     font.pixelSize: 42
                     x: backButton.x + backButton.width + 20
                     anchors.verticalCenter: parent.verticalCenter
-                    color: "#FFFFFF"
+                    color: "#D9D9D9"
                     text: {
                         if (stackView.currentItem && stackView.currentItem.title)
                             stackView.currentItem.title
@@ -52,7 +52,7 @@ ApplicationWindow {
         Rectangle {
             width: root.width
             height: 5
-            color: "#403F69"
+            color: "#FF6426"
         }
     }
 

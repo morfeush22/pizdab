@@ -10,20 +10,22 @@ Component {
 
         Rectangle {
             width: parent.width
-            height: 50
-            color: "#0A073E"
+            height: 60
+            color: "#4D4A48"
 
             Text {
                 anchors.left: parent.left
                 anchors.leftMargin: 10
                 anchors.verticalCenter: parent.verticalCenter
                 font.pointSize: 12
-                color: "#FFFFFF"
+                color: mouseArea.containsMouse ? "#FF6426" : "#D9D9D9"
                 text: "<b>" + title + "</b>"
             }
 
             MouseArea {
+                id: mouseArea
                 anchors.fill: parent
+                hoverEnabled: true
                 onClicked: {
                     mainWindow.Stack.view.push(
                                {item: Qt.resolvedUrl(url), properties: {title: title}});
@@ -35,7 +37,7 @@ Component {
         Rectangle {
             width: parent.width
             height: 2
-            color: "#403F69"
+            color: mouseArea.containsMouse ? "#FF6426" : "#403E3C"
         }
     }
 }

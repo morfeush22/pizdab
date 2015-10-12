@@ -22,5 +22,6 @@
         <file>images/iet_logo.png</file>
         <file>images/kt_logo.png</file>
         <file>images/agh_logo.png</file>
+        <file>images/no_cover.png</file>
     </qresource>
 </RCC>

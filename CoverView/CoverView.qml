@@ -80,6 +80,6 @@ Rectangle {
         height: (mainView.height - cover.height)/2
         anchors.horizontalCenter: cover.horizontalCenter
         anchors.top: cover.bottom
-        anchors.topMargin: 5
+        anchors.topMargin: 35
     }
 }

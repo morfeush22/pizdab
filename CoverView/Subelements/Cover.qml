@@ -1,5 +1,5 @@
 import QtQuick 2.5
 
-Rectangle {
-    color: "blue"
+Image {
+    source: "qrc:/images/no_cover.png"
 }
