@@ -23,5 +23,8 @@
         <file>images/kt_logo.png</file>
         <file>images/agh_logo.png</file>
         <file>images/no_cover.png</file>
+        <file>CommonElements/VirtualKeyboard/VirtualKeyboardDelegate.qml</file>
+        <file>CommonElements/VirtualKeyboard/VirtualKeyboard.qml</file>
+        <file>CommonElements/VirtualKeyboard/FontAwesome.otf</file>
     </qresource>
 </RCC>

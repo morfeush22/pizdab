@@ -7,7 +7,8 @@ SOURCES += main.cpp \
     ui_scheduler.cpp \
     q_station_info.cpp \
     q_user_fic_data.cpp \
-    q_scheduler_config.cpp
+    q_scheduler_config.cpp \
+    CommonElements/VirtualKeyboard/key_event_dispatcher.cpp
 
 RESOURCES += qml.qrc
 
@@ -35,4 +36,7 @@ HEADERS += \
     ui_scheduler.h \
     q_station_info.h \
     q_user_fic_data.h \
-    q_scheduler_config.h
+    q_scheduler_config.h \
+    CommonElements/VirtualKeyboard/key_event_dispatcher.h
+
+DISTFILES +=
