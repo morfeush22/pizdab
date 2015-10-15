@@ -17,7 +17,7 @@ Flickable {
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.topMargin: 30
-            anchors.leftMargin: 10
+            anchors.leftMargin: 30
             font.pointSize: 12
             text: "<b>Pizdab</b> <br>
 
@@ -36,7 +36,7 @@ Flickable {
             anchors.top: aboutText.bottom
             anchors.left: parent.left
             anchors.topMargin: 20
-            anchors.leftMargin: 10
+            anchors.leftMargin: 30
             spacing: 20
 
             Image {

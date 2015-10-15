@@ -9,49 +9,57 @@ Rectangle {
     color: "#D9D9D9"
 
     Column {
-        Row {
-            height: 50
-            width: 200
-            spacing: 30
+        id: options
+        spacing: 20
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.margins: 30
 
+        Column {
             Text {
+                width: 300
+                height: 25
                 id: sfLabel
-                text: "sample freq"
+                text: "Sampling Frequency"
+                font.pixelSize: height/1.5
+                color: "#21201F"
             }
 
-            TextInput {
+            InputItemDelegate {
                 id: sfInput
-                //focus: true
-                text: schedulerConfig.samplingRate
-                validator: IntValidator { bottom: 1 }
+                inputText: schedulerConfig.samplingRate
+                descriptionText: "Hz"
             }
         }
 
-        Row {
-            height: 50
-            width: 200
-            spacing: 30
-
+        Column {
             Text {
+                width: 300
+                height: 25
                 id: cfLabel
-                text: "carrier freq"
+                text: "Carrier Frequency"
+                font.pixelSize: height/1.5
+                color: "#21201F"
             }
 
-            TextInput {
+            InputItemDelegate {
                 id: cfInput
-                //focus: true
-                text: schedulerConfig.carrierFrequency
-                validator: IntValidator { bottom: 1 }
+                inputText: schedulerConfig.carrierFrequency
+                descriptionText: "Hz"
             }
         }
+    }
 
-        Button {
-            text: "submit"
-            onClicked: {
-                schedulerConfig.samplingRate = sfInput.text;
-                schedulerConfig.carrierFrequency = cfInput.text;
-                optionsList.Stack.view.pop();
-            }
+    ButtonDelegate {
+        anchors.left: parent.left
+        anchors.leftMargin: 30
+        anchors.top: options.bottom
+        anchors.topMargin: 30
+        text: "Submit"
+        onClicked: {
+            schedulerConfig.samplingRate = sfInput.inputText;
+            schedulerConfig.carrierFrequency = cfInput.inputText;
+            optionsList.Stack.view.pop();
         }
     }
 
@@ -60,7 +68,7 @@ Rectangle {
 
         states: State {
             name: "visible"
-            when: sfInput.activeFocus || cfInput.activeFocus
+            when: sfInput.hasFocus || cfInput.hasFocus
             PropertyChanges {
                 target: virtualKeyboard
                 y: optionsList.height - virtualKeyboard.height

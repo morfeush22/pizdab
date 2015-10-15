@@ -23,10 +23,63 @@ Rectangle {
         }
     }
 
+    Column {
+        anchors.fill: parent
+        anchors.margins: 30
+        spacing: 70
+
+        Column {
+            spacing: 5
+
+            Item {
+                width: 300
+                height: 50
+
+                Text {
+                    id: labelText
+                    anchors.fill: parent
+                    text: "Start from file"
+                    font.pixelSize: height/1.5
+                    color: "#21201F"
+                }
+
+                /*
+                Rectangle {
+                    x: labelText.x - 10
+                    y: labelText.y + labelText.contentHeight
+                    width: 300
+                    height: 3
+                    color: "#FF6426"
+                }
+                */
+            }
+
+            ButtonDelegate {
+                text: "Open file"
+                onClicked: {
+                    fileDialog.visible = true;
+                }
+
+            }
+        }
+
+        Column {
+            Text {
+                width: 300
+                height: 50
+                text: "Start from device"
+                font.pixelSize: height/1.5
+                color: "#21201F"
+            }
+        }
+
+    }
+    /*
     Button {
         text: threadController.schedulerRunning
         onClicked: {
             fileDialog.visible = true;
         }
     }
+    */
 }
