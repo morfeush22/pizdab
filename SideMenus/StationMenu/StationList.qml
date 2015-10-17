@@ -1,11 +1,11 @@
 import QtQuick 2.5
-import "Subelements"
+import "./Subelements"
 
 Row {
     id: stationList
 
     Rectangle {
-        width: 2
+        width: 1
         height: stationList.height
         color: "#403E3C"
     }

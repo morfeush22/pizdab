@@ -51,6 +51,7 @@ Rectangle {
     }
 
     ButtonDelegate {
+        id: submitFreqConfig
         anchors.left: parent.left
         anchors.leftMargin: 30
         anchors.top: options.bottom
@@ -60,6 +61,56 @@ Rectangle {
             schedulerConfig.samplingRate = sfInput.inputText;
             schedulerConfig.carrierFrequency = cfInput.inputText;
             optionsList.Stack.view.pop();
+        }
+    }
+
+    Column {
+        anchors.left: parent.left
+        anchors.leftMargin: 30
+        anchors.top: submitFreqConfig.bottom
+        anchors.topMargin: 50
+        anchors.bottom: parent.bottom
+
+        ListModel {
+            id: addressesListModel
+            dynamicRoles: true
+        }
+
+        Component {
+            id: addressesListDelegate
+            Text {
+                text: address
+                font.pixelSize: 12
+            }
+        }
+
+        Component.onCompleted: {
+            var newModel = [];
+            var addresses = hostInfo.addresses();
+            for (var i = 0; i < addresses.length; i++) {
+                newModel.push({"address": addresses[i]});
+                //console.log(addresses[i]);
+            }
+
+            addressesList.model.clear();
+            addressesList.model.append(newModel);
+        }
+
+        Text {
+            width: 300
+            height: 25
+            id: addr
+            text: "IP addresses"
+            font.pixelSize: height/1.5
+            color: "#21201F"
+        }
+
+        ListView {
+            id: addressesList
+            width: 300
+            height: parent.height
+            model: addressesListModel
+            delegate: addressesListDelegate
         }
     }
 

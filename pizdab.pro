@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick
+QT += qml quick network
 
 SOURCES += main.cpp \
     thread_controller.cpp \
@@ -8,7 +8,8 @@ SOURCES += main.cpp \
     q_station_info.cpp \
     q_user_fic_data.cpp \
     q_scheduler_config.cpp \
-    CommonElements/VirtualKeyboard/key_event_dispatcher.cpp
+    CommonElements/VirtualKeyboard/key_event_dispatcher.cpp \
+    host_info.cpp
 
 RESOURCES += qml.qrc
 
@@ -37,6 +38,7 @@ HEADERS += \
     q_station_info.h \
     q_user_fic_data.h \
     q_scheduler_config.h \
-    CommonElements/VirtualKeyboard/key_event_dispatcher.h
+    CommonElements/VirtualKeyboard/key_event_dispatcher.h \
+    host_info.h
 
 DISTFILES +=

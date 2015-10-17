@@ -1,5 +1,5 @@
 import QtQuick 2.5
-import "Subelements"
+import "./Subelements"
 
 Row {
     id: contextMenu;
@@ -71,7 +71,7 @@ Row {
     }
 
     Rectangle {
-        width: 2
+        width: 1
         height: contextMenu.height
         color: "#403E3C"
     }

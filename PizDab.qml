@@ -15,6 +15,15 @@ Rectangle {
         //console.log(threadController.getDevices());
     }
 
+    //temporary
+    Timer {
+        interval: 500; running: true; repeat: true
+        onTriggered: {
+            //console.log(hostInfo.addresses());
+            //console.log(threadController.getDevices());
+        }
+    }
+
     FocusScope {
         id: mainView
         width: mainWindow.width
