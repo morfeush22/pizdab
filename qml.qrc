@@ -28,5 +28,6 @@
         <file>CommonElements/VirtualKeyboard/FontAwesome.otf</file>
         <file>SideMenus/ContextMenu/Subelements/InputItemDelegate.qml</file>
         <file>SideMenus/ContextMenu/Subelements/ButtonDelegate.qml</file>
+        <file>WSServer.qml</file>
     </qresource>
 </RCC>

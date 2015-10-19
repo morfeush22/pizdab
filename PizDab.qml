@@ -1,5 +1,6 @@
 import QtQuick 2.5
 import QtQuick.Controls 1.2
+import QtWebSockets 1.0
 import "CoverView"
 import "SpectrumView"
 import "SideMenus/ContextMenu"
@@ -10,7 +11,7 @@ Rectangle {
     property bool backButtonBarVisible: false
 
     Component.onCompleted: {
-        //threadController.startScheduler(schedulerConfig);
+        threadController.startScheduler(schedulerConfig);
         //todo move to CaptureList
         //console.log(threadController.getDevices());
     }
@@ -19,10 +20,44 @@ Rectangle {
     Timer {
         interval: 500; running: true; repeat: true
         onTriggered: {
+            //\u2713 - check mark
             //console.log(hostInfo.addresses());
             //console.log(threadController.getDevices());
         }
     }
+
+    WSServer {
+    }
+
+    /*
+    WebSocketServer {
+        id: server
+        port: 8080
+        listen: true
+        onClientConnected: {
+            webSocket.onTextMessageReceived.connect(function(message) {
+                //webSocket.sendTextMessage("Hello client from server!");
+                var newModel = [
+                            {"station_title": "1", "kbps": "1", "station_id": "1", "sub_channel_id": "1"},
+                            {"station_title": "2", "kbps": "2", "station_id": "2", "sub_channel_id": "2"},
+                            {"station_title": "3", "kbps": "3", "station_id": "3", "sub_channel_id": "3"},
+                            {"station_title": "4", "kbps": "4", "station_id": "4", "sub_channel_id": "4"},
+                            {"station_title": "5", "kbps": "5", "station_id": "5", "sub_channel_id": "5"}
+                        ];
+                var parsed = JSON.parse(message);
+                var msg = {};
+                msg.$id = parsed.$id;
+                msg.$type = parsed.$type;
+                msg.$data = newModel;
+                webSocket.sendTextMessage(JSON.stringify(msg));
+            });
+            console.log("ACK");
+        }
+        onErrorStringChanged: {
+            console.log("NACK");
+        }
+    }
+    */
 
     FocusScope {
         id: mainView

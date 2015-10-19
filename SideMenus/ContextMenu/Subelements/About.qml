@@ -19,7 +19,7 @@ Flickable {
             anchors.topMargin: 30
             anchors.leftMargin: 30
             font.pointSize: 12
-            text: "<b>Pizdab</b> <br>
+            text: "<b>PizDab</b> <br>
 
                     Who are we? <br>
                     Two students of final year first degree studies at AGH University of Science and Technology. <br>
