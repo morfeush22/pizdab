@@ -33,7 +33,6 @@ var StationBox = React.createClass({
 		return (
 			<div className="stationBox">
 				<IPForm onFormSubmit={this.handleFormSubmit}/>
-				<h1>Stations</h1>
 				<StationList data={this.state.data} onStationClicked={this.handleStationClicked} />
 			</div>
 			);
@@ -52,7 +51,9 @@ var StationList = React.createClass({
 		}.bind(this));
 		return (
 			<div className="stationList">
-				{stationNodes}
+				<ul>
+					{stationNodes}
+				</ul>
 			</div>
 			)
 	}
@@ -64,9 +65,9 @@ var Station = React.createClass({
 	},
 	render: function() {
 		return (
-			<p className="station" onClick={this.handleClick}>
+			<li className="station" onClick={this.handleClick}>
 				{this.props.station.station_title} - {this.props.station.current_station.toString()}
-			</p>
+			</li>
 			)
 	}
 })
