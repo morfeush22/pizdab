@@ -1,6 +1,9 @@
 var socketService = new SocketService();
 
 var StationBox = React.createClass({
+	handleControll: function(connected) {
+		this.setState({connected: connected});
+	},
 	handleData: function(message) {
 		switch(message.$type) {
 			case "set":
@@ -16,7 +19,7 @@ var StationBox = React.createClass({
 	handleFormSubmit: function(url) {
 		this.setState({data: []});
 		this.props.socketService.stop();
-		this.props.socketService.start("ws://" + url, this.handleData);
+		this.props.socketService.start("ws://" + url, this.handleData, this.handleControll);
 	},
 	handleStationClicked: function(station) {
 		var request = {};
@@ -25,17 +28,36 @@ var StationBox = React.createClass({
 		this.props.socketService.sendRequest(request);
 	},
 	getInitialState: function() {
-    	return {data: []};
+    	return {data: [], connected: false};
 	},
 	render: function() {
 		return (
 			<div className="stationBox">
-				<IPForm onFormSubmit={this.handleFormSubmit}/>
+				<IPForm connected={this.state.connected} onFormSubmit={this.handleFormSubmit}/>
 				<StationList data={this.state.data} onStationClicked={this.handleStationClicked} />
 			</div>
 			);
 	}
 });
+
+var IPForm = React.createClass({
+	handleSubmit: function(e) {
+		e.preventDefault();
+		var url = this.refs.url.value.trim();
+		this.props.onFormSubmit(url);
+	},
+	render: function() {
+		var ipFormClass = classNames({
+			"addrInput": true,
+			"addrInputConnected": this.props.connected
+		});
+		return (
+				<form className="ipForm" onSubmit={this.handleSubmit}>
+					<input className={ipFormClass} type="search" placeholder="Address" ref="url" />
+				</form>
+			)
+	}
+})
 
 var StationList = React.createClass({
 	handleStationClicked: function(station) {
@@ -60,7 +82,7 @@ var StationList = React.createClass({
 		else
 			renderElement = (
 					<div className="emptyList">
-						<img src="http://simpleicon.com/wp-content/uploads/warning.png"></img>
+						<img src="images/warning.png"></img>
 						<span>Station list is empty. Enter vaild IP address to get station list.</span>
 					</div>
 				)
@@ -82,21 +104,6 @@ var Station = React.createClass({
 			<li className={stationClass} onClick={this.handleClick}>
 				<span>{this.props.station.station_title}</span>
 			</li>
-			)
-	}
-})
-
-var IPForm = React.createClass({
-	handleSubmit: function(e) {
-		e.preventDefault();
-		var url = this.refs.url.value.trim();
-		this.props.onFormSubmit(url);
-	},
-	render: function() {
-		return (
-				<form className="ipForm" onSubmit={this.handleSubmit}>
-					<input className="addrInput" type="search" placeholder="Address" ref="url" />
-				</form>
 			)
 	}
 })

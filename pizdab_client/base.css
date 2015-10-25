@@ -49,10 +49,10 @@ table {
 
 
 html, body {
-	font-family: "Arial";
-	background-color: #D9D9D9;
 	height: 100%;
 	width: 100%;
+	background-color: #D9D9D9;
+	font-family: "Arial";
 }
 
 #content {
@@ -67,48 +67,40 @@ html, body {
   	flex-flow: column;
 }
 
-.stationList ul {
-	list-style-type: none;
-	padding-left: 0;
-}
-
-.station {
-	background-color: #4D4A48;
-	color: #D9D9D9;
-	border-bottom: 5px solid #403E3C;
-	font-size: 30px;
-	width: 100%;
-	line-height: 2.5em;
-}
-
-.station span {
-	 margin-left: 20px;
-}
-
-.station:hover {
-	color: #FF6426;
-	border-color: #FF6426;
-}
-
-.stationActive {
-	color: #FF6426;
-	border-color: #FF6426;	
-}
-
 .addrInput {
+	background: #D9D9D9;
+	border: 5px solid #21201F;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
+    flex: 0 1 auto;
     font-size: 45px;
 	line-height: 2.5em;
 	width: 100%;
-	border: 5px solid #21201F;
-	background: #D9D9D9;
-	flex: 0 1 auto;
 }
 
 .addrInput:focus {
 	border: 5px solid #FF6426;
+}
+
+.addrInput::-webkit-search-cancel-button {
+  	height: 28px;
+  	width: 28px;
+    background: url(images/x.png);
+  	-webkit-appearance: none;
+}
+
+.addrInputConnected {
+	background: #FF6426;
+}
+
+.addrInputConnected:focus {
+	border: 5px solid #FFFFFF;;
+}
+
+.stationList ul {
+	list-style-type: none;
+	padding-left: 0;
 }
 
 .emptyList {
@@ -119,27 +111,43 @@ html, body {
 
 .emptyList span {
 	font-size: 25px;
-    top: 65%;
-    left: 50%;
+	font-weight: bold;
     margin-right: -50%;
     position: absolute;
     transform: translate(-50%, -50%);
-    font-weight: bold;
+	left: 50%;
+    top: 65%;  
 }
 
 .emptyList img {
-	width: 300px;
 	height: 300px;
-    top: 40%;
-    left: 50%;
+	width: 300px;
     margin-right: -50%;
     position: absolute;
-    transform: translate(-50%, -50%)
+    transform: translate(-50%, -50%);
+    top: 40%;
+    left: 50%;
 }
 
-.addrInput::-webkit-search-cancel-button {
-  -webkit-appearance: none;
-  height: 28px;
-  width: 28px;
-  background: url(https://cdn4.iconfinder.com/data/icons/iconic/raster/32/x.png);
+.station {
+	width: 100%;
+	background-color: #4D4A48;
+	border-bottom: 5px solid #403E3C;
+	color: #D9D9D9;
+	font-size: 30px;
+	line-height: 2.5em;
+}
+
+.station span {
+	 margin-left: 20px;
+}
+
+.station:hover {
+	border-color: #FF6426;
+	color: #FF6426;
+}
+
+.stationActive {
+	color: #FF6426;
+	border-color: #FF6426;	
 }

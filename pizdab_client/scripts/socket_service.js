@@ -1,22 +1,26 @@
 function SocketService() {
 	var service = {};
 	var url = null;
-	var callback = null;
+	var dataCallback = null;
+	var controllCallback = null;
 	var connected = false;
 	var ws = null;
 
-	function start(newUrl, newCallback) {
+	function start(newUrl, newDataCallback, newControllCallback) {
 		url = newUrl;
-		callback = newCallback;
+		dataCallback = newDataCallback;
+		controllCallback = newControllCallback;
 		connected = false;	
 		ws = new WebSocket(newUrl);
 
 		ws.onopen = function() {
 			connected = true;
+			controllCallback(connected);
 		}
 
 		ws.onclose = function() {
 			connected = false;
+			controllCallback(connected);
 		}
 
 		ws.onmessage = function(message) {
@@ -27,15 +31,13 @@ function SocketService() {
 	function stop() {
 		if (connected) {
 			ws.close();
-			console.log("close");
 		}
-		console.log(connected);
 	}
 
 	function sendRequest(request) {
 		if (ws && ~[2, 3].indexOf(ws.readyState)) {
 			connected = false;
-			start(url, callback);
+			start(url, dataCallback, controllCallback);
 		}
 
 		if (connected)
@@ -43,7 +45,7 @@ function SocketService() {
 	}
 
 	function handleRequest(request) {
-		callback(request)
+		dataCallback(request)
 	}
 
 	service.start = start;
