@@ -4,7 +4,6 @@ var StationBox = React.createClass({
 	handleData: function(message) {
 		switch(message.$type) {
 			case "set":
-				console.log("rcv");
 			case "init":	
 			case "up":
 				this.setState({data: message.$data});
@@ -20,7 +19,6 @@ var StationBox = React.createClass({
 		this.props.socketService.start("ws://" + url, this.handleData);
 	},
 	handleStationClicked: function(station) {
-		//console.log(station.sub_channel_id);
 		var request = {};
 		request.$type = "set";
 		request.$data = station.sub_channel_id;
@@ -49,13 +47,25 @@ var StationList = React.createClass({
 				<Station key={station.sub_channel_id} station={station} onStationClicked={this.handleStationClicked} />
 				);
 		}.bind(this));
-		return (
-			<div className="stationList">
-				<ul>
-					{stationNodes}
-				</ul>
-			</div>
-			)
+
+		var renderElement;
+		if (stationNodes.length)
+			renderElement = (
+					<div className="stationList">
+						<ul>
+							{stationNodes}
+						</ul>
+					</div>
+				)
+		else
+			renderElement = (
+					<div className="emptyList">
+						<img src="http://simpleicon.com/wp-content/uploads/warning.png"></img>
+						<span>Station list is empty. Enter vaild IP address to get station list.</span>
+					</div>
+				)
+
+		return renderElement
 	}
 })
 
@@ -64,9 +74,13 @@ var Station = React.createClass({
 		this.props.onStationClicked(this.props.station);
 	},
 	render: function() {
+		var stationClass = classNames({
+			"station": true,
+			"stationActive": this.props.station.current_station
+		});
 		return (
-			<li className="station" onClick={this.handleClick}>
-				{this.props.station.station_title} - {this.props.station.current_station.toString()}
+			<li className={stationClass} onClick={this.handleClick}>
+				<span>{this.props.station.station_title}</span>
 			</li>
 			)
 	}
@@ -81,8 +95,7 @@ var IPForm = React.createClass({
 	render: function() {
 		return (
 				<form className="ipForm" onSubmit={this.handleSubmit}>
-					<input type="text" placeholder="IP" ref="url" />
-					<input type="submit" value="Post" />
+					<input className="addrInput" type="search" placeholder="Address" ref="url" />
 				</form>
 			)
 	}

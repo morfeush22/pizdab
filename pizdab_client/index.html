@@ -8,30 +8,12 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/classnames/2.2.0/index.js"></script>
 </head>
 <body>
 	<div id="content"></div>
 	<script type="text/javascript" src="scripts/socket_service.js"></script>
 	<script type="text/babel" src="scripts/ws_cli.js"></script>
-
-
-<!--
-	<span id="log"></span>
-	
-	<script>
-		var exampleSocket = new WebSocket("ws://localhost:8080");
-		document.getElementById("log").innerHTML = "";
-
-		exampleSocket.onopen = function (event) {
-		  exampleSocket.send("Here's some text that the server is urgently awaiting!"); 
-		};
-		
-		exampleSocket.onmessage = function (event) {
-		  console.log(event.data);
-		  document.getElementById("log").innerHTML = event.data;
-		}
-	</script>
--->
-
 </body>
 </html>

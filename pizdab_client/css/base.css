@@ -47,6 +47,26 @@ table {
 	border-spacing: 0;
 }
 
+
+html, body {
+	font-family: "Arial";
+	background-color: #D9D9D9;
+	height: 100%;
+	width: 100%;
+}
+
+#content {
+	height: 100%;
+	width: 100%;
+}
+
+.stationBox {
+	height: 100%;
+	width: 100%;
+	display: flex;
+  	flex-flow: column;
+}
+
 .stationList ul {
 	list-style-type: none;
 	padding-left: 0;
@@ -55,11 +75,71 @@ table {
 .station {
 	background-color: #4D4A48;
 	color: #D9D9D9;
-	border-bottom: 2px solid;
-	border-bottom-color: #403E3C;
+	border-bottom: 5px solid #403E3C;
+	font-size: 30px;
+	width: 100%;
+	line-height: 2.5em;
+}
+
+.station span {
+	 margin-left: 20px;
 }
 
 .station:hover {
 	color: #FF6426;
-	border-bottom-color: #FF6426;
+	border-color: #FF6426;
+}
+
+.stationActive {
+	color: #FF6426;
+	border-color: #FF6426;	
+}
+
+.addrInput {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    font-size: 45px;
+	line-height: 2.5em;
+	width: 100%;
+	border: 5px solid #21201F;
+	background: #D9D9D9;
+	flex: 0 1 auto;
+}
+
+.addrInput:focus {
+	border: 5px solid #FF6426;
+}
+
+.emptyList {
+	flex: 1 1 auto;
+	background-color: #FF6426;
+	position: relative;
+}
+
+.emptyList span {
+	font-size: 25px;
+    top: 65%;
+    left: 50%;
+    margin-right: -50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+}
+
+.emptyList img {
+	width: 300px;
+	height: 300px;
+    top: 40%;
+    left: 50%;
+    margin-right: -50%;
+    position: absolute;
+    transform: translate(-50%, -50%)
+}
+
+.addrInput::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  height: 28px;
+  width: 28px;
+  background: url(https://cdn4.iconfinder.com/data/icons/iconic/raster/32/x.png);
 }
