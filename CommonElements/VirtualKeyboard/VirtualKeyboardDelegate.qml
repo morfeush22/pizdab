@@ -11,12 +11,12 @@ Item {
             id: buttonText
             anchors.margins: 2
             anchors.fill: parent
+            color: "#D9D9D9"
             fontSizeMode: Text.Fit
             font.pixelSize: 500
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            text: letter
-            color: "#D9D9D9"
+            text: letter 
         }
 
         MouseArea {

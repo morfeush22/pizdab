@@ -4,48 +4,48 @@ import "../../../CommonElements/VirtualKeyboard"
 
 Rectangle {
     id: optionsList
-    property string title
     property bool backButtonBarVisible: true
+    property string title
     color: "#D9D9D9"
 
     Column {
         id: options
-        spacing: 20
-        anchors.top: parent.top
         anchors.left: parent.left
         anchors.margins: 30
+        anchors.top: parent.top
+        spacing: 20
 
         Column {
             Text {
-                width: 300
-                height: 25
                 id: sfLabel
-                text: "Sampling Frequency"
-                font.pixelSize: height/1.5
                 color: "#21201F"
+                height: 25
+                width: 300
+                font.pixelSize: height/1.5
+                text: "Sampling Frequency"   
             }
 
             InputItemDelegate {
                 id: sfInput
-                inputText: schedulerConfig.samplingRate
                 descriptionText: "Hz"
+                inputText: schedulerConfig.samplingRate 
             }
         }
 
         Column {
             Text {
-                width: 300
-                height: 25
                 id: cfLabel
-                text: "Carrier Frequency"
-                font.pixelSize: height/1.5
                 color: "#21201F"
+                height: 25
+                width: 300
+                font.pixelSize: height/1.5
+                text: "Carrier Frequency"
             }
 
             InputItemDelegate {
                 id: cfInput
-                inputText: schedulerConfig.carrierFrequency
                 descriptionText: "Hz"
+                inputText: schedulerConfig.carrierFrequency
             }
         }
     }
@@ -53,23 +53,24 @@ Rectangle {
     ButtonDelegate {
         id: submitFreqConfig
         anchors.left: parent.left
-        anchors.leftMargin: 30
         anchors.top: options.bottom
         anchors.topMargin: 30
+        anchors.leftMargin: 30
         text: "Submit"
+
         onClicked: {
-            schedulerConfig.samplingRate = sfInput.inputText;
             schedulerConfig.carrierFrequency = cfInput.inputText;
+            schedulerConfig.samplingRate = sfInput.inputText;
             optionsList.Stack.view.pop();
         }
     }
 
     Column {
-        anchors.left: parent.left
-        anchors.leftMargin: 30
-        anchors.top: submitFreqConfig.bottom
-        anchors.topMargin: 50
         anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.top: submitFreqConfig.bottom
+        anchors.leftMargin: 30
+        anchors.topMargin: 50
 
         ListModel {
             id: addressesListModel
@@ -79,8 +80,8 @@ Rectangle {
         Component {
             id: addressesListDelegate
             Text {
-                text: address
                 font.pixelSize: 12
+                text: address
             }
         }
 
@@ -89,7 +90,6 @@ Rectangle {
             var addresses = hostInfo.addresses();
             for (var i = 0; i < addresses.length; i++) {
                 newModel.push({"address": addresses[i]});
-                //console.log(addresses[i]);
             }
 
             addressesList.model.clear();
@@ -97,20 +97,20 @@ Rectangle {
         }
 
         Text {
-            width: 300
-            height: 25
             id: addr
-            text: "IP addresses"
-            font.pixelSize: height/1.5
             color: "#21201F"
+            font.pixelSize: height/1.5
+            height: 25
+            width: 300
+            text: "IP addresses" 
         }
 
         ListView {
             id: addressesList
-            width: 300
-            height: parent.height
-            model: addressesListModel
             delegate: addressesListDelegate
+            height: parent.height
+            width: 300
+            model: addressesListModel
         }
     }
 

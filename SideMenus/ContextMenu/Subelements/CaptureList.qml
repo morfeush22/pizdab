@@ -4,14 +4,14 @@ import QtQuick.Dialogs 1.2
 
 Rectangle {
     id: captureList
-    property string title
     property bool backButtonBarVisible: true
+    property string title
     color: "#D9D9D9"
 
     FileDialog {
         id: fileDialog
-        title: "Please choose a file"
         folder: shortcuts.home
+        title: "Please choose a file"
         onAccepted: {
             schedulerConfig.inputFilename = fileDialog.fileUrl;
             captureList.Stack.view.push(
@@ -32,26 +32,16 @@ Rectangle {
             spacing: 5
 
             Item {
-                width: 300
                 height: 50
+                width: 300
 
                 Text {
-                    id: labelText
+                    id: labelTextFile
                     anchors.fill: parent
-                    text: "Start from file"
-                    font.pixelSize: height/1.5
                     color: "#21201F"
+                    font.pixelSize: height/1.5
+                    text: "Start from file" 
                 }
-
-                /*
-                Rectangle {
-                    x: labelText.x - 10
-                    y: labelText.y + labelText.contentHeight
-                    width: 300
-                    height: 3
-                    color: "#FF6426"
-                }
-                */
             }
 
             ButtonDelegate {
@@ -59,27 +49,24 @@ Rectangle {
                 onClicked: {
                     fileDialog.visible = true;
                 }
-
             }
         }
 
         Column {
-            Text {
-                width: 300
+            spacing: 5
+
+            Item {
                 height: 50
-                text: "Start from device"
-                font.pixelSize: height/1.5
-                color: "#21201F"
+                width: 300
+
+                Text {
+                    id: labelTextDevice
+                    anchors.fill: parent
+                    color: "#21201F"
+                    font.pixelSize: height/1.5
+                    text: "Start from device"
+                }
             }
         }
-
     }
-    /*
-    Button {
-        text: threadController.schedulerRunning
-        onClicked: {
-            fileDialog.visible = true;
-        }
-    }
-    */
 }

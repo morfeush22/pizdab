@@ -5,16 +5,16 @@ Row {
     id: stationList
 
     Rectangle {
-        width: 1
-        height: stationList.height
         color: "#403E3C"
+        height: stationList.height
+        width: 1
     }
 
     Rectangle {
         id: context
-        width: stationList.width
-        height: stationList.height
         color: "#D9D9D9"
+        height: stationList.height
+        width: stationList.width
 
         ListModel {
             id: stationListNavListModel
@@ -27,10 +27,10 @@ Row {
 
         ListView {
             id: stationListNavList
-            width: parent.width
-            height: parent.height
-            model: stationListNavListModel
             delegate: stationListNavListDelegate
+            height: parent.height
+            width: parent.width
+            model: stationListNavListModel 
         }
 
         Connections {
@@ -44,6 +44,7 @@ Row {
                                 "station_id": threadController.stationList[i].stationId,
                                 "sub_channel_id": threadController.stationList[i].subChannelId})
                 }
+
                 stationListNavList.model.clear();
                 stationListNavList.model.append(newModel);
             }

@@ -1,11 +1,10 @@
 import QtQuick 2.5
 
 Flickable {
-    property string title
     property bool backButtonBarVisible: true
-    contentWidth: about.width
+    property string title
     contentHeight: about.height
-
+    contentWidth: about.width
 
     Rectangle {
         id: about
@@ -14,10 +13,10 @@ Flickable {
 
         Text {
             id: aboutText
-            anchors.top: parent.top
             anchors.left: parent.left
-            anchors.topMargin: 30
+            anchors.top: parent.top
             anchors.leftMargin: 30
+            anchors.topMargin: 30
             font.pointSize: 12
             text: "<b>PizDab</b> <br>
 
@@ -33,10 +32,10 @@ Flickable {
 
         Column {
             id: logos
-            anchors.top: aboutText.bottom
             anchors.left: parent.left
-            anchors.topMargin: 20
+            anchors.top: aboutText.bottom
             anchors.leftMargin: 30
+            anchors.topMargin: 20
             spacing: 20
 
             Image {
@@ -46,12 +45,6 @@ Flickable {
             Image {
                 source: "qrc:/images/kt_logo.png"
             }
-
-            /*
-            Image {
-                source: "qrc:/images/agh_logo.png"
-            }
-            */
 
             Image {
                 source: "qrc:/images/logo.png"

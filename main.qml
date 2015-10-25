@@ -3,26 +3,26 @@ import QtQuick.Controls 1.2
 
 ApplicationWindow {
     id: root
-    width: 800
     height: 480
+    width: 800
     visible: true
 
     toolBar: Column {
         visible: stackView.depth > 1 && stackView.currentItem.backButtonBarVisible
 
         Rectangle {
-            width: root.width
-            height: 100
             color: "#21201F"
+            height: 100
+            width: root.width
 
             Rectangle {
                 id: backButton
-                width: 80
-                height: 80
                 anchors.left: parent.left
                 anchors.leftMargin: 20
                 anchors.verticalCenter: parent.verticalCenter
                 color: "transparent"
+                height: 80
+                width: 80
 
                 Image {
                     anchors.verticalCenter: parent.verticalCenter
@@ -35,10 +35,11 @@ ApplicationWindow {
                 }
 
                 Text {
-                    font.pixelSize: 42
-                    x: backButton.x + backButton.width + 20
                     anchors.verticalCenter: parent.verticalCenter
                     color: "#D9D9D9"
+                    font.pixelSize: 42
+                    x: backButton.x + backButton.width + 20
+
                     text: {
                         if (stackView.currentItem && stackView.currentItem.title)
                             stackView.currentItem.title
@@ -50,9 +51,9 @@ ApplicationWindow {
         }
 
         Rectangle {
-            width: root.width
-            height: 5
             color: "#FF6426"
+            height: 5
+            width: root.width
         }
     }
 
@@ -61,6 +62,7 @@ ApplicationWindow {
         anchors.fill: parent
         focus: true
         initialItem: PizDab {}
+
         delegate: StackViewDelegate {
             function transitionFinished(properties) {
                 properties.exitItem.opacity = 1
@@ -69,16 +71,16 @@ ApplicationWindow {
             pushTransition: StackViewTransition {
                 PropertyAnimation {
                     target: enterItem
-                    property: "opacity"
                     from: 0
                     to: 1
+                    property: "opacity"
                 }
 
                 PropertyAnimation {
                     target: exitItem
-                    property: "opacity"
                     from: 1
                     to: 0
+                    property: "opacity"
                 }
             }
         }

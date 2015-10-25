@@ -3,24 +3,16 @@ import QtWebSockets 1.0
 
 Item {
     id: server
-    property var wsData: []
     property var slData: []
-    /*
-    property var slData: [
-        {"station_title": "1", "kbps": "1", "station_id": "1", "sub_channel_id": "1", "current_station": true},
-        {"station_title": "2", "kbps": "2", "station_id": "2", "sub_channel_id": "2", "current_station": false},
-        {"station_title": "3", "kbps": "3", "station_id": "3", "sub_channel_id": "3", "current_station": false},
-        {"station_title": "4", "kbps": "4", "station_id": "4", "sub_channel_id": "4", "current_station": false},
-        {"station_title": "5", "kbps": "5", "station_id": "5", "sub_channel_id": "5", "current_station": false}
-    ];
-    */
+    property var wsData: []  
 
     WebSocketServer {
-        port: 8080
         listen: true
+        port: 8080
+
         onClientConnected: {
             wsData.push(webSocket);
-            //console.log(webSocket);
+
             webSocket.onTextMessageReceived.connect(function(message) {
                 var parsedMessage = JSON.parse(message);
                 var response = {};
@@ -38,20 +30,18 @@ Item {
 
                 webSocket.sendTextMessage(JSON.stringify(response));
             });
+
             webSocket.onStatusChanged.connect(function(status) {
                 if (status === WebSocket.Closed) {
-                    //console.log("del");
-                    //console.log(webSocket);
                     var index = wsData.indexOf(webSocket);
                     if (index > -1)
                         wsData.splice(index, 1);
-                    //delete wsData[webSocket];
-                    //console.log(wsData.length);
                 }
-
             }.bind(this));
+
             webSocket.sendTextMessage(JSON.stringify({"$type": "init", "$data": slData}));
         }
+
         onErrorStringChanged: {
             console.log(errorString);
         }
@@ -74,6 +64,7 @@ Item {
                             "sub_channel_id": threadController.stationList[i].subChannelId,
                             "current_station": currentStation});
             }
+
             slData = stationList;
             var response = {
                 "$type": "up",
@@ -83,6 +74,12 @@ Item {
             for (i = 0; i < wsData.length; i++) {
                 wsData[i].sendTextMessage(JSON.stringify(response));
             }
+        }
+    }
+
+    function closeConnections() {
+        for (var i = 0; i < wsData.length; i++) {
+            wsData[i].active = false;
         }
     }
 }

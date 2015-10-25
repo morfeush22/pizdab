@@ -3,8 +3,8 @@ import QtQuick.Window 2.0
 
 Item {
     id: virtualKeyboard
-    width: parent.width
     height: 600
+    width: parent.width
     y: parent.height
 
     Item {
@@ -38,11 +38,11 @@ Item {
     }
 
     Rectangle {
+        anchors.bottom: parent.bottom
         id: keyboard
         color: "transparent"
-        width: parent.width
         height: 80
-        anchors.bottom: parent.bottom
+        width: parent.width
 
         MouseArea {
             anchors.fill: parent
@@ -50,15 +50,15 @@ Item {
 
         Column {
             id: keyboardColumn
-            anchors.margins: 5
             anchors.fill: parent
+            anchors.margins: 5
             spacing: 5
 
             Row {
                 id: keyboardRow
-                height: keyboard.height/4 - 10
-                spacing: 5
                 anchors.horizontalCenter: parent.horizontalCenter
+                height: keyboard.height/4 - 10
+                spacing: 5  
 
                 Repeater {
                     model: virtualKeyboardModel

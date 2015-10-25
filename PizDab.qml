@@ -27,42 +27,13 @@ Rectangle {
     }
 
     WSServer {
+        id: wsServer
     }
-
-    /*
-    WebSocketServer {
-        id: server
-        port: 8080
-        listen: true
-        onClientConnected: {
-            webSocket.onTextMessageReceived.connect(function(message) {
-                //webSocket.sendTextMessage("Hello client from server!");
-                var newModel = [
-                            {"station_title": "1", "kbps": "1", "station_id": "1", "sub_channel_id": "1"},
-                            {"station_title": "2", "kbps": "2", "station_id": "2", "sub_channel_id": "2"},
-                            {"station_title": "3", "kbps": "3", "station_id": "3", "sub_channel_id": "3"},
-                            {"station_title": "4", "kbps": "4", "station_id": "4", "sub_channel_id": "4"},
-                            {"station_title": "5", "kbps": "5", "station_id": "5", "sub_channel_id": "5"}
-                        ];
-                var parsed = JSON.parse(message);
-                var msg = {};
-                msg.$id = parsed.$id;
-                msg.$type = parsed.$type;
-                msg.$data = newModel;
-                webSocket.sendTextMessage(JSON.stringify(msg));
-            });
-            console.log("ACK");
-        }
-        onErrorStringChanged: {
-            console.log("NACK");
-        }
-    }
-    */
 
     FocusScope {
         id: mainView
-        width: mainWindow.width
         height: mainWindow.height
+        width: mainWindow.width
         focus: true
         state: "showCoverView"
 
@@ -75,9 +46,9 @@ Rectangle {
         }
 
         Rectangle {
-            id: shade
             anchors.fill: parent
             color: "black"
+            id: shade 
             opacity: 0
         }
 
@@ -87,13 +58,15 @@ Rectangle {
 
                 PropertyChanges {
                     target: coverView
-                    width: parent.width; height: parent.height
+                    height: parent.height
+                    width: parent.width;
                     z: 0
                 }
 
                 PropertyChanges {
                     target: spectrumView
-                    width: 60; height: 60
+                    height: 60
+                    width: 60;
                     x: 30; y: 30; z: 1
                 }
             },
@@ -103,13 +76,15 @@ Rectangle {
 
                 PropertyChanges {
                     target: coverView
-                    width: 60; height: 60
+                    height: 60
+                    width: 60;
                     x: 30; y: 30; z: 1
                 }
 
                 PropertyChanges {
                     target: spectrumView
-                    width: parent.width; height: parent.height
+                    height: parent.height
+                    width: parent.width;
                     z: 0
                 }
             }
@@ -118,11 +93,11 @@ Rectangle {
 
     Image {
         id: leftArrow
-        source: "qrc:/images/navigation_previous_item.png"
-        rotation: 180
-        anchors.verticalCenter: contextMenu.verticalCenter
         anchors.left: contextMenu.right
         anchors.leftMargin: 10
+        anchors.verticalCenter: contextMenu.verticalCenter
+        rotation: 180
+        source: "qrc:/images/navigation_previous_item.png"
 
         MouseArea {
             anchors.fill: parent
@@ -132,10 +107,11 @@ Rectangle {
 
     Image {
         id: rightArrow
-        source: "qrc:/images/navigation_previous_item.png"
-        rotation: 0
-        anchors.verticalCenter: stationList.verticalCenter
         anchors.right: stationList.left
+        anchors.rightMargin: 10
+        anchors.verticalCenter: stationList.verticalCenter
+        rotation: 0
+        source: "qrc:/images/navigation_previous_item.png"
 
         MouseArea {
             anchors.fill: parent
@@ -145,45 +121,45 @@ Rectangle {
 
     ContextMenu {
         id: contextMenu;
-        x: -250;
-        width: 250;
         height: parent.height
+        width: 250;
+        x: -250;
     }
 
     StationList {
         id: stationList
-        x: parent.width
-        width: 250
         height: parent.height
+        width: 250
+        x: parent.width
     }
 
     states: [
         State {
             name: "sideMenusClosed"
             PropertyChanges { target: contextMenu; x: -250 }
-            PropertyChanges { target: stationList; x: parent.width }
             PropertyChanges { target: mainView; x: 0 }
             PropertyChanges { target: shade; opacity: 0 }
+            PropertyChanges { target: stationList; x: parent.width }
         },
 
         State {
             name: "contextMenuOpened"
             PropertyChanges { target: contextMenu; x: 0 }
-            PropertyChanges { target: stationList; x: parent.width + 250 }
+            PropertyChanges { target: leftArrow; rotation: 0 }
             PropertyChanges { target: mainView; x: 250 }
             PropertyChanges { target: shade; opacity: 0.35 }
-            PropertyChanges { target: leftArrow; rotation: 0 }
             PropertyChanges { target: shade; z: 2 }
+            PropertyChanges { target: stationList; x: parent.width + 250 }
         },
 
         State {
             name: "stationListOpened"
             PropertyChanges { target: contextMenu; x: -500 }
-            PropertyChanges { target: stationList; x: parent.width - 250 }
             PropertyChanges { target: mainView; x: -250 }
-            PropertyChanges { target: shade; opacity: 0.35 }
             PropertyChanges { target: rightArrow; rotation: 180 }
+            PropertyChanges { target: shade; opacity: 0.35 }
             PropertyChanges { target: shade; z: 2 }
+            PropertyChanges { target: stationList; x: parent.width - 250 }
         }
     ]
 

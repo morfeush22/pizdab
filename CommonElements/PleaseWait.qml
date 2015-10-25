@@ -4,12 +4,21 @@ import QtQuick.Controls 1.2
 Rectangle {
     id: pleaseWait
     property bool backButtonBarVisible: false
+    color: "#D9D9D9"
 
-    Text {
+    Image {
+        id: loadingAnimation
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
-        text: {
-            "pleaseWait"
+        smooth: true
+        source: "qrc:/images/loading.png"
+
+        NumberAnimation on rotation {
+            from: 0
+            to: 360
+            duration: 900
+            loops: Animation.Infinite
+            running: loadingAnimation.visible === true
         }
     }
 

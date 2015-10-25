@@ -5,18 +5,18 @@ Rectangle {
     signal clicked()
 
     id: button
-    width: 200
-    height: 50
     color: buttonMouseArea.pressed ? "#FF6426" : "#21201F"
+    height: 50
+    width: 200
 
     Text {
         id: buttonText
         anchors.fill: parent
-        text: "Submit"
         color: "#D9D9D9"
+        font.pixelSize: parent.height/2
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
-        font.pixelSize: parent.height/2
+        text: "Submit"
     }
 
     MouseArea {

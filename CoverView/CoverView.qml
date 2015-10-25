@@ -2,18 +2,17 @@ import QtQuick 2.5
 import "./Subelements"
 
 Rectangle {
-    id: cView
+    id: coverView
     color: "#D9D9D9"
     state: "active"
 
     states: [
         State {
             name: "inactive";
-            when: mainView.state == "showSpectrumView"
+            when: mainView.state === "showSpectrumView"
 
             PropertyChanges {
-                target: cView
-                color: "blue"
+                target: coverView
                 scale: 1.5
             }
 
@@ -24,8 +23,8 @@ Rectangle {
 
             PropertyChanges {
                 target: cover
-                width: Math.min(parent.width, parent.height);
                 height: width
+                width: Math.min(parent.width, parent.height);   
             }
 
             PropertyChanges {
@@ -36,7 +35,7 @@ Rectangle {
 
         State {
             name: "active";
-            when: mainView.state == "showCoverView"
+            when: mainView.state === "showCoverView"
 
             PropertyChanges {
                 target: mouseArea
@@ -45,8 +44,8 @@ Rectangle {
 
             PropertyChanges {
                 target: cover
-                width: 0.7*Math.min(parent.width, parent.height);
                 height: width
+                width: 0.7*Math.min(parent.width, parent.height);  
             }
 
             PropertyChanges {
@@ -76,10 +75,11 @@ Rectangle {
 
     TagBar {
         id: tagBar
-        width: cover.width
-        height: (mainView.height - cover.height)/2
         anchors.horizontalCenter: cover.horizontalCenter
         anchors.top: cover.bottom
-        anchors.topMargin: 35
+        anchors.topMargin: 0
+        height: (mainView.height - cover.height)/2
+        text: "No RDS data"
+        width: cover.width
     }
 }

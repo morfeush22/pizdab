@@ -1,30 +1,28 @@
 import QtQuick 2.5
 
 Row {
-    spacing: 10
-    property alias inputText: input.text
     property alias descriptionText: description.text
     property alias hasFocus: input.activeFocus
+    property alias inputText: input.text
+    spacing: 10
 
     Rectangle {
         id: border
-        color: "transparent"
-        border.width: 2
         border.color: "#FF6426"
-        width: 400
+        border.width: 2
+        color: "transparent"
         height: 50
+        width: 400
 
         TextInput {
-            anchors.fill: parent
+            id: input
             anchors.bottomMargin: 5
+            anchors.fill: parent
             anchors.leftMargin: 10
             color: "#21201F"
-
-            id: input
-
+            font.pixelSize: height/2
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
-            font.pixelSize: height/2
             validator: IntValidator { bottom: 1 }
         }
     }
@@ -32,7 +30,7 @@ Row {
     Text {
         id: description
         anchors.leftMargin: 10
-        font.pixelSize:  input.font.pixelSize
         anchors.verticalCenter: border.verticalCenter
+        font.pixelSize:  input.font.pixelSize
     }
 }

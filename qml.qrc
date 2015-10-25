@@ -6,7 +6,6 @@
         <file>CoverView/Subelements/Cover.qml</file>
         <file>CoverView/Subelements/TagBar.qml</file>
         <file>SpectrumView/Subelements/Spectrum.qml</file>
-        <file>CommonElements/ToolTip.qml</file>
         <file>main.qml</file>
         <file>images/arrow.png</file>
         <file>images/navigation_previous_item.png</file>
@@ -21,7 +20,6 @@
         <file>images/logo.png</file>
         <file>images/iet_logo.png</file>
         <file>images/kt_logo.png</file>
-        <file>images/agh_logo.png</file>
         <file>images/no_cover.png</file>
         <file>CommonElements/VirtualKeyboard/VirtualKeyboardDelegate.qml</file>
         <file>CommonElements/VirtualKeyboard/VirtualKeyboard.qml</file>
@@ -29,5 +27,7 @@
         <file>SideMenus/ContextMenu/Subelements/InputItemDelegate.qml</file>
         <file>SideMenus/ContextMenu/Subelements/ButtonDelegate.qml</file>
         <file>WSServer.qml</file>
+        <file>images/loading.png</file>
+        <file>CommonElements/MarqueeText.qml</file>
     </qresource>
 </RCC>

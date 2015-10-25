@@ -1,17 +1,17 @@
 import QtQuick 2.5
 
 Rectangle {
-    id: sView
+    id: spectrumView
     color: "black"
     state: "inactive"
 
     states: [
         State {
             name: "inactive";
-            when: mainView.state == "showCoverView"
+            when: mainView.state === "showCoverView"
 
             PropertyChanges {
-                target: sView
+                target: spectrumView
                 color: "red"
                 scale: 1.5
             }
@@ -24,7 +24,7 @@ Rectangle {
 
         State {
             name: "active";
-            when: mainView.state == "showSpectrumView"
+            when: mainView.state === "showSpectrumView"
 
             PropertyChanges {
                 target: mouseArea
