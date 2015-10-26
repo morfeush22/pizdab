@@ -9,7 +9,8 @@ SOURCES += main.cpp \
     q_user_fic_data.cpp \
     q_scheduler_config.cpp \
     CommonElements/VirtualKeyboard/key_event_dispatcher.cpp \
-    host_info.cpp
+    host_info.cpp \
+    q_spectrum_data.cpp
 
 RESOURCES += qml.qrc
 
@@ -39,6 +40,7 @@ HEADERS += \
     q_user_fic_data.h \
     q_scheduler_config.h \
     CommonElements/VirtualKeyboard/key_event_dispatcher.h \
-    host_info.h
+    host_info.h \
+    q_spectrum_data.h
 
 DISTFILES +=

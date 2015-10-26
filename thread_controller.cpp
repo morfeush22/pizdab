@@ -28,6 +28,7 @@ ThreadController::ThreadController(QObject *parent):
     scheduler_running_(false) {
     q_station_list_ = new QList<QObject *>;
     q_user_fic_extra_data_ = new QUserFICData;
+    q_spectrum_data_ = new QSpectrumData;
 }
 
 ThreadController::~ThreadController() {
@@ -39,17 +40,18 @@ ThreadController::~ThreadController() {
         delete scheduler_thread_;
     }
 
-    for(QList<QObject *>::iterator it = q_station_list_->begin(); it != q_station_list_->end(); it++)
+    for (QList<QObject *>::iterator it = q_station_list_->begin(); it != q_station_list_->end(); it++)
         delete (*it);
 
     delete q_station_list_;
     delete q_user_fic_extra_data_;
+    delete q_spectrum_data_;
 }
 
 QList<QString> ThreadController::getDevices() {
     QList<QString> q_devices;
     std::list<std::string> devices = ui_scheduler_->GetDevices();
-    for(std::list<std::string>::iterator it = devices.begin(); it != devices.end(); it++)
+    for (std::list<std::string>::iterator it = devices.begin(); it != devices.end(); it++)
         q_devices.push_back(QString(it->c_str()));
     return q_devices;
 }
@@ -68,7 +70,7 @@ void ThreadController::startScheduler(QSchedulerConfig *config) {
 }
 
 void ThreadController::stopScheduler() {
-    if(!scheduler_running_)
+    if (!scheduler_running_)
         return;
 
     ui_scheduler_->StopWork();
@@ -92,6 +94,10 @@ QString ThreadController::text() const {
 
 QList<QObject *> ThreadController::stationList() const {
     return *q_station_list_;
+}
+
+QSpectrumData *ThreadController::spectrumData() const {
+    return q_spectrum_data_;
 }
 
 bool ThreadController::schedulerRunning() const {
@@ -120,7 +126,7 @@ void ThreadController::HandleRDSData(std::string text) {
 }
 
 void ThreadController::HandleStationInfoData(std::list<stationInfo> station_list) {
-    for(QList<QObject *>::iterator it = q_station_list_->begin(); it != q_station_list_->end(); it++)
+    for (QList<QObject *>::iterator it = q_station_list_->begin(); it != q_station_list_->end(); it++)
         delete (*it);
     q_station_list_->clear();
 
@@ -134,6 +140,20 @@ void ThreadController::HandleStationInfoData(std::list<stationInfo> station_list
     }
 
     emit stationListChanged();
+}
+
+void ThreadController::HandleSpectrumData(std::vector<std::pair<size_t, float> > spectrum_data) {
+    QList<size_t> x_values;
+    QList<float> y_values;
+    for (std::vector<std::pair<size_t, float> >::iterator it = spectrum_data.begin(); it != spectrum_data.end(); it++) {
+        x_values.append(it->first);
+        y_values.append(it->second);
+    }
+
+    q_spectrum_data_->setXValues(x_values);
+    q_spectrum_data_->setYValues(y_values);
+
+    emit spectrumDataChanged();
 }
 
 void ThreadController::HandleSchedulerStarted() {

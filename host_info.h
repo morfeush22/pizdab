@@ -9,6 +9,7 @@ class HostInfo : public QObject {
 
 public:
     explicit HostInfo(QObject *parent = 0);
+
     Q_INVOKABLE QList<QString> addresses();
 };
 
