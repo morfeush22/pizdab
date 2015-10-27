@@ -15,7 +15,9 @@ int main(int argc, char *argv[]) {
     qRegisterMetaType<Scheduler::SchedulerConfig_t>("Scheduler::SchedulerConfig_t");
     qRegisterMetaType<UserFICData_t>("UserFICData_t");
     qRegisterMetaType<std::list<stationInfo> >("std::list<stationInfo>");
+    qRegisterMetaType<std::vector<std::pair<size_t, float> > >("std::vector<std::pair<size_t, float> >");
     qRegisterMetaType<QUserFICData *>("QUserFICData *");
+    qRegisterMetaType<QSpectrumData *>("QSpectrumData *");
 
     QSchedulerConfig scheduler_config;
     ThreadController thread_controller;

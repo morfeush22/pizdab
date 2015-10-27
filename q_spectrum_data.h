@@ -2,24 +2,25 @@
 #define QSPECTRUMDATA_H
 
 #include <QObject>
+#include <QVariantList>
 
 class QSpectrumData: public QObject {
     Q_OBJECT
 
-    Q_PROPERTY(QList<size_t> * xValues READ xValues NOTIFY xValuesChanged)
-    Q_PROPERTY(QList<float> * yValues READ yValues NOTIFY yValuesChanged)
+    Q_PROPERTY(QVariantList xValues READ xValues NOTIFY xValuesChanged)
+    Q_PROPERTY(QVariantList yValues READ yValues NOTIFY yValuesChanged)
 
-    QList<size_t> *x_values_;
-    QList<float> *y_values_;
+    QVariantList x_values_;
+    QVariantList y_values_;
 
 public:
     explicit QSpectrumData(QObject *parent = 0);
     virtual ~QSpectrumData();
 
-    QList<size_t> *xValues() const;
-    void setXValues(QList<size_t> &xValues);
-    QList<float> *yValues() const;
-    void setYValues(QList<float> &yValues);
+    const QVariantList &xValues() const;
+    void setXValues(QVariantList &xValues);
+    const QVariantList &yValues() const;
+    void setYValues(QVariantList &yValues);
 
 signals:
     void xValuesChanged();

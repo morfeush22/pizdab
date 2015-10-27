@@ -2,31 +2,62 @@
 
 QSpectrumData::QSpectrumData(QObject *parent):
     QObject(parent) {
-    x_values_ = new QList<size_t>;
-    y_values_ = new QList<float>;
+    x_values_ << static_cast<qulonglong>(1);
+    x_values_ << static_cast<qulonglong>(2);
+    x_values_ << static_cast<qulonglong>(3);
+    x_values_ << static_cast<qulonglong>(4);
+    x_values_ << static_cast<qulonglong>(5);
+
+    y_values_ << static_cast<float>(0.5);
+    y_values_ << static_cast<float>(1);
+    y_values_ << static_cast<float>(1.5);
+    y_values_ << static_cast<float>(1);
+    y_values_ << static_cast<float>(0.5);
+
+    x_values_ << static_cast<qulonglong>(1);
+    x_values_ << static_cast<qulonglong>(2);
+    x_values_ << static_cast<qulonglong>(3);
+    x_values_ << static_cast<qulonglong>(4);
+    x_values_ << static_cast<qulonglong>(5);
+
+    y_values_ << static_cast<float>(0.5);
+    y_values_ << static_cast<float>(1);
+    y_values_ << static_cast<float>(1.5);
+    y_values_ << static_cast<float>(1);
+    y_values_ << static_cast<float>(0.5);
+
+    x_values_ << static_cast<qulonglong>(1);
+    x_values_ << static_cast<qulonglong>(2);
+    x_values_ << static_cast<qulonglong>(3);
+    x_values_ << static_cast<qulonglong>(4);
+    x_values_ << static_cast<qulonglong>(5);
+
+    y_values_ << static_cast<float>(0.5);
+    y_values_ << static_cast<float>(1);
+    y_values_ << static_cast<float>(1.5);
+    y_values_ << static_cast<float>(1);
+    y_values_ << static_cast<float>(0.5);
 }
 
 QSpectrumData::~QSpectrumData() {
-    delete x_values_;
-    delete y_values_;
 }
 
-QList<size_t> *QSpectrumData::xValues() const {
+const QVariantList &QSpectrumData::xValues() const {
     return x_values_;
 }
 
-void QSpectrumData::setXValues(QList<size_t> &xValues) {
-    x_values_->swap(xValues);
+void QSpectrumData::setXValues(QVariantList &xValues) {
+    x_values_.swap(xValues);
 
     emit xValuesChanged();
 }
 
-QList<float> *QSpectrumData::yValues() const {
+const QVariantList &QSpectrumData::yValues() const {
     return y_values_;
 }
 
-void QSpectrumData::setYValues(QList<float> &yValues) {
-    y_values_->swap(yValues);
+void QSpectrumData::setYValues(QVariantList &yValues) {
+    y_values_.swap(yValues);
 
     emit yValuesChanged();
 }

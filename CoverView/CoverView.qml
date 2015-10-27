@@ -78,7 +78,7 @@ Rectangle {
         anchors.horizontalCenter: cover.horizontalCenter
         anchors.top: cover.bottom
         anchors.topMargin: 0
-        height: (mainView.height - cover.height)/2
+        height: (coverView.height - cover.height)/2
         text: "No RDS data"
         width: cover.width
     }

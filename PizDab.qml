@@ -18,7 +18,7 @@ Rectangle {
 
     //temporary
     Timer {
-        interval: 500; running: true; repeat: true
+        interval: 500; running: false; repeat: true
         onTriggered: {
             //\u2713 - check mark
             //console.log(hostInfo.addresses());
