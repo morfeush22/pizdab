@@ -29,7 +29,6 @@
         <file>WSServer.qml</file>
         <file>images/loading.png</file>
         <file>CommonElements/MarqueeText.qml</file>
-        <file>images/spectrum.png</file>
         <file>SideMenus/ContextMenu/Subelements/CheckboxDelegate.qml</file>
     </qresource>
 </RCC>

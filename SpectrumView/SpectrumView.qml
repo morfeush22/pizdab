@@ -83,10 +83,39 @@ Rectangle {
         }
     }
 
+    /*
     Image {
         id: spectrumIcon
         anchors.fill: parent
         source: "qrc:/images/spectrum.png"
+    }
+    */
+
+    Rectangle {
+        id: spectrumIcon
+        //height: 50
+        //width: 50
+        color: mouseArea.pressed ? "#FF6426" : "#21201F"
+        anchors.fill: parent
+        //color: "transparent"
+
+        Text {
+            id: character
+            anchors.fill: parent
+            color: "#D9D9D9"
+            font.pixelSize: height
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            text: "\u223f"
+        }
+
+        /*
+        MouseArea {
+            id: buttonMouseArea
+            anchors.fill: parent
+            //onClicked: console.log("clicked")
+        }
+        */
     }
 
     Rectangle {
@@ -107,6 +136,7 @@ Rectangle {
             anchors.fill: parent
             anchors.leftMargin: 10
             color: "#21201F"
+            elide: Text.ElideRight
             font.pixelSize: height/2
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
