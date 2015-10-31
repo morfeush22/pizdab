@@ -108,8 +108,8 @@ Rectangle {
         ListView {
             id: addressesList
             clip: true
-            delegate: addressesListDelegate - addr.height - 20
-            height: parent.height
+            delegate: addressesListDelegate
+            height: parent.height - addr.height - 20
             width: 300
             model: addressesListModel
         }

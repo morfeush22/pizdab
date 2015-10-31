@@ -12,18 +12,6 @@ Rectangle {
 
     Component.onCompleted: {
         threadController.startScheduler(schedulerConfig);
-        //todo move to CaptureList
-        //console.log(threadController.getDevices());
-    }
-
-    //temporary
-    Timer {
-        interval: 500; running: false; repeat: true
-        onTriggered: {
-            //\u2713 - check mark
-            //console.log(hostInfo.addresses());
-            //console.log(threadController.getDevices());
-        }
     }
 
     WSServer {

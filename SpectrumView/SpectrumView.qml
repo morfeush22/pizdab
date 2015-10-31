@@ -74,8 +74,8 @@ Rectangle {
 
     Spectrum {
         id: spectrum
-        height: width
-        width: 0.7*Math.min(parent.width, parent.height);
+        height: 0.7 * parent.height
+        width: 0.7 * parent.width
 
         anchors {
             horizontalCenter: parent.horizontalCenter
@@ -83,21 +83,10 @@ Rectangle {
         }
     }
 
-    /*
-    Image {
-        id: spectrumIcon
-        anchors.fill: parent
-        source: "qrc:/images/spectrum.png"
-    }
-    */
-
     Rectangle {
         id: spectrumIcon
-        //height: 50
-        //width: 50
         color: mouseArea.pressed ? "#FF6426" : "#21201F"
         anchors.fill: parent
-        //color: "transparent"
 
         Text {
             id: character
@@ -108,14 +97,6 @@ Rectangle {
             verticalAlignment: Text.AlignVCenter
             text: "\u223f"
         }
-
-        /*
-        MouseArea {
-            id: buttonMouseArea
-            anchors.fill: parent
-            //onClicked: console.log("clicked")
-        }
-        */
     }
 
     Rectangle {

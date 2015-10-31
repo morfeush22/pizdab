@@ -13,16 +13,6 @@ Row {
         width: 50
         color: buttonMouseArea.pressed ? "#FF6426" : "#21201F"
 
-        Text {
-            id: character
-            anchors.fill: parent
-            color: "#D9D9D9"
-            font.pixelSize: height/2
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            text: "\u2713"
-        }
-
         MouseArea {
             id: buttonMouseArea
             anchors.fill: parent
@@ -33,7 +23,7 @@ Row {
     Text {
         id: description
         anchors.verticalCenter: checkbox.verticalCenter
-        font.pixelSize:  character.font.pixelSize
+        font.pixelSize: parent.height/2
         text: name
     }
 }
