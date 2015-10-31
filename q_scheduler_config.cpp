@@ -50,11 +50,11 @@ void QSchedulerConfig::setInputFilename(QUrl input_filename) {
     emit inputFilenameChanged();
 }
 
-Scheduler::data_source_t QSchedulerConfig::dataSource() const {
+int QSchedulerConfig::dataSource() const {
     return data_source_;
 }
 
-void QSchedulerConfig::setDataSource(const Scheduler::data_source_t data_source) {
+void QSchedulerConfig::setDataSource(const int data_source) {
     data_source_ = data_source;
 
     emit dataSourceChanged();

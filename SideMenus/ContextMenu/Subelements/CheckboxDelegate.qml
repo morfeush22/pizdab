@@ -1,37 +1,39 @@
 import QtQuick 2.5
+import QtQuick.Controls 1.2
 
-Component {
-    Row {
-        spacing: 30
+Row {
+    signal clicked()
 
-        Rectangle {
-            id: checkbox
-            height: 50
-            width: 50
-            color: buttonMouseArea.pressed ? "#FF6426" : "#21201F"
+    id: checkboxDelegate
+    spacing: 30
 
-            Text {
-                id: character
-                anchors.fill: parent
-                color: "#D9D9D9"
-                font.pixelSize: height/2
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-                text: "\u2713"
-            }
-
-            MouseArea {
-                id: buttonMouseArea
-                anchors.fill: parent
-                onClicked: console.log("clicked")
-            }
-        }
+    Rectangle {
+        id: checkbox
+        height: 50
+        width: 50
+        color: buttonMouseArea.pressed ? "#FF6426" : "#21201F"
 
         Text {
-            id: description
-            anchors.verticalCenter: checkbox.verticalCenter
-            font.pixelSize:  character.font.pixelSize
-            text: tab[index]
+            id: character
+            anchors.fill: parent
+            color: "#D9D9D9"
+            font.pixelSize: height/2
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            text: "\u2713"
         }
+
+        MouseArea {
+            id: buttonMouseArea
+            anchors.fill: parent
+            onClicked: checkboxDelegate.clicked();
+        }
+    }
+
+    Text {
+        id: description
+        anchors.verticalCenter: checkbox.verticalCenter
+        font.pixelSize:  character.font.pixelSize
+        text: name
     }
 }

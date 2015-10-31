@@ -2,6 +2,7 @@ import QtQuick 2.5
 
 Rectangle {
     property alias text: buttonText.text
+    property alias textColor: buttonText.color
     signal clicked()
 
     id: button

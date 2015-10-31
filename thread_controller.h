@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QQmlListProperty>
 #include <QThread>
+#include <QVariantList>
 #include "q_scheduler_config.h"
 #include "q_spectrum_data.h"
 #include "q_station_info.h"
@@ -37,7 +38,7 @@ public:
     explicit ThreadController(QObject *parent = 0);
     virtual ~ThreadController();
 
-    Q_INVOKABLE QList<QString> getDevices();
+    Q_INVOKABLE QVariantList getDevices();
     Q_INVOKABLE void startScheduler(QSchedulerConfig *config);
     Q_INVOKABLE void stopScheduler();
     Q_INVOKABLE void changeStation(quint16 new_station);

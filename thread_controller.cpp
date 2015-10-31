@@ -12,7 +12,7 @@ void ThreadController::ConnectSignals() {
 
 Scheduler::SchedulerConfig_t ThreadController::parseConfig(QSchedulerConfig *config) {
     Scheduler::SchedulerConfig_t new_config;
-    new_config.data_source = config->dataSource();
+    new_config.data_source = static_cast<Scheduler::data_source_t>(config->dataSource());
     if (new_config.data_source == Scheduler::DATA_FROM_DONGLE)
         new_config.dongle_nr = config->dongleNr();
     else
@@ -48,11 +48,13 @@ ThreadController::~ThreadController() {
     delete q_spectrum_data_;
 }
 
-QList<QString> ThreadController::getDevices() {
-    QList<QString> q_devices;
-    std::list<std::string> devices = ui_scheduler_->GetDevices();
-    for (std::list<std::string>::iterator it = devices.begin(); it != devices.end(); it++)
-        q_devices.push_back(QString(it->c_str()));
+QVariantList ThreadController::getDevices() {
+    QVariantList q_devices;
+    //std::list<std::string> devices = ui_scheduler_->GetDevices();
+    //for (std::list<std::string>::iterator it = devices.begin(); it != devices.end(); it++)
+        //q_devices << QString(it->c_str());
+    q_devices << QString("device1");
+
     return q_devices;
 }
 
