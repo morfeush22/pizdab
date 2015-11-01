@@ -121,7 +121,7 @@ Rectangle {
             font.pixelSize: height/2
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
-            text: "SNR: 0 dB"
+            text: "SNR: " + threadController.snr.toFixed(2) + "dB"
         }
     }
 }

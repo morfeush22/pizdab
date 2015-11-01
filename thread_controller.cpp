@@ -6,6 +6,7 @@ void ThreadController::ConnectSignals() {
     connect(ui_scheduler_, &UIScheduler::FicExtraData, this, &ThreadController::HandleFicExtraData);
     connect(ui_scheduler_, &UIScheduler::RDSData, this, &ThreadController::HandleRDSData);
     connect(ui_scheduler_, &UIScheduler::StationInfoData, this, &ThreadController::HandleStationInfoData);
+    connect(ui_scheduler_, &UIScheduler::SpectrumData, this, &ThreadController::HandleSpectrumData);
     connect(ui_scheduler_, &UIScheduler::SchedulerStarted, this, &ThreadController::HandleSchedulerStarted);
     connect(ui_scheduler_, &UIScheduler::SchedulerStopped, this, &ThreadController::HandleSchedulerStopped);
 }
@@ -53,7 +54,7 @@ QVariantList ThreadController::getDevices() {
     //std::list<std::string> devices = ui_scheduler_->GetDevices();
     //for (std::list<std::string>::iterator it = devices.begin(); it != devices.end(); it++)
         //q_devices << QString(it->c_str());
-    q_devices << QString("device1");
+    q_devices << QString("test device");
 
     return q_devices;
 }
@@ -144,16 +145,18 @@ void ThreadController::HandleStationInfoData(std::list<stationInfo> station_list
     emit stationListChanged();
 }
 
-void ThreadController::HandleSpectrumData(std::vector<std::pair<size_t, float> > spectrum_data) {
+void ThreadController::HandleSpectrumData(std::vector<std::pair<size_t, float> > *spectrum_data) {
     QVariantList x_values;
     QVariantList y_values;
-    for (std::vector<std::pair<size_t, float> >::iterator it = spectrum_data.begin(); it != spectrum_data.end(); it++) {
+    for (std::vector<std::pair<size_t, float> >::iterator it = spectrum_data->begin(); it != spectrum_data->end(); it++) {
         x_values << static_cast<qulonglong>(it->first);
         y_values << static_cast<float>(it->second);
     }
 
     q_spectrum_data_->setXValues(x_values);
     q_spectrum_data_->setYValues(y_values);
+
+    delete spectrum_data;
 
     emit spectrumDataChanged();
 }

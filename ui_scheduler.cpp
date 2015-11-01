@@ -7,11 +7,14 @@ void UIScheduler::ParametersFromSDR(Scheduler::scheduler_error_t error_code) {
 }
 
 void UIScheduler::ParametersFromSDR(float snr) {
-    if (snr != snr)
+    if (snr == snr)
         emit SNRData(snr);
 }
 
 void UIScheduler::ParametersFromSDR(UserFICData_t *user_fic_extra_data) {
+    if (user_fic_extra_data == NULL)
+        return;
+
     UserFICData_t new_data;
     std::list<stationInfo> new_station_list;
 
@@ -44,6 +47,10 @@ void UIScheduler::ParametersFromSDR(std::string *text) {
     std::string new_text = *text;
     emit RDSData(new_text);
     delete text;
+}
+
+void UIScheduler::ParametersFromSDR(std::vector<std::pair<size_t, float> > *spectrum_data) {
+    emit SpectrumData(spectrum_data);
 }
 
 UIScheduler::UIScheduler(QObject *parent):
