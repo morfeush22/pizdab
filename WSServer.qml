@@ -3,6 +3,7 @@ import QtWebSockets 1.0
 
 Item {
     id: server
+
     property var slData: []
     property var wsData: []  
 
@@ -49,6 +50,7 @@ Item {
 
     Connections {
         target: threadController
+
         onStationListChanged: {
             var stationList = [];
 

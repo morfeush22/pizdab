@@ -1,7 +1,7 @@
 import QtQuick 2.5
 
 Item {
-    id: keyboardDelegate
+    id: virtualKeyboardDelegate
 
     Rectangle {
         anchors.fill: parent

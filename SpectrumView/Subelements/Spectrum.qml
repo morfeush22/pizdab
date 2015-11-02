@@ -2,8 +2,10 @@ import QtQuick 2.5
 
 Rectangle {
     id: spectrum
+
     property int barSpacing: 1
-    property int scaleFactor: -3
+    property int scaleFactor: -2
+
     color: "transparent"
 
     Row {

@@ -8,6 +8,7 @@ import "SideMenus/StationMenu"
 
 Rectangle {
     id: mainWindow
+
     property bool backButtonBarVisible: false
 
     Component.onCompleted: {
@@ -34,9 +35,9 @@ Rectangle {
         }
 
         Rectangle {
+            id: shade
             anchors.fill: parent
             color: "black"
-            id: shade 
             opacity: 0
         }
 

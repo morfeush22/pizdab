@@ -3,7 +3,9 @@ import QtQuick.Controls 1.2
 
 Rectangle {
     id: pleaseWait
+
     property bool backButtonBarVisible: false
+
     color: "#D9D9D9"
 
     Image {

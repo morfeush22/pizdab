@@ -25,13 +25,16 @@ int main(int argc, char *argv[]) {
     QQmlApplicationEngine engine;
     KeyEventDispatcher key_event_dispatcher;
     HostInfo host_info;
+
     //register singletons
     engine.rootContext()->setContextProperty("schedulerConfig", &scheduler_config);
     engine.rootContext()->setContextProperty("threadController", &thread_controller);
     engine.rootContext()->setContextProperty("keyEventDispatcher", &key_event_dispatcher);
     engine.rootContext()->setContextProperty("hostInfo", &host_info);
+
     //load main view into engine
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+
     //register quit signal
     QObject::connect(&engine, SIGNAL(quit()), &app, SLOT(quit()));
 

@@ -3,6 +3,7 @@ import QtQuick 2.5
 Flickable {
     property bool backButtonBarVisible: true
     property string title
+
     contentHeight: about.height
     contentWidth: about.width
 

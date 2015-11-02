@@ -32,7 +32,7 @@ Rectangle {
             }
 
             PropertyChanges {
-                target: snrValue
+                target: snrContainer
                 visible: false
             }
         },
@@ -57,7 +57,7 @@ Rectangle {
             }
 
             PropertyChanges {
-                target: snrValue
+                target: snrContainer
                 visible: true
             }
         }
@@ -99,29 +99,13 @@ Rectangle {
         }
     }
 
-    Rectangle {
-        id: snrContainter
+    SNRContainer {
+        id: snrContainer
         anchors.right: parent.right
         anchors.rightMargin: 100
         anchors.top: parent.top
         anchors.topMargin: 50
-        border.color: "#FF6426"
-        border.width: 2
-        color: "transparent"
         height: 50
         width: 200
-
-        Text {
-            id: snrValue
-            anchors.bottomMargin: 5
-            anchors.fill: parent
-            anchors.leftMargin: 10
-            color: "#21201F"
-            elide: Text.ElideRight
-            font.pixelSize: height/2
-            horizontalAlignment: Text.AlignLeft
-            verticalAlignment: Text.AlignVCenter
-            text: "SNR: " + threadController.snr.toFixed(2) + "dB"
-        }
     }
 }

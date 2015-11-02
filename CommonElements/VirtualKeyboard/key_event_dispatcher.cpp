@@ -11,6 +11,7 @@ KeyEventDispatcher::KeyEventDispatcher(QObject *parent) : QObject(parent) {
 
 void KeyEventDispatcher::emitKey(Qt::Key key) {
     QQuickItem *receiver = qobject_cast<QQuickItem *>(QGuiApplication::focusObject());
+
     if (!receiver)
         return;
 

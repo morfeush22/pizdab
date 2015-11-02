@@ -14,13 +14,16 @@ void ThreadController::ConnectSignals() {
 Scheduler::SchedulerConfig_t ThreadController::parseConfig(QSchedulerConfig *config) {
     Scheduler::SchedulerConfig_t new_config;
     new_config.data_source = static_cast<Scheduler::data_source_t>(config->dataSource());
+
     if (new_config.data_source == Scheduler::DATA_FROM_DONGLE)
         new_config.dongle_nr = config->dongleNr();
     else
         new_config.input_filename = config->inputFilename();
+
     new_config.sampling_rate = config->samplingRate();
     new_config.carrier_frequency = config->carrierFrequency();
     new_config.start_station_nr = config->initialChannel();
+
     return new_config;
 }
 
@@ -116,6 +119,7 @@ void ThreadController::HandleSNRData(float snr) {
 void ThreadController::HandleFicExtraData(UserFICData_t user_fic_extra_data) {
     if ((user_fic_extra_data.validity_ & UserFICData_t::LABEL_VALID) && q_user_fic_extra_data_->currentStationId() != user_fic_extra_data.service_id_)
         q_user_fic_extra_data_->setCurrentStationId(user_fic_extra_data.service_id_);
+
     q_user_fic_extra_data_->setBitrate(user_fic_extra_data.bitrate_);
     q_user_fic_extra_data_->setDabPlus(user_fic_extra_data.DAB_plus_);
 
@@ -131,6 +135,7 @@ void ThreadController::HandleRDSData(std::string text) {
 void ThreadController::HandleStationInfoData(std::list<stationInfo> station_list) {
     for (QList<QObject *>::iterator it = q_station_list_->begin(); it != q_station_list_->end(); it++)
         delete (*it);
+
     q_station_list_->clear();
 
     for(std::list<stationInfo>::iterator it = station_list.begin(); it != station_list.end(); it++) {
@@ -148,6 +153,7 @@ void ThreadController::HandleStationInfoData(std::list<stationInfo> station_list
 void ThreadController::HandleSpectrumData(std::vector<std::pair<size_t, float> > *spectrum_data) {
     QVariantList x_values;
     QVariantList y_values;
+
     for (std::vector<std::pair<size_t, float> >::iterator it = spectrum_data->begin(); it != spectrum_data->end(); it++) {
         x_values << static_cast<qulonglong>(it->first);
         y_values << static_cast<float>(it->second);
@@ -172,6 +178,7 @@ void ThreadController::HandleSchedulerStopped() {
 
     scheduler_thread_->quit();
     scheduler_thread_->wait();
+
     delete ui_scheduler_;
     delete scheduler_thread_;
 

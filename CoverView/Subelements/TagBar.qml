@@ -3,7 +3,9 @@ import "../../CommonElements"
 
 Rectangle {
     id: tagBar
+
     property string text
+
     color: "transparent"
 
     onTextChanged: {

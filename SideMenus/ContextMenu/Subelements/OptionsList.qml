@@ -4,8 +4,10 @@ import "../../../CommonElements/VirtualKeyboard"
 
 Rectangle {
     id: optionsList
+
     property bool backButtonBarVisible: true
     property string title
+
     color: "#D9D9D9"
 
     Column {
@@ -65,54 +67,12 @@ Rectangle {
         }
     }
 
-    Column {
+    IPContainer {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.top: submitFreqConfig.bottom
         anchors.leftMargin: 30
         anchors.topMargin: 50
-
-        ListModel {
-            id: addressesListModel
-            dynamicRoles: true
-        }
-
-        Component {
-            id: addressesListDelegate
-            Text {
-                font.pixelSize: 12
-                text: address
-            }
-        }
-
-        Component.onCompleted: {
-            var newModel = [];
-            var addresses = hostInfo.addresses();
-            for (var i = 0; i < addresses.length; i++) {
-                newModel.push({"address": addresses[i]});
-            }
-
-            addressesList.model.clear();
-            addressesList.model.append(newModel);
-        }
-
-        Text {
-            id: addr
-            color: "#21201F"
-            font.pixelSize: height/1.5
-            height: 25
-            width: 300
-            text: "IP addresses" 
-        }
-
-        ListView {
-            id: addressesList
-            clip: true
-            delegate: addressesListDelegate
-            height: parent.height - addr.height - 20
-            width: 300
-            model: addressesListModel
-        }
     }
 
     VirtualKeyboard {

@@ -2,7 +2,7 @@ import QtQuick 2.5
 import QtQuick.Controls 1.2
 
 Component {
-    id: menuDelegate
+    id: stationListNavListDelegate
 
     Column {
         id: listElement

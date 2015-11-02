@@ -25,7 +25,8 @@ class ThreadController: public QObject {
     QThread *scheduler_thread_;
     bool scheduler_running_;
     float snr_;
-    std::string text_;  
+    std::string text_;
+
     //variables QML formatted
     QUserFICData *q_user_fic_extra_data_;
     QList<QObject *> *q_station_list_;

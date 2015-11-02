@@ -4,6 +4,7 @@ Row {
     property alias descriptionText: description.text
     property alias hasFocus: input.activeFocus
     property alias inputText: input.text
+
     spacing: 10
 
     Rectangle {

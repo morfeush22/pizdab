@@ -30,5 +30,10 @@
         <file>images/loading.png</file>
         <file>CommonElements/MarqueeText.qml</file>
         <file>SideMenus/ContextMenu/Subelements/CheckboxDelegate.qml</file>
+        <file>SpectrumView/Subelements/SNRContainer.qml</file>
+        <file>SideMenus/ContextMenu/Subelements/ContextMenuNavListModel.qml</file>
+        <file>CommonElements/VirtualKeyboard/VirtualKeyboardModel.qml</file>
+        <file>SideMenus/ContextMenu/Subelements/IPContainer.qml</file>
+        <file>SideMenus/ContextMenu/Subelements/DevicesContainer.qml</file>
     </qresource>
 </RCC>

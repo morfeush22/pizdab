@@ -2,9 +2,11 @@ import QtQuick 2.5
 
 Item {
     id: marqueeText
+
     property int position: 0
     property alias text: scrollingText.text
     property alias pixelSize: scrollingText.font.pixelSize
+
     clip: true
 
     Text {

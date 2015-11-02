@@ -1,11 +1,12 @@
 import QtQuick 2.5
 
 Rectangle {
+    id: buttonDelegate
+
     property alias text: buttonText.text
     property alias textColor: buttonText.color
     signal clicked()
 
-    id: button
     color: buttonMouseArea.pressed ? "#FF6426" : "#21201F"
     height: 50
     width: 200
@@ -23,8 +24,9 @@ Rectangle {
     MouseArea {
         id: buttonMouseArea
         anchors.fill: parent
+
         onClicked: {
-            button.clicked();
+            buttonDelegate.clicked();
         }
     }
 }
