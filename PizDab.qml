@@ -11,10 +11,6 @@ Rectangle {
 
     property bool backButtonBarVisible: false
 
-    Component.onCompleted: {
-        threadController.startScheduler(schedulerConfig);
-    }
-
     WSServer {
         id: wsServer
     }

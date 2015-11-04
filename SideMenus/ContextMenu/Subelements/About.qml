@@ -1,16 +1,17 @@
 import QtQuick 2.5
 
-Flickable {
+Rectangle {
     property bool backButtonBarVisible: true
     property string title
 
-    contentHeight: about.height
-    contentWidth: about.width
+    color: "#D9D9D9"
 
-    Rectangle {
+    Flickable {
         id: about
-        height: aboutText.height + logos.height
-        color: "#D9D9D9"
+        anchors.fill: parent
+        contentHeight: aboutText.height + aboutText.anchors.topMargin + logos.height + logos.anchors.topMargin + 30
+        contentWidth: Math.max(aboutText.width, logos.width) + 30
+
 
         Text {
             id: aboutText

@@ -15,8 +15,8 @@ Item {
         id: virtualKeyboardDelegate
 
         VirtualKeyboardDelegate {
-            height: 70
-            width: 70
+            height: keyboard.height
+            width: height
         }
     }
 
@@ -28,29 +28,17 @@ Item {
         id: keyboard
         anchors.bottom: parent.bottom
         color: "transparent"
-        height: 80
+        height: virtualKeyboard.width/virtualKeyboardModel.count
         width: parent.width
 
-        MouseArea {
-            anchors.fill: parent
-        }
+        Row {
+            id: keyboardRow
+            anchors.horizontalCenter: parent.horizontalCenter
+            height: keyboard.height/4 - 10
 
-        Column {
-            id: keyboardColumn
-            anchors.fill: parent
-            anchors.margins: 5
-            spacing: 5
-
-            Row {
-                id: keyboardRow
-                anchors.horizontalCenter: parent.horizontalCenter
-                height: keyboard.height/4 - 10
-                spacing: 5  
-
-                Repeater {
-                    model: virtualKeyboardModel
-                    delegate: virtualKeyboardDelegate
-                }
+            Repeater {
+                model: virtualKeyboardModel
+                delegate: virtualKeyboardDelegate
             }
         }
     }
