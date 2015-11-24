@@ -90,12 +90,14 @@ Rectangle {
 
         Text {
             id: character
+            anchors.margins: 2
             anchors.fill: parent
             color: "#D9D9D9"
+            fontSizeMode: Text.Fit
             font.pixelSize: height
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            text: "\u223f"
+            text: "\u007e"
         }
     }
 

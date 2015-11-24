@@ -54,10 +54,9 @@ ThreadController::~ThreadController() {
 
 QVariantList ThreadController::getDevices() {
     QVariantList q_devices;
-    //std::list<std::string> devices = ui_scheduler_->GetDevices();
-    //for (std::list<std::string>::iterator it = devices.begin(); it != devices.end(); it++)
-        //q_devices << QString(it->c_str());
-    q_devices << QString("test device");
+    std::list<std::string> devices = ui_scheduler_->GetDevices();
+    for (std::list<std::string>::iterator it = devices.begin(); it != devices.end(); it++)
+        q_devices << QString(it->c_str());
 
     return q_devices;
 }

@@ -1,11 +1,11 @@
 #include <QGuiApplication>
-#include "host_info.h"
-#include <QQmlContext>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 #include <QtQml>
+#include "CommonElements/VirtualKeyboard/key_event_dispatcher.h"
+#include "host_info.h"
 #include "q_scheduler_config.h"
 #include "thread_controller.h"
-#include "CommonElements/VirtualKeyboard/key_event_dispatcher.h"
 
 
 int main(int argc, char *argv[]) {

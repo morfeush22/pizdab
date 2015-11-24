@@ -20,10 +20,6 @@ Item {
         }
     }
 
-    FontLoader {
-        source: "FontAwesome.otf"
-    }
-
     Rectangle {
         id: keyboard
         anchors.bottom: parent.bottom
