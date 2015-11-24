@@ -3,8 +3,8 @@ import QtQuick 2.5
 Rectangle {
     id: spectrum
 
-    property int barSpacing: 1
-    property int scaleFactor: -2
+    property int barSpacing: 0
+    property real scaleFactor: -1.5
 
     color: "transparent"
 
@@ -17,7 +17,7 @@ Rectangle {
             Rectangle {
                 anchors.bottom: container.bottom
                 height: scaleFactor*modelData
-                width: spectrum.width/threadController.spectrumData.yValues.length - barSpacing
+                width: spectrum.width/threadController.spectrumData.yValues.length
                 color: "#FF6426"
             }
         }

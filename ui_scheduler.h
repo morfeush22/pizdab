@@ -14,7 +14,7 @@ class UIScheduler: public QObject, public Scheduler {
     virtual void ParametersFromSDR(float snr);
     virtual void ParametersFromSDR(UserFICData_t *user_fic_extra_data);
     virtual void ParametersFromSDR(std::string *text);
-    virtual void ParametersFromSDR(std::vector<std::pair<size_t, float> > *spectrum_data);
+    virtual void ParametersFromSDR(float *spectrum_data);
 
     scheduler_error_t errno_;
 
@@ -29,7 +29,7 @@ signals:
     void FicExtraData(UserFICData_t);
     void RDSData(std::string);
     void StationInfoData(std::list<stationInfo>);
-    void SpectrumData(std::vector<std::pair<size_t, float> > *);
+    void SpectrumData(float *);
     void SchedulerStarted();
     void SchedulerStopped();
 

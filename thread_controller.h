@@ -66,7 +66,7 @@ public slots:
     void HandleFicExtraData(UserFICData_t user_fic_extra_data);
     void HandleRDSData(std::string text);
     void HandleStationInfoData(std::list<stationInfo> station_list);
-    void HandleSpectrumData(std::vector<std::pair<size_t, float> > *spectrum_data);
+    void HandleSpectrumData(float *spectrum_data);
     void HandleSchedulerStarted();
     void HandleSchedulerStopped();
 

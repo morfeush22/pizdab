@@ -149,13 +149,13 @@ void ThreadController::HandleStationInfoData(std::list<stationInfo> station_list
     emit stationListChanged();
 }
 
-void ThreadController::HandleSpectrumData(std::vector<std::pair<size_t, float> > *spectrum_data) {
+void ThreadController::HandleSpectrumData(float *spectrum_data) {
     QVariantList x_values;
     QVariantList y_values;
 
-    for (std::vector<std::pair<size_t, float> >::iterator it = spectrum_data->begin(); it != spectrum_data->end(); it++) {
-        x_values << static_cast<qulonglong>(it->first);
-        y_values << static_cast<float>(it->second);
+    for (int i = 0; i < 800; i++) {
+        x_values << static_cast<qulonglong>(i);
+        y_values << static_cast<float>(spectrum_data[i]);
     }
 
     q_spectrum_data_->setXValues(x_values);

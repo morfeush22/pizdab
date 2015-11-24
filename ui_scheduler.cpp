@@ -49,7 +49,7 @@ void UIScheduler::ParametersFromSDR(std::string *text) {
     delete text;
 }
 
-void UIScheduler::ParametersFromSDR(std::vector<std::pair<size_t, float> > *spectrum_data) {
+void UIScheduler::ParametersFromSDR(float *spectrum_data) {
     emit SpectrumData(spectrum_data);
 }
 
