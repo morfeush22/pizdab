@@ -3,7 +3,7 @@
 QSchedulerConfig::QSchedulerConfig(QObject *parent):
     QObject(parent),
     sampling_rate_(2048000),
-    carrier_frequency_(209936),
+    carrier_frequency_(229072000),
     dongle_nr_(0),
     input_filename_("//home/morfeush22/project/sdr/Record3_katowice_iq.raw"),
     data_source_(Scheduler::DATA_FROM_FILE),
