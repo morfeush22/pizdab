@@ -25,15 +25,15 @@ QML_IMPORT_PATH =
 # Default rules for deployment.
 include(deployment.pri)
 
-unix:!macx: LIBS += -L$$[QT_SYSROOT]/home/odroid/sdr -lsdrdab
+unix:!macx: LIBS += -L$$[QT_SYSROOT]/opt/sdr -lsdrdab
 
-INCLUDEPATH += $$[QT_SYSROOT]/home/odroid/sdr/sdrdab/src
-DEPENDPATH += $$[QT_SYSROOT]/home/odroid/sdr/sdrdab/src
+INCLUDEPATH += $$[QT_SYSROOT]/opt/sdr/sdrdab/src
+DEPENDPATH += $$[QT_SYSROOT]/opt/sdr/sdrdab/src
 
-unix:!macx: LIBS += -L$$[QT_SYSROOT]/home/odroid/sdr/rtlsdr-bin/src/ -lrtlsdr
+unix:!macx: LIBS += -L$$[QT_SYSROOT]/opt/sdr/rtlsdr-bin/src/ -lrtlsdr
 
-INCLUDEPATH += $$[QT_SYSROOT]/home/odroid/sdr/rtlsdr/include
-DEPENDPATH += $$[QT_SYSROOT]/home/odroid/sdr/rtlsdr/include
+INCLUDEPATH += $$[QT_SYSROOT]/opt/sdr/rtlsdr/include
+DEPENDPATH += $$[QT_SYSROOT]/opt/sdr/rtlsdr/include
 
 CONFIG += link_pkgconfig
 PKGCONFIG += gstreamer-1.0
@@ -52,7 +52,7 @@ HEADERS += \
 
 LIBS += -Wl,-rpath-link=$$[QT_SYSROOT]/usr/lib/arm-linux-gnueabihf/mali-egl
 
-LIBS += -Wl,-rpath=sdr
-LIBS += -Wl,-rpath=sdr/rtlsdr-bin/src
+LIBS += -Wl,-rpath=/opt/sdr
+LIBS += -Wl,-rpath=/opt/sdr/rtlsdr-bin/src
 
 DISTFILES +=
