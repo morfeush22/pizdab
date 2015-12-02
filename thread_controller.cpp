@@ -161,7 +161,7 @@ void ThreadController::HandleSpectrumData(float *spectrum_data) {
     q_spectrum_data_->setXValues(x_values);
     q_spectrum_data_->setYValues(y_values);
 
-    delete spectrum_data;
+    delete[] spectrum_data;
 
     emit spectrumDataChanged();
 }

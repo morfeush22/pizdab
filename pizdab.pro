@@ -2,9 +2,6 @@ TEMPLATE = app
 
 QT += qml quick network websockets
 
-QMAKE_CXXFLAGS_CXX11 =
-QMAKE_CXXFLAGS_GNUCXX11 =
-
 SOURCES += main.cpp \
     thread_controller.cpp \
     ui_scheduler.cpp \
@@ -17,28 +14,24 @@ SOURCES += main.cpp \
 
 RESOURCES += qml.qrc
 
-target.path = /home/odroid
-
 # Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH =
+QML_IMPORT_PATH = .
 
 # Default rules for deployment.
 include(deployment.pri)
 
-unix:!macx: LIBS += -L$$[QT_SYSROOT]/opt/sdr -lsdrdab
+unix:!macx: LIBS += -L$$PWD/../sdr/ -lsdrdab
 
-INCLUDEPATH += $$[QT_SYSROOT]/opt/sdr/sdrdab/src
-DEPENDPATH += $$[QT_SYSROOT]/opt/sdr/sdrdab/src
+INCLUDEPATH += $$PWD/../sdr/sdrdab/src
+DEPENDPATH += $$PWD/../sdr/sdrdab/src
 
-unix:!macx: LIBS += -L$$[QT_SYSROOT]/opt/sdr/rtlsdr-bin/src/ -lrtlsdr
+unix:!macx: LIBS += -L$$PWD/../sdr/rtlsdr-bin/src/ -lrtlsdr
 
-INCLUDEPATH += $$[QT_SYSROOT]/opt/sdr/rtlsdr/include
-DEPENDPATH += $$[QT_SYSROOT]/opt/sdr/rtlsdr/include
+INCLUDEPATH += $$PWD/../sdr/rtlsdr/include
+DEPENDPATH += $$PWD/../sdr/rtlsdr/include
 
 CONFIG += link_pkgconfig
 PKGCONFIG += gstreamer-1.0
-
-unix:!macx:: LIBS += -pthread -lgstreamer-1.0 -lgobject-2.0 -lglib-2.0 -lpcre
 
 HEADERS += \
     thread_controller.h \
@@ -50,9 +43,6 @@ HEADERS += \
     host_info.h \
     q_spectrum_data.h
 
-LIBS += -Wl,-rpath-link=$$[QT_SYSROOT]/usr/lib/arm-linux-gnueabihf/mali-egl
-
-LIBS += -Wl,-rpath=/opt/sdr
-LIBS += -Wl,-rpath=/opt/sdr/rtlsdr-bin/src
+LIBS += -Wl,-rpath=/home/morfeush22/project/sdr
 
 DISTFILES +=
