@@ -1,7 +1,7 @@
 var socketService = new SocketService();
 
 var StationBox = React.createClass({
-	handleControll: function(connected) {
+	handleControl: function(connected) {
 		this.setState({connected: connected});
 	},
 	handleData: function(message) {
@@ -19,7 +19,7 @@ var StationBox = React.createClass({
 	handleFormSubmit: function(url) {
 		this.setState({data: []});
 		this.props.socketService.stop();
-		this.props.socketService.start("ws://" + url, this.handleData, this.handleControll);
+		this.props.socketService.start("ws://" + url, this.handleData, this.handleControl);
 	},
 	handleStationClicked: function(station) {
 		var request = {};

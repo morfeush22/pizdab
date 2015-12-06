@@ -2,25 +2,25 @@ function SocketService() {
 	var service = {};
 	var url = null;
 	var dataCallback = null;
-	var controllCallback = null;
+	var controlCallback = null;
 	var connected = false;
 	var ws = null;
 
-	function start(newUrl, newDataCallback, newControllCallback) {
+	function start(newUrl, newDataCallback, newControlCallback) {
 		url = newUrl;
 		dataCallback = newDataCallback;
-		controllCallback = newControllCallback;
+		controlCallback = newControlCallback;
 		connected = false;	
 		ws = new WebSocket(newUrl);
 
 		ws.onopen = function() {
 			connected = true;
-			controllCallback(connected);
+			controlCallback(connected);
 		}
 
 		ws.onclose = function() {
 			connected = false;
-			controllCallback(connected);
+			controlCallback(connected);
 		}
 
 		ws.onmessage = function(message) {
@@ -37,7 +37,7 @@ function SocketService() {
 	function sendRequest(request) {
 		if (ws && ~[2, 3].indexOf(ws.readyState)) {
 			connected = false;
-			start(url, dataCallback, controllCallback);
+			start(url, dataCallback, controlCallback);
 		}
 
 		if (connected)
