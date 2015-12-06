@@ -3,6 +3,9 @@
 QUserFICData::QUserFICData(QObject *parent): QObject(parent) {
 }
 
+QUserFICData::~QUserFICData() {
+}
+
 bool QUserFICData::dabPlus() const {
     return dab_plus_;
 }

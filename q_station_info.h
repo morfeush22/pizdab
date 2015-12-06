@@ -19,6 +19,7 @@ class QStationInfo: public QObject {
 
 public:
     explicit QStationInfo(QObject* parent = 0);
+    virtual ~QStationInfo();
 
     size_t audioKbps() const;
     void setAudioKbps(size_t audio_kbps);

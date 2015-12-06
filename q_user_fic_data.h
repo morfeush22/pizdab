@@ -16,6 +16,7 @@ class QUserFICData: public QObject {
 
 public:
     explicit QUserFICData(QObject *parent = 0);
+    virtual ~QUserFICData();
 
     bool dabPlus() const;
     void setDabPlus(bool dab_plus);

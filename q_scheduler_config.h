@@ -23,6 +23,7 @@ class QSchedulerConfig : public QObject {
 
 public:
     explicit QSchedulerConfig(QObject *parent = 0);
+    virtual ~QSchedulerConfig();
 
     quint32 samplingRate() const;
     void setSamplingRate(const unsigned int sampling_rate);

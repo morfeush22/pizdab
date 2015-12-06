@@ -10,6 +10,9 @@ QSchedulerConfig::QSchedulerConfig(QObject *parent):
     initial_channel_(0x0) {
 }
 
+QSchedulerConfig::~QSchedulerConfig() {
+}
+
 quint32 QSchedulerConfig::samplingRate() const {
     return sampling_rate_;
 }
