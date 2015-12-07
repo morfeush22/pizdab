@@ -21,7 +21,7 @@ Item {
                 switch(parsedMessage.$type) {
                 case "set":
                     threadController.changeStation(parsedMessage.$data);
-                    response.$type = parsedMessage.$type;
+                    response.$type = "up";
                     response.$data = slData;
                     break;
                 default:
