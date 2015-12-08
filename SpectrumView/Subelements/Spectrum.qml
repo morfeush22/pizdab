@@ -4,7 +4,8 @@ Rectangle {
     id: spectrum
 
     property int barSpacing: 0
-    property real scaleFactor: -1.5
+    property int offset: 600
+    property real scaleFactor: 3
 
     color: "transparent"
 
@@ -16,7 +17,7 @@ Rectangle {
             model: threadController.spectrumData.yValues
             Rectangle {
                 anchors.bottom: container.bottom
-                height: scaleFactor*modelData
+                height: offset + scaleFactor*modelData
                 width: spectrum.width/threadController.spectrumData.yValues.length
                 color: "#FF6426"
             }
